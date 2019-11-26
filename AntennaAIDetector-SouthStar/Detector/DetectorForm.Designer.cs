@@ -35,9 +35,9 @@
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ToolStripMenuItem_ParamView = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_Run = new System.Windows.Forms.ToolStripMenuItem();
             this.panelOfDefaultView = new System.Windows.Forms.Panel();
             this.panelOfParamView = new System.Windows.Forms.Panel();
-            this.ToolStripMenuItem_Run = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -79,7 +79,7 @@
             // toolStripStatusLabel5
             // 
             this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(837, 17);
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(457, 17);
             this.toolStripStatusLabel5.Spring = true;
             // 
             // toolStripStatusLabel6
@@ -107,6 +107,13 @@
             this.ToolStripMenuItem_ParamView.Text = "打开参数设置";
             this.ToolStripMenuItem_ParamView.Click += new System.EventHandler(this.ToolStripMenuItem_ParamView_Click);
             // 
+            // ToolStripMenuItem_Run
+            // 
+            this.ToolStripMenuItem_Run.Name = "ToolStripMenuItem_Run";
+            this.ToolStripMenuItem_Run.Size = new System.Drawing.Size(68, 21);
+            this.ToolStripMenuItem_Run.Text = "运行测试";
+            this.ToolStripMenuItem_Run.Click += new System.EventHandler(this.ToolStripMenuItem_Run_Click);
+            // 
             // panelOfDefaultView
             // 
             this.panelOfDefaultView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -122,13 +129,6 @@
             this.panelOfParamView.Name = "panelOfParamView";
             this.panelOfParamView.Size = new System.Drawing.Size(1025, 714);
             this.panelOfParamView.TabIndex = 36;
-            // 
-            // ToolStripMenuItem_Run
-            // 
-            this.ToolStripMenuItem_Run.Name = "ToolStripMenuItem_Run";
-            this.ToolStripMenuItem_Run.Size = new System.Drawing.Size(68, 21);
-            this.ToolStripMenuItem_Run.Text = "运行测试";
-            this.ToolStripMenuItem_Run.Click += new System.EventHandler(this.ToolStripMenuItem_Run_Click);
             // 
             // DetectorForm
             // 

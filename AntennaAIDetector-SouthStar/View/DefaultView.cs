@@ -1,6 +1,8 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using AntennaAIDetector_SouthStar.Detector;
+using Aqrose.Framework.Core.DataType;
+using Aqrose.Framework.Utility.Tools;
 using Aqrose.Framework.Utility.WindowConfig;
 
 namespace AntennaAIDetector_SouthStar.View
@@ -8,6 +10,32 @@ namespace AntennaAIDetector_SouthStar.View
     public partial class DefaultView : UserControl
     {
         private Detector.Detector _detector = null;
+        private double _timeOfRun = 0.0;
+
+        public string ResultInfo
+        {
+            get
+            {
+                string resultInfo = "";
+                if (null != _detector)
+                {
+                    foreach (var result in _detector.ProductManager.Result)
+                    {
+                        resultInfo += (EnumTools.GetDescription(result) + "  ");
+                    }
+                }
+
+                return "运行结果：" + resultInfo;
+            }
+        }
+        public string TimeInfo
+        {
+            get
+            {
+                return "运行时间：" + _timeOfRun.ToString() + " ms";
+            }
+        }
+
         public DefaultView(Detector.Detector detector)
         {
             _detector = detector;
@@ -67,12 +95,7 @@ namespace AntennaAIDetector_SouthStar.View
             return;
         }
 
-        public void Refresh()
-        {
-            FormRefresh(true);
-
-            return;
-        }
+        #region Event
 
         private void splitContainer1_SizeChanged(object sender, System.EventArgs e)
         {
@@ -80,5 +103,28 @@ namespace AntennaAIDetector_SouthStar.View
 
             return;
         }
+
+        #endregion
+
+        public void Process()
+        {
+            RunTime runTime = new RunTime();
+
+            if (null != _detector.ImageIn)
+            {
+                runTime.LogStartRunTime();
+                _detector.Process();
+                runTime.LogEndRunTime();
+                runTime.GetRunTime(out _timeOfRun);
+            }
+            else
+            {
+                MessageBox.Show("DetectorForm: 当前无图像！");
+            }
+            FormRefresh(true);
+
+            return;
+        }
+
     }
 }
