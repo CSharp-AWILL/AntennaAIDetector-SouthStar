@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AntennaAIDetector_SouthStar.View;
+using Aqrose.Framework.Core.DataType;
+using Aqrose.Framework.Utility.Tools;
 
 namespace AntennaAIDetector_SouthStar.Detector
 {
@@ -21,11 +23,12 @@ namespace AntennaAIDetector_SouthStar.Detector
             _detector = detector;
             InitializeComponent();
             LoadViews();
+            RefreshStatusStrip();
         }
 
         private void LoadViews()
         {
-            _defaultView = new DefaultView();
+            _defaultView = new DefaultView(_detector);
             _defaultView.Dock = DockStyle.Fill;
             this.panelOfDefaultView.Controls.Add(_defaultView);
             _paramView = new ParamView(_detector.ProductManager);
@@ -35,6 +38,25 @@ namespace AntennaAIDetector_SouthStar.Detector
 
             return;
         }
+
+        private void RefreshStatusStrip(double time = 0.0)
+        {
+            string resultInfo = "";
+
+            this.labelResult.Text = "";
+            this.labelRunTime.Text = "";
+            foreach (var result in _detector.ProductManager.Result)
+            {
+                resultInfo += (EnumTools.GetDescription(result) + "  ");
+            }
+            this.labelResult.Text = "运行结果：" + resultInfo;
+            this.labelResult.ForeColor = _detector.ProductManager.IsResultOK ? Color.Blue : Color.Red;
+            this.labelRunTime.Text = "运行时间：" + time.ToString() + " ms";
+
+            return;
+        }
+
+        #region Event
 
         private void ToolStripMenuItem_ParamView_Click(object sender, EventArgs e)
         {
@@ -51,5 +73,29 @@ namespace AntennaAIDetector_SouthStar.Detector
 
             return;
         }
+
+        private void ToolStripMenuItem_Run_Click(object sender, EventArgs e)
+        {
+            RunTime runTime = new RunTime();
+            double time;
+            if (null == _detector.ImageIn)
+            {
+                MessageBox.Show("DetectorForm: 当前无图像！");
+
+                return;
+            }
+            
+            runTime.LogStartRunTime();
+            _detector.Process();
+            runTime.LogEndRunTime();
+            runTime.GetRunTime(out time);
+
+            _defaultView.Refresh();
+            RefreshStatusStrip(time);
+
+            return;
+        }
+
+        #endregion
     }
 }

@@ -37,6 +37,7 @@
             this.ToolStripMenuItem_ParamView = new System.Windows.Forms.ToolStripMenuItem();
             this.panelOfDefaultView = new System.Windows.Forms.Panel();
             this.panelOfParamView = new System.Windows.Forms.Panel();
+            this.ToolStripMenuItem_Run = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +53,7 @@
             this.statusStrip2.Location = new System.Drawing.Point(0, 739);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.Size = new System.Drawing.Size(1184, 22);
+            this.statusStrip2.SizingGrip = false;
             this.statusStrip2.TabIndex = 33;
             this.statusStrip2.Text = "statusStrip1";
             // 
@@ -61,7 +63,7 @@
             this.labelResult.AutoSize = false;
             this.labelResult.Name = "labelResult";
             this.labelResult.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelResult.Size = new System.Drawing.Size(85, 17);
+            this.labelResult.Size = new System.Drawing.Size(300, 17);
             this.labelResult.Text = "运行状态：OK";
             this.labelResult.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelResult.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
@@ -70,7 +72,7 @@
             // 
             this.labelRunTime.AutoSize = false;
             this.labelRunTime.Name = "labelRunTime";
-            this.labelRunTime.Size = new System.Drawing.Size(135, 17);
+            this.labelRunTime.Size = new System.Drawing.Size(300, 17);
             this.labelRunTime.Text = "运行时间(ms) 0.00  ";
             this.labelRunTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -90,7 +92,8 @@
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.AliceBlue;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItem_ParamView});
+            this.ToolStripMenuItem_ParamView,
+            this.ToolStripMenuItem_Run});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1184, 25);
@@ -119,6 +122,13 @@
             this.panelOfParamView.Name = "panelOfParamView";
             this.panelOfParamView.Size = new System.Drawing.Size(1025, 714);
             this.panelOfParamView.TabIndex = 36;
+            // 
+            // ToolStripMenuItem_Run
+            // 
+            this.ToolStripMenuItem_Run.Name = "ToolStripMenuItem_Run";
+            this.ToolStripMenuItem_Run.Size = new System.Drawing.Size(68, 21);
+            this.ToolStripMenuItem_Run.Text = "运行测试";
+            this.ToolStripMenuItem_Run.Click += new System.EventHandler(this.ToolStripMenuItem_Run_Click);
             // 
             // DetectorForm
             // 
@@ -157,5 +167,6 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_ParamView;
         private System.Windows.Forms.Panel panelOfDefaultView;
         private System.Windows.Forms.Panel panelOfParamView;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Run;
     }
 }

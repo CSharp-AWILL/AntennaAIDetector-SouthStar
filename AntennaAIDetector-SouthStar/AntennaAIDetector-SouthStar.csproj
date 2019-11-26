@@ -50,6 +50,10 @@
     <Reference Include="AqVision.Graphic">
       <HintPath>..\Release\AqVision.Graphic.dll</HintPath>
     </Reference>
+    <Reference Include="halcondotnet, Version=13.0.0.0, Culture=neutral, PublicKeyToken=4973bed59ddbf2b8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Release\halcondotnet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -62,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithm\Affine.cs" />
     <Compile Include="Detector\Detector.cs" />
     <Compile Include="Detector\DetectorForm.cs">
       <SubType>Form</SubType>

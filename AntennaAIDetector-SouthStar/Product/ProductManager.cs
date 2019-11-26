@@ -17,15 +17,15 @@ namespace AntennaAIDetector_SouthStar.Product
             [Description("OK")]
             OK,
             [Description("漏焊")]
-            Defect,
+            DEFECT,
             [Description("溢出")]
-            Overage,
+            OVERAGE,
             [Description("偏位")]
-            Offset,
+            OFFSET,
             [Description("拉尖")]
-            Tip,
+            TIP,
             [Description("虚焊")]
-            BadConnection
+            BADCONNECTION
         }
 
         public class Defect
@@ -35,7 +35,9 @@ namespace AntennaAIDetector_SouthStar.Product
             public int TinyNumFilter { get; set; } = 0;
             public double ObvAreaFilter { get; set; } = 0.0;
             public int ObvNumFilter { get; set; } = 0;
+            //
             public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
+            public bool IsResultOKOfAIDI { get; set; } = true;
 
         }
 
@@ -47,29 +49,51 @@ namespace AntennaAIDetector_SouthStar.Product
             public int TinyNumFilter { get; set; } = 0;
             public double ObvAreaFilter { get; set; } = 0.0;
             public int ObvNumFilter { get; set; } = 0;
+            //
             public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
+            public bool IsResultOKOfAIDI { get; set; } = true;
         }
 
         public class Offset
         {
             public bool IsAddToDetection { get; set; } = true;
+            //
             public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
+            public bool IsResultOKOfAIDI { get; set; } = true;
         }
 
         public class Tip
         {
             public bool IsAddToDetection { get; set; } = true;
+            //
             public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
+            public bool IsResultOKOfAIDI { get; set; } = true;
         }
 
         public class BadConnection
         {
             public bool IsAddToDetection { get; set; } = true;
+            //
             public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
+            public bool IsResultOKOfAIDI { get; set; } = true;
         }
 
         #endregion
-        public List<ETypeOfNg> Result { get; private set; } = new List<ETypeOfNg>();
+        public List<ETypeOfNg> Result { get; private set; } = new List<ETypeOfNg>() { ETypeOfNg.UNPROCESSED };
+        public bool IsResultOK
+        {
+            get
+            {
+                if (1 == Result.Count && ETypeOfNg.OK == Result[0])
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
         public ShapeOf2D.ShapeOf2D RegionOfNg { get; private set; } = null;
 
         public Defect DefectParam { get; set; } = new Defect();
@@ -207,25 +231,33 @@ namespace AntennaAIDetector_SouthStar.Product
         {
             Result.Clear();
             // TODO: analyze result
-            if (DefectParam.IsAddToDetection)
+            if (DefectParam.IsAddToDetection && (!DefectParam.IsResultOKOfAIDI))
             {
-                Result.Add(ETypeOfNg.Defect);
+                Result.Add(ETypeOfNg.DEFECT);
             }
-            if (OverageParam.IsAddToDetection)
+            if (OverageParam.IsAddToDetection && (!OverageParam.IsResultOKOfAIDI))
             {
-                Result.Add(ETypeOfNg.Overage);
+                Result.Add(ETypeOfNg.OVERAGE);
             }
-            if (OffsetParam.IsAddToDetection)
+            if (OffsetParam.IsAddToDetection && (!OffsetParam.IsResultOKOfAIDI))
             {
-                Result.Add(ETypeOfNg.Offset);
+                Result.Add(ETypeOfNg.OFFSET);
             }
-            if (TipParam.IsAddToDetection)
+            //
+            if (TipParam.IsAddToDetection &&(!TipParam.IsResultOKOfAIDI))
             {
-                Result.Add(ETypeOfNg.Tip);
+                Result.Add(ETypeOfNg.TIP);
             }
-            if (BadConnectionParam.IsAddToDetection)
+            //
+            if (BadConnectionParam.IsAddToDetection &&(!BadConnectionParam.IsResultOKOfAIDI))
             {
-                Result.Add(ETypeOfNg.BadConnection);
+                Result.Add(ETypeOfNg.BADCONNECTION);
+            }
+
+            //
+            if (0 == Result.Count)
+            {
+                Result.Add(ETypeOfNg.OK);
             }
 
             return;
@@ -239,10 +271,6 @@ namespace AntennaAIDetector_SouthStar.Product
             return;
         }
 
-        public bool JudgeResult()
-        {
-            return 0 == Result.Count;
-        }
 
         //
         public void Union1()

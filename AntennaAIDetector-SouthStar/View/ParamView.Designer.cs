@@ -29,29 +29,29 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.checkBox_Defect_IsAddToDetection = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.checkBox_BadConnection_IsAddToDetection = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.checkBox_Overage_IsAddToDetection = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.checkBox_Offset_IsAddToDetection = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox_Tip_IsAddToDetection = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
             this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,6 +66,29 @@
             this.panel1.Size = new System.Drawing.Size(164, 611);
             this.panel1.TabIndex = 0;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.checkBox_Defect_IsAddToDetection);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(162, 35);
+            this.panel2.TabIndex = 0;
+            // 
+            // checkBox_Defect_IsAddToDetection
+            // 
+            this.checkBox_Defect_IsAddToDetection.AutoSize = true;
+            this.checkBox_Defect_IsAddToDetection.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.checkBox_Defect_IsAddToDetection.Location = new System.Drawing.Point(0, 19);
+            this.checkBox_Defect_IsAddToDetection.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox_Defect_IsAddToDetection.Name = "checkBox_Defect_IsAddToDetection";
+            this.checkBox_Defect_IsAddToDetection.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.checkBox_Defect_IsAddToDetection.Size = new System.Drawing.Size(162, 16);
+            this.checkBox_Defect_IsAddToDetection.TabIndex = 0;
+            this.checkBox_Defect_IsAddToDetection.Text = "检测漏焊";
+            this.checkBox_Defect_IsAddToDetection.UseVisualStyleBackColor = true;
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -76,6 +99,29 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(164, 611);
             this.flowLayoutPanel1.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.checkBox_BadConnection_IsAddToDetection);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(162, 35);
+            this.panel3.TabIndex = 1;
+            // 
+            // checkBox_BadConnection_IsAddToDetection
+            // 
+            this.checkBox_BadConnection_IsAddToDetection.AutoSize = true;
+            this.checkBox_BadConnection_IsAddToDetection.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.checkBox_BadConnection_IsAddToDetection.Location = new System.Drawing.Point(0, 19);
+            this.checkBox_BadConnection_IsAddToDetection.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox_BadConnection_IsAddToDetection.Name = "checkBox_BadConnection_IsAddToDetection";
+            this.checkBox_BadConnection_IsAddToDetection.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.checkBox_BadConnection_IsAddToDetection.Size = new System.Drawing.Size(162, 16);
+            this.checkBox_BadConnection_IsAddToDetection.TabIndex = 1;
+            this.checkBox_BadConnection_IsAddToDetection.Text = "检测虚焊";
+            this.checkBox_BadConnection_IsAddToDetection.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel2
             // 
@@ -88,6 +134,29 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(164, 611);
             this.flowLayoutPanel2.TabIndex = 2;
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.checkBox_Overage_IsAddToDetection);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Margin = new System.Windows.Forms.Padding(0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(162, 35);
+            this.panel4.TabIndex = 1;
+            // 
+            // checkBox_Overage_IsAddToDetection
+            // 
+            this.checkBox_Overage_IsAddToDetection.AutoSize = true;
+            this.checkBox_Overage_IsAddToDetection.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.checkBox_Overage_IsAddToDetection.Location = new System.Drawing.Point(0, 19);
+            this.checkBox_Overage_IsAddToDetection.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox_Overage_IsAddToDetection.Name = "checkBox_Overage_IsAddToDetection";
+            this.checkBox_Overage_IsAddToDetection.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.checkBox_Overage_IsAddToDetection.Size = new System.Drawing.Size(162, 16);
+            this.checkBox_Overage_IsAddToDetection.TabIndex = 1;
+            this.checkBox_Overage_IsAddToDetection.Text = "检测溢出";
+            this.checkBox_Overage_IsAddToDetection.UseVisualStyleBackColor = true;
+            // 
             // flowLayoutPanel3
             // 
             this.flowLayoutPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -98,6 +167,29 @@
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(164, 611);
             this.flowLayoutPanel3.TabIndex = 3;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.checkBox_Offset_IsAddToDetection);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Margin = new System.Windows.Forms.Padding(0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(162, 35);
+            this.panel5.TabIndex = 1;
+            // 
+            // checkBox_Offset_IsAddToDetection
+            // 
+            this.checkBox_Offset_IsAddToDetection.AutoSize = true;
+            this.checkBox_Offset_IsAddToDetection.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.checkBox_Offset_IsAddToDetection.Location = new System.Drawing.Point(0, 19);
+            this.checkBox_Offset_IsAddToDetection.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox_Offset_IsAddToDetection.Name = "checkBox_Offset_IsAddToDetection";
+            this.checkBox_Offset_IsAddToDetection.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.checkBox_Offset_IsAddToDetection.Size = new System.Drawing.Size(162, 16);
+            this.checkBox_Offset_IsAddToDetection.TabIndex = 1;
+            this.checkBox_Offset_IsAddToDetection.Text = "检测偏位";
+            this.checkBox_Offset_IsAddToDetection.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel4
             // 
@@ -110,49 +202,9 @@
             this.flowLayoutPanel4.Size = new System.Drawing.Size(164, 611);
             this.flowLayoutPanel4.TabIndex = 4;
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.checkBox1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(162, 35);
-            this.panel2.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.checkBox2);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(162, 35);
-            this.panel3.TabIndex = 1;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.checkBox3);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Margin = new System.Windows.Forms.Padding(0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(162, 35);
-            this.panel4.TabIndex = 1;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.checkBox4);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Margin = new System.Windows.Forms.Padding(0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(162, 35);
-            this.panel5.TabIndex = 1;
-            // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.checkBox5);
+            this.panel6.Controls.Add(this.checkBox_Tip_IsAddToDetection);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Margin = new System.Windows.Forms.Padding(0);
@@ -160,70 +212,18 @@
             this.panel6.Size = new System.Drawing.Size(162, 35);
             this.panel6.TabIndex = 1;
             // 
-            // checkBox1
+            // checkBox_Tip_IsAddToDetection
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.checkBox1.Location = new System.Drawing.Point(0, 19);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.checkBox1.Size = new System.Drawing.Size(162, 16);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "检测溢出";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.checkBox2.Location = new System.Drawing.Point(0, 19);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(0);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.checkBox2.Size = new System.Drawing.Size(162, 16);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "检测溢出";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.checkBox3.Location = new System.Drawing.Point(0, 19);
-            this.checkBox3.Margin = new System.Windows.Forms.Padding(0);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.checkBox3.Size = new System.Drawing.Size(162, 16);
-            this.checkBox3.TabIndex = 1;
-            this.checkBox3.Text = "检测溢出";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.checkBox4.Location = new System.Drawing.Point(0, 19);
-            this.checkBox4.Margin = new System.Windows.Forms.Padding(0);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.checkBox4.Size = new System.Drawing.Size(162, 16);
-            this.checkBox4.TabIndex = 1;
-            this.checkBox4.Text = "检测溢出";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.checkBox5.Location = new System.Drawing.Point(0, 19);
-            this.checkBox5.Margin = new System.Windows.Forms.Padding(0);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.checkBox5.Size = new System.Drawing.Size(162, 16);
-            this.checkBox5.TabIndex = 1;
-            this.checkBox5.Text = "检测溢出";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox_Tip_IsAddToDetection.AutoSize = true;
+            this.checkBox_Tip_IsAddToDetection.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.checkBox_Tip_IsAddToDetection.Location = new System.Drawing.Point(0, 19);
+            this.checkBox_Tip_IsAddToDetection.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBox_Tip_IsAddToDetection.Name = "checkBox_Tip_IsAddToDetection";
+            this.checkBox_Tip_IsAddToDetection.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.checkBox_Tip_IsAddToDetection.Size = new System.Drawing.Size(162, 16);
+            this.checkBox_Tip_IsAddToDetection.TabIndex = 1;
+            this.checkBox_Tip_IsAddToDetection.Text = "检测拉尖";
+            this.checkBox_Tip_IsAddToDetection.UseVisualStyleBackColor = true;
             // 
             // ParamView
             // 
@@ -238,18 +238,18 @@
             this.Name = "ParamView";
             this.Size = new System.Drawing.Size(964, 611);
             this.panel1.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel3.ResumeLayout(false);
-            this.flowLayoutPanel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.flowLayoutPanel3.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.flowLayoutPanel4.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.ResumeLayout(false);
@@ -268,10 +268,10 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox5;
+        private System.Windows.Forms.CheckBox checkBox_Defect_IsAddToDetection;
+        private System.Windows.Forms.CheckBox checkBox_BadConnection_IsAddToDetection;
+        private System.Windows.Forms.CheckBox checkBox_Overage_IsAddToDetection;
+        private System.Windows.Forms.CheckBox checkBox_Offset_IsAddToDetection;
+        private System.Windows.Forms.CheckBox checkBox_Tip_IsAddToDetection;
     }
 }

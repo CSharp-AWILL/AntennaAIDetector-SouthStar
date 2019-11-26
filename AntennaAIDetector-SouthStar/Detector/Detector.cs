@@ -20,7 +20,17 @@ namespace AntennaAIDetector_SouthStar.Detector
 
         [InputData]
         public Bitmap ImageIn { get; set; } = null;
-
+        [InputData]
+        public bool IsResultOKOfDefectAIDI { get; set; } = false;
+        [InputData]
+        public bool IsResultOKOfBadConnectionAIDI { get; set; } = false;
+        [InputData]
+        public bool IsResultOKOfOverageAIDI { get; set; } = false;
+        [InputData]
+        public bool IsResultOKOfOffsetAIDI { get; set; } = false;
+        [InputData]
+        public bool IsResultOKOfTipAIDI { get; set; } = false;
+        
         public ProductManager ProductManager { get; set; } = new ProductManager();
 
         #region IDisplay
@@ -37,11 +47,22 @@ namespace AntennaAIDetector_SouthStar.Detector
 
         #endregion
 
+        public bool IsDisplayOfDefect { get; set; } = true;
+        public bool IsDisplayOfBadConnection { get; set; } = true;
+        public bool IsDisplayOfOverage { get; set; } = true;
+        public bool IsDisplayOfOffset { get; set; } = true;
+        public bool IsDisplayOfTip { get; set; } = true;
+
+        public Detector()
+        {
+        }
+
+        
         #region IModule
 
         public void CloseModule()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void InitModule(string projectDirectory, string nodeName)
@@ -69,6 +90,32 @@ namespace AntennaAIDetector_SouthStar.Detector
                 }
 
                 #endregion
+                //
+                strParamInfo = xmlParameter.GetParamData("IsDisplayOfDefect");
+                if (strParamInfo != "")
+                {
+                    IsDisplayOfDefect = Convert.ToBoolean(strParamInfo);
+                }
+                strParamInfo = xmlParameter.GetParamData("IsDisplayOfBadConnection");
+                if (strParamInfo != "")
+                {
+                    IsDisplayOfBadConnection = Convert.ToBoolean(strParamInfo);
+                }
+                strParamInfo = xmlParameter.GetParamData("IsDisplayOfOverage");
+                if (strParamInfo != "")
+                {
+                    IsDisplayOfOverage = Convert.ToBoolean(strParamInfo);
+                }
+                strParamInfo = xmlParameter.GetParamData("IsDisplayOfOffset");
+                if (strParamInfo != "")
+                {
+                    IsDisplayOfOffset = Convert.ToBoolean(strParamInfo);
+                }
+                strParamInfo = xmlParameter.GetParamData("IsDisplayOfTip");
+                if (strParamInfo != "")
+                {
+                    IsDisplayOfTip = Convert.ToBoolean(strParamInfo);
+                }
             }
             //
             ProductManager.LoadParam(configFileOfDefectManager);
@@ -78,12 +125,18 @@ namespace AntennaAIDetector_SouthStar.Detector
 
         public void Run()
         {
-            throw new NotImplementedException();
+            if (null != ImageIn)
+            {
+                Process();
+                IsResultOK = ProductManager.IsResultOK;
+            }
+
+            //throw new NotImplementedException();
         }
 
         public void SaveModule(string projectDirectory, string nodeName)
         {
-            string configFile = projectDirectory + @"\DefectInspector-" + nodeName + ".xml";
+            string configFile = projectDirectory + @"\Detector-" + nodeName + ".xml";
             string configFileOfDefectManager = projectDirectory + @"\DefectManager-" + nodeName + ".xml";
             XmlParameter xmlParameter = new XmlParameter();
 
@@ -93,6 +146,12 @@ namespace AntennaAIDetector_SouthStar.Detector
             xmlParameter.Add("IsDisplay", IsDisplay);
 
             #endregion
+            //
+            xmlParameter.Add("IsDisplayOfDefect", IsDisplayOfDefect);
+            xmlParameter.Add("IsDisplayOfBadConnection", IsDisplayOfBadConnection);
+            xmlParameter.Add("IsDisplayOfOverage", IsDisplayOfOverage);
+            xmlParameter.Add("IsDisplayOfOffset", IsDisplayOfOffset);
+            xmlParameter.Add("IsDisplayOfTip", IsDisplayOfTip);
 
             xmlParameter.WriteParameter(configFile);
             //
@@ -111,6 +170,21 @@ namespace AntennaAIDetector_SouthStar.Detector
         }
 
         #endregion
+
+        public void Process()
+        {
+            ProductManager.SetResultAsUnprocessed();
+
+            ProductManager.DefectParam.IsResultOKOfAIDI = IsResultOKOfDefectAIDI;
+            ProductManager.BadConnectionParam.IsResultOKOfAIDI = IsResultOKOfBadConnectionAIDI;
+            ProductManager.OverageParam.IsResultOKOfAIDI = IsResultOKOfOverageAIDI;
+            ProductManager.OffsetParam.IsResultOKOfAIDI = IsResultOKOfOffsetAIDI;
+            ProductManager.TipParam.IsResultOKOfAIDI = IsResultOKOfTipAIDI;
+            ProductManager.AnalyzeResult();
+
+            return;
+        }
+
 
     }
 }
