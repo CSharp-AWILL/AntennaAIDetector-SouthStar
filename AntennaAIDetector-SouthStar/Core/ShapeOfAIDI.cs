@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Aqrose.Framework.Utility.DataStructure;
 
-namespace AntennaAIDetector_SouthStar.ShapeOf2D
+namespace AntennaAIDetector_SouthStar.Core
 {
     public class ShapeOfAIDI
     {

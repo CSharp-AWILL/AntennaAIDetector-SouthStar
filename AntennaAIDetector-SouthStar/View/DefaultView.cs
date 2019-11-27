@@ -83,23 +83,23 @@ namespace AntennaAIDetector_SouthStar.View
                     DisplayContour.Display(this.aqDisplay1, shape);
                 }
                 //
-                if (this.checkBox_Overage_IsShow.Checked)
+                if (_detector.IsDisplayOfOverage)
                 {
-                    var temp = _detector.ProductManager.BadConnectionParam.Region;
+                    var temp = _detector.ProductManager.OverageParam.Region;
                     DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Blue, 2);
                     DisplayContour.Display(this.aqDisplay1, shape);
                 }
                 //
-                if (this.checkBox_Offset_IsShow.Checked)
+                if (_detector.IsDisplayOfOffset)
                 {
-                    var temp = _detector.ProductManager.BadConnectionParam.Region;
+                    var temp = _detector.ProductManager.OffsetParam.Region;
                     DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Yellow, 2);
                     DisplayContour.Display(this.aqDisplay1, shape);
                 }
                 //
-                if (this.checkBox_Tip_IsShow.Checked)
+                if (_detector.IsDisplayOfTip)
                 {
-                    var temp = _detector.ProductManager.BadConnectionParam.Region;
+                    var temp = _detector.ProductManager.TipParam.Region;
                     DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Orange, 2);
                     DisplayContour.Display(this.aqDisplay1, shape);
                 }

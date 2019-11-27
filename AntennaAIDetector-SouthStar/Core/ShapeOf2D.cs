@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AntennaAIDetector_SouthStar.ShapeOf2D
+namespace AntennaAIDetector_SouthStar.Core
 {
     public class ShapeOf2D
     {

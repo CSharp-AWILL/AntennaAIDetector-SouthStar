@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using AntennaAIDetector_SouthStar.ShapeOf2D;
+using AntennaAIDetector_SouthStar.Core;
+using AntennaAIDetector_SouthStar.Product.Detail;
 using Aqrose.Framework.Utility.DataStructure;
 using Aqrose.Framework.Utility.Tools;
 
@@ -30,60 +31,6 @@ namespace AntennaAIDetector_SouthStar.Product
             BADCONNECTION
         }
 
-        public class Defect
-        {
-            public bool IsAddToDetection { get; set; } = true;
-            public double TinyAreaFilter { get; set; } = 0.0;
-            public int TinyNumFilter { get; set; } = 0;
-            public double ObvAreaFilter { get; set; } = 0.0;
-            public int ObvNumFilter { get; set; } = 0;
-            //
-            public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
-            public bool IsResultOKOfAIDI { get; set; } = true;
-            public List<ShapeOfAIDI> ResultDetailOfAIDI { get; set; } = new List<ShapeOfAIDI>();
-        }
-
-        public class Overage
-        {
-            public bool IsAddToDetection { get; set; } = true;
-            public double StandardAreaFilter { get; set; } = 0.0;
-            public double TinyAreaFilter { get; set; } = 0.0;
-            public int TinyNumFilter { get; set; } = 0;
-            public double ObvAreaFilter { get; set; } = 0.0;
-            public int ObvNumFilter { get; set; } = 0;
-            //
-            public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
-            public bool IsResultOKOfAIDI { get; set; } = true;
-            public List<ShapeOfAIDI> ResultDetailOfAIDI { get; set; } = new List<ShapeOfAIDI>();
-        }
-
-        public class Offset
-        {
-            public bool IsAddToDetection { get; set; } = true;
-            //
-            public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
-            public bool IsResultOKOfAIDI { get; set; } = true;
-            public List<ShapeOfAIDI> ResultDetailOfAIDI { get; set; } = new List<ShapeOfAIDI>();
-        }
-
-        public class Tip
-        {
-            public bool IsAddToDetection { get; set; } = true;
-            //
-            public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
-            public bool IsResultOKOfAIDI { get; set; } = true;
-            public List<ShapeOfAIDI> ResultDetailOfAIDI { get; set; } = new List<ShapeOfAIDI>();
-        }
-
-        public class BadConnection
-        {
-            public bool IsAddToDetection { get; set; } = true;
-            //
-            public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
-            public bool IsResultOKOfAIDI { get; set; } = true;
-            public List<ShapeOfAIDI> ResultDetailOfAIDI { get; set; } = new List<ShapeOfAIDI>();
-        }
-
         #endregion
         public List<ETypeOfNg> Result { get; private set; } = new List<ETypeOfNg>() { ETypeOfNg.UNPROCESSED };
         public bool IsResultOK
@@ -100,7 +47,7 @@ namespace AntennaAIDetector_SouthStar.Product
                 }
             }
         }
-        public ShapeOf2D.ShapeOf2D RegionOfNg { get; private set; } = null;
+        public ShapeOf2D RegionOfNg { get; private set; } = null;
 
         public Defect DefectParam { get; set; } = new Defect();
         public Overage OverageParam { get; set; } = new Overage();

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using AntennaAIDetector_SouthStar.Core;
 using AntennaAIDetector_SouthStar.Product;
-using AntennaAIDetector_SouthStar.ShapeOf2D;
 using Aqrose.Framework.Core.Attributes;
 using Aqrose.Framework.Core.DataType;
 using Aqrose.Framework.Core.Interface;
@@ -73,7 +73,7 @@ namespace AntennaAIDetector_SouthStar.Detector
 
         private void RefreshDisplayShape()
         {
-            ShapeOf2D.ShapeOf2D result = new ShapeOf2D.ShapeOf2D();
+            ShapeOf2D result = new ShapeOf2D();
 
             _displayShapes = new List<AqShap>();
             if (IsDisplayOfDefect)

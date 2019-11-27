@@ -38,5 +38,10 @@ namespace AntennaAIDetector_SouthStar.View
 
             return;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
