@@ -21,7 +21,7 @@ namespace AntennaAIDetector_SouthStar.Detector
         private List<AqShap> _displayShapes = new List<AqShap>();
 
         [InputData]
-        public Bitmap ImageIn { get; set; } = null;
+        public Bitmap ImageIn { get; set; } = new Bitmap(100,100);
         //
         [InputData]
         public bool IsResultOKOfDefectAIDI { get; set; } = false;
@@ -35,15 +35,15 @@ namespace AntennaAIDetector_SouthStar.Detector
         public bool IsResultOKOfTipAIDI { get; set; } = false;
         //
         [InputData]
-        public List<AIDIShape> OutputOfDefectAIDI { get; set; } = null;
+        public List<AIDIShape> OutputOfDefectAIDI { get; set; } = new List<AIDIShape>();
         [InputData]
-        public List<AIDIShape> OutputOfBadConnectionAIDI { get; set; } = null;
+        public List<AIDIShape> OutputOfBadConnectionAIDI { get; set; } = new List<AIDIShape>();
         [InputData]
-        public List<AIDIShape> OutputOfOverageAIDI { get; set; } = null;
+        public List<AIDIShape> OutputOfOverageAIDI { get; set; } = new List<AIDIShape>();
         [InputData]
-        public List<AIDIShape> OutputOfOffsetAIDI { get; set; } = null;
+        public List<AIDIShape> OutputOfOffsetAIDI { get; set; } = new List<AIDIShape>();
         [InputData]
-        public List<AIDIShape> OutputOfTipAIDI { get; set; } = null;
+        public List<AIDIShape> OutputOfTipAIDI { get; set; } = new List<AIDIShape>();
 
         public ProductManager ProductManager { get; set; } = new ProductManager();
 
