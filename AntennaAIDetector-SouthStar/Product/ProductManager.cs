@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using AntennaAIDetector_SouthStar.ShapeOf2D;
+using Aqrose.Framework.Utility.DataStructure;
 using Aqrose.Framework.Utility.Tools;
 
 namespace AntennaAIDetector_SouthStar.Product
@@ -38,7 +40,7 @@ namespace AntennaAIDetector_SouthStar.Product
             //
             public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
             public bool IsResultOKOfAIDI { get; set; } = true;
-
+            public List<ShapeOfAIDI> ResultDetailOfAIDI { get; set; } = new List<ShapeOfAIDI>();
         }
 
         public class Overage
@@ -52,6 +54,7 @@ namespace AntennaAIDetector_SouthStar.Product
             //
             public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
             public bool IsResultOKOfAIDI { get; set; } = true;
+            public List<ShapeOfAIDI> ResultDetailOfAIDI { get; set; } = new List<ShapeOfAIDI>();
         }
 
         public class Offset
@@ -60,6 +63,7 @@ namespace AntennaAIDetector_SouthStar.Product
             //
             public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
             public bool IsResultOKOfAIDI { get; set; } = true;
+            public List<ShapeOfAIDI> ResultDetailOfAIDI { get; set; } = new List<ShapeOfAIDI>();
         }
 
         public class Tip
@@ -68,6 +72,7 @@ namespace AntennaAIDetector_SouthStar.Product
             //
             public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
             public bool IsResultOKOfAIDI { get; set; } = true;
+            public List<ShapeOfAIDI> ResultDetailOfAIDI { get; set; } = new List<ShapeOfAIDI>();
         }
 
         public class BadConnection
@@ -76,6 +81,7 @@ namespace AntennaAIDetector_SouthStar.Product
             //
             public ShapeOf2D.ShapeOf2D Region { get; set; } = new ShapeOf2D.ShapeOf2D();
             public bool IsResultOKOfAIDI { get; set; } = true;
+            public List<ShapeOfAIDI> ResultDetailOfAIDI { get; set; } = new List<ShapeOfAIDI>();
         }
 
         #endregion
@@ -227,7 +233,7 @@ namespace AntennaAIDetector_SouthStar.Product
         }
 
         //
-        public void AnalyzeResult()
+        public void ProcessResultOfAIDI()
         {
             Result.Clear();
             // TODO: analyze result
@@ -246,11 +252,19 @@ namespace AntennaAIDetector_SouthStar.Product
             //
             if (TipParam.IsAddToDetection &&(!TipParam.IsResultOKOfAIDI))
             {
+                foreach (var temp in TipParam.ResultDetailOfAIDI)
+                {
+                    TipParam.Region += temp.ShapeOf2D;
+                }
                 Result.Add(ETypeOfNg.TIP);
             }
             //
             if (BadConnectionParam.IsAddToDetection &&(!BadConnectionParam.IsResultOKOfAIDI))
             {
+                foreach (var temp in BadConnectionParam.ResultDetailOfAIDI)
+                {
+                    BadConnectionParam.Region += temp.ShapeOf2D;
+                }
                 Result.Add(ETypeOfNg.BADCONNECTION);
             }
 

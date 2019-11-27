@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using AntennaAIDetector_SouthStar.Product;
+using AntennaAIDetector_SouthStar.ShapeOf2D;
 using Aqrose.Framework.Core.Attributes;
 using Aqrose.Framework.Core.DataType;
 using Aqrose.Framework.Core.Interface;
+using Aqrose.Framework.Utility.DataStructure;
 using Aqrose.Framework.Utility.Tools;
 using AqVision.Graphic.AqVision.shape;
 
@@ -20,6 +22,7 @@ namespace AntennaAIDetector_SouthStar.Detector
 
         [InputData]
         public Bitmap ImageIn { get; set; } = null;
+        //
         [InputData]
         public bool IsResultOKOfDefectAIDI { get; set; } = false;
         [InputData]
@@ -30,7 +33,18 @@ namespace AntennaAIDetector_SouthStar.Detector
         public bool IsResultOKOfOffsetAIDI { get; set; } = false;
         [InputData]
         public bool IsResultOKOfTipAIDI { get; set; } = false;
-        
+        //
+        [InputData]
+        public List<AIDIShape> OutputOfDefectAIDI { get; set; } = null;
+        [InputData]
+        public List<AIDIShape> OutputOfBadConnectionAIDI { get; set; } = null;
+        [InputData]
+        public List<AIDIShape> OutputOfOverageAIDI { get; set; } = null;
+        [InputData]
+        public List<AIDIShape> OutputOfOffsetAIDI { get; set; } = null;
+        [InputData]
+        public List<AIDIShape> OutputOfTipAIDI { get; set; } = null;
+
         public ProductManager ProductManager { get; set; } = new ProductManager();
 
         #region IDisplay
@@ -57,7 +71,73 @@ namespace AntennaAIDetector_SouthStar.Detector
         {
         }
 
-        
+        private void RefreshDisplayShape()
+        {
+            ShapeOf2D.ShapeOf2D result = new ShapeOf2D.ShapeOf2D();
+
+            _displayShapes = new List<AqShap>();
+            if (IsDisplayOfDefect)
+            {
+                result += ProductManager.DefectParam.Region;
+            }
+            if (IsDisplayOfBadConnection)
+            {
+                result += ProductManager.BadConnectionParam.Region;
+            }
+            if (IsDisplayOfOverage)
+            {
+                result += ProductManager.OverageParam.Region;
+            }
+            if (IsDisplayOfOffset)
+            {
+                result += ProductManager.OffsetParam.Region;
+            }
+            if (IsDisplayOfTip)
+            {
+                result += ProductManager.TipParam.Region;
+            }
+
+            DisplayContour.GetContours(result.XldPointYs, result.XldPointXs, result.XldPointsNums, out _displayShapes, AqVision.Graphic.AqColorEnum.Red, 2);
+
+            return;
+        }
+
+        private void InjectInputDataToProductManager()
+        {
+            //
+            ProductManager.DefectParam.IsResultOKOfAIDI = IsResultOKOfDefectAIDI;
+            ProductManager.BadConnectionParam.IsResultOKOfAIDI = IsResultOKOfBadConnectionAIDI;
+            ProductManager.OverageParam.IsResultOKOfAIDI = IsResultOKOfOverageAIDI;
+            ProductManager.OffsetParam.IsResultOKOfAIDI = IsResultOKOfOffsetAIDI;
+            ProductManager.TipParam.IsResultOKOfAIDI = IsResultOKOfTipAIDI;
+            //
+            do
+            {
+                foreach (var temp in OutputOfDefectAIDI)
+                {
+                    ProductManager.DefectParam.ResultDetailOfAIDI.Add(new ShapeOfAIDI(temp));
+                }
+                foreach (var temp in OutputOfBadConnectionAIDI)
+                {
+                    ProductManager.BadConnectionParam.ResultDetailOfAIDI.Add(new ShapeOfAIDI(temp));
+                }
+                foreach (var temp in OutputOfOverageAIDI)
+                {
+                    ProductManager.OverageParam.ResultDetailOfAIDI.Add(new ShapeOfAIDI(temp));
+                }
+                foreach (var temp in OutputOfOffsetAIDI)
+                {
+                    ProductManager.OffsetParam.ResultDetailOfAIDI.Add(new ShapeOfAIDI(temp));
+                }
+                foreach (var temp in OutputOfTipAIDI)
+                {
+                    ProductManager.TipParam.ResultDetailOfAIDI.Add(new ShapeOfAIDI(temp));
+                }
+            } while (false);
+
+            return;
+        }
+
         #region IModule
 
         public void CloseModule()
@@ -129,6 +209,16 @@ namespace AntennaAIDetector_SouthStar.Detector
             {
                 Process();
                 IsResultOK = ProductManager.IsResultOK;
+
+                if (IsDisplay)
+                {
+                    RefreshDisplayShape();
+                    IsUpdate = true;
+                }
+                else
+                {
+                    IsUpdate = false;
+                }
             }
 
             //throw new NotImplementedException();
@@ -174,16 +264,13 @@ namespace AntennaAIDetector_SouthStar.Detector
         public void Process()
         {
             ProductManager.SetResultAsUnprocessed();
-
-            ProductManager.DefectParam.IsResultOKOfAIDI = IsResultOKOfDefectAIDI;
-            ProductManager.BadConnectionParam.IsResultOKOfAIDI = IsResultOKOfBadConnectionAIDI;
-            ProductManager.OverageParam.IsResultOKOfAIDI = IsResultOKOfOverageAIDI;
-            ProductManager.OffsetParam.IsResultOKOfAIDI = IsResultOKOfOffsetAIDI;
-            ProductManager.TipParam.IsResultOKOfAIDI = IsResultOKOfTipAIDI;
-            ProductManager.AnalyzeResult();
+            InjectInputDataToProductManager();
+            ProductManager.ProcessResultOfAIDI();
 
             return;
         }
+
+        
 
 
     }

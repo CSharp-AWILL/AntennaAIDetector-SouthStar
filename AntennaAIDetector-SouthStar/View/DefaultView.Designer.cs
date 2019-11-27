@@ -114,6 +114,7 @@
             // 
             this.checkBox_Tip_IsShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_Tip_IsShow.AutoSize = true;
+            this.checkBox_Tip_IsShow.ForeColor = System.Drawing.Color.Orange;
             this.checkBox_Tip_IsShow.Location = new System.Drawing.Point(3, 3);
             this.checkBox_Tip_IsShow.Name = "checkBox_Tip_IsShow";
             this.checkBox_Tip_IsShow.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
@@ -135,6 +136,7 @@
             // 
             this.checkBox_Offset_IsShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_Offset_IsShow.AutoSize = true;
+            this.checkBox_Offset_IsShow.ForeColor = System.Drawing.Color.Yellow;
             this.checkBox_Offset_IsShow.Location = new System.Drawing.Point(3, 3);
             this.checkBox_Offset_IsShow.Name = "checkBox_Offset_IsShow";
             this.checkBox_Offset_IsShow.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
@@ -156,6 +158,7 @@
             // 
             this.checkBox_Overage_IsShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_Overage_IsShow.AutoSize = true;
+            this.checkBox_Overage_IsShow.ForeColor = System.Drawing.Color.Blue;
             this.checkBox_Overage_IsShow.Location = new System.Drawing.Point(3, 3);
             this.checkBox_Overage_IsShow.Name = "checkBox_Overage_IsShow";
             this.checkBox_Overage_IsShow.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
@@ -177,6 +180,7 @@
             // 
             this.checkBox_BadConnection_IsShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_BadConnection_IsShow.AutoSize = true;
+            this.checkBox_BadConnection_IsShow.ForeColor = System.Drawing.Color.Red;
             this.checkBox_BadConnection_IsShow.Location = new System.Drawing.Point(3, 3);
             this.checkBox_BadConnection_IsShow.Name = "checkBox_BadConnection_IsShow";
             this.checkBox_BadConnection_IsShow.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);
@@ -198,6 +202,7 @@
             // 
             this.checkBox_Defect_IsShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_Defect_IsShow.AutoSize = true;
+            this.checkBox_Defect_IsShow.ForeColor = System.Drawing.Color.Green;
             this.checkBox_Defect_IsShow.Location = new System.Drawing.Point(3, 3);
             this.checkBox_Defect_IsShow.Name = "checkBox_Defect_IsShow";
             this.checkBox_Defect_IsShow.Padding = new System.Windows.Forms.Padding(50, 0, 0, 0);

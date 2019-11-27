@@ -68,6 +68,41 @@ namespace AntennaAIDetector_SouthStar.View
             if (null != _detector.ImageIn)
             {
                 this.aqDisplay1.Image = _detector.ImageIn.Clone() as Bitmap;
+                //
+                if (this.checkBox_Defect_IsShow.Checked)
+                {
+                    var temp = _detector.ProductManager.DefectParam.Region;
+                    DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Green, 2);
+                    DisplayContour.Display(this.aqDisplay1, shape);
+                }
+                //
+                if (this.checkBox_BadConnection_IsShow.Checked)
+                {
+                    var temp = _detector.ProductManager.BadConnectionParam.Region;
+                    DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Red, 2);
+                    DisplayContour.Display(this.aqDisplay1, shape);
+                }
+                //
+                if (this.checkBox_Overage_IsShow.Checked)
+                {
+                    var temp = _detector.ProductManager.BadConnectionParam.Region;
+                    DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Blue, 2);
+                    DisplayContour.Display(this.aqDisplay1, shape);
+                }
+                //
+                if (this.checkBox_Offset_IsShow.Checked)
+                {
+                    var temp = _detector.ProductManager.BadConnectionParam.Region;
+                    DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Yellow, 2);
+                    DisplayContour.Display(this.aqDisplay1, shape);
+                }
+                //
+                if (this.checkBox_Tip_IsShow.Checked)
+                {
+                    var temp = _detector.ProductManager.BadConnectionParam.Region;
+                    DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Orange, 2);
+                    DisplayContour.Display(this.aqDisplay1, shape);
+                }
             }
             if (isAutoFit)
             {
