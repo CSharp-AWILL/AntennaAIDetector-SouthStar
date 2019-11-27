@@ -47,7 +47,6 @@ namespace AntennaAIDetector_SouthStar.Product
                 }
             }
         }
-        public ShapeOf2D RegionOfNg { get; private set; } = null;
 
         public Defect DefectParam { get; set; } = new Defect();
         public Overage OverageParam { get; set; } = new Overage();
@@ -58,16 +57,6 @@ namespace AntennaAIDetector_SouthStar.Product
         public ProductManager()
         {
             // LABEL: do nothing
-        }
-
-        private void UnionRegionOfAIDI()
-        {
-            RegionOfNg = DefectParam.Region + OverageParam.Region;
-            RegionOfNg = RegionOfNg + OffsetParam.Region;
-            RegionOfNg = RegionOfNg + TipParam.Region;
-            RegionOfNg = RegionOfNg + BadConnectionParam.Region;
-
-            return;
         }
 
         //
@@ -209,19 +198,13 @@ namespace AntennaAIDetector_SouthStar.Product
             //
             if (TipParam.IsAddToDetection &&(!TipParam.IsResultOKOfAIDI))
             {
-                foreach (var temp in TipParam.ResultDetailOfAIDI)
-                {
-                    TipParam.Region += temp.ShapeOf2D;
-                }
+                TipParam.CalculateRegion();
                 Result.Add(ETypeOfNg.TIP);
             }
             //
             if (BadConnectionParam.IsAddToDetection &&(!BadConnectionParam.IsResultOKOfAIDI))
             {
-                foreach (var temp in BadConnectionParam.ResultDetailOfAIDI)
-                {
-                    BadConnectionParam.Region += temp.ShapeOf2D;
-                }
+                BadConnectionParam.CalculateRegion();
                 Result.Add(ETypeOfNg.BADCONNECTION);
             }
 
@@ -230,7 +213,6 @@ namespace AntennaAIDetector_SouthStar.Product
             {
                 Result.Add(ETypeOfNg.OK);
             }
-            UnionRegionOfAIDI();
 
             return;
         }

@@ -78,8 +78,10 @@
     <Compile Include="Product\Detail\Defect.cs" />
     <Compile Include="Product\Detail\Offset.cs" />
     <Compile Include="Product\Detail\Overage.cs" />
+    <Compile Include="Product\IEvaluateAIDI.cs" />
     <Compile Include="Product\ProductManager.cs" />
     <Compile Include="Product\Detail\Tip.cs" />
+    <Compile Include="Product\ResultOfAIDI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\ShapeOf2D.cs" />
     <Compile Include="Core\ShapeOfAIDI.cs" />

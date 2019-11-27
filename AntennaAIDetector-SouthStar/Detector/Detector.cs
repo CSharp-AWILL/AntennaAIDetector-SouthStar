@@ -111,29 +111,11 @@ namespace AntennaAIDetector_SouthStar.Detector
             ProductManager.OffsetParam.IsResultOKOfAIDI = IsResultOKOfOffsetAIDI;
             ProductManager.TipParam.IsResultOKOfAIDI = IsResultOKOfTipAIDI;
             //
-            do
-            {
-                foreach (var temp in OutputOfDefectAIDI)
-                {
-                    ProductManager.DefectParam.ResultDetailOfAIDI.Add(new ShapeOfAIDI(temp));
-                }
-                foreach (var temp in OutputOfBadConnectionAIDI)
-                {
-                    ProductManager.BadConnectionParam.ResultDetailOfAIDI.Add(new ShapeOfAIDI(temp));
-                }
-                foreach (var temp in OutputOfOverageAIDI)
-                {
-                    ProductManager.OverageParam.ResultDetailOfAIDI.Add(new ShapeOfAIDI(temp));
-                }
-                foreach (var temp in OutputOfOffsetAIDI)
-                {
-                    ProductManager.OffsetParam.ResultDetailOfAIDI.Add(new ShapeOfAIDI(temp));
-                }
-                foreach (var temp in OutputOfTipAIDI)
-                {
-                    ProductManager.TipParam.ResultDetailOfAIDI.Add(new ShapeOfAIDI(temp));
-                }
-            } while (false);
+            ProductManager.DefectParam.ResultOfAIDI = new ResultOfAIDI(OutputOfDefectAIDI);
+            ProductManager.BadConnectionParam.ResultOfAIDI = new ResultOfAIDI(OutputOfBadConnectionAIDI);
+            ProductManager.OverageParam.ResultOfAIDI = new ResultOfAIDI(OutputOfOverageAIDI);
+            ProductManager.OffsetParam.ResultOfAIDI = new ResultOfAIDI(OutputOfOffsetAIDI);
+            ProductManager.TipParam.ResultOfAIDI = new ResultOfAIDI(OutputOfTipAIDI);
 
             return;
         }
