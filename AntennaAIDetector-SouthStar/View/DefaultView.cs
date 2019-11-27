@@ -11,7 +11,6 @@ namespace AntennaAIDetector_SouthStar.View
     {
         private Detector.Detector _detector = null;
         private double _timeOfRun = 0.0;
-        private bool _isFirstOpen = true;
 
         public string ResultInfo
         {
@@ -43,7 +42,7 @@ namespace AntennaAIDetector_SouthStar.View
             InitializeComponent();
             DoDataBindings();
             InitializeComboxWndName(this.comboBoxDisplayWindowName, _detector.DisplayWindowName);
-            FormRefresh(true);
+            //FormRefresh(true);
         }
 
         private void DoDataBindings()
@@ -135,14 +134,14 @@ namespace AntennaAIDetector_SouthStar.View
 
         private void splitContainer1_SizeChanged(object sender, System.EventArgs e)
         {
-            if (!_isFirstOpen)
-            {
-                FormRefresh(true);
-            }
-            else
-            {
-                _isFirstOpen = false;
-            }
+            //if (!_isFirstOpen)
+            //{
+            //}
+            //else
+            //{
+            //    _isFirstOpen = false;
+            //}
+            FormRefresh(true);
 
             return;
         }
