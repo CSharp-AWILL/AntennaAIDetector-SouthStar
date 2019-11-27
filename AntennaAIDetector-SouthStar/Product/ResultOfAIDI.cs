@@ -33,11 +33,14 @@ namespace AntennaAIDetector_SouthStar.Product
 
         public ResultOfAIDI(List<AIDIShape> badInputData):this()
         {
-            foreach (var badAIDIShape in badInputData)
+            if (null != badInputData)
             {
-                ResultDetailOfAIDI.Add(new ShapeOfAIDI(badAIDIShape));
+                foreach (var badAIDIShape in badInputData)
+                {
+                    ResultDetailOfAIDI.Add(new ShapeOfAIDI(badAIDIShape));
+                }
+                InitializeRawRegion();
             }
-            InitializeRawRegion();
         }
         //
         public void CalculateRegion()
