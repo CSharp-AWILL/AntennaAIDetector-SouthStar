@@ -113,6 +113,16 @@ namespace AntennaAIDetector_SouthStar.Product
             // LABEL: do nothing
         }
 
+        private void UnionRegionOfAIDI()
+        {
+            RegionOfNg = DefectParam.Region + OverageParam.Region;
+            RegionOfNg = RegionOfNg + OffsetParam.Region;
+            RegionOfNg = RegionOfNg + TipParam.Region;
+            RegionOfNg = RegionOfNg + BadConnectionParam.Region;
+
+            return;
+        }
+
         //
         public void LoadParam(string configFile)
         {
@@ -273,6 +283,7 @@ namespace AntennaAIDetector_SouthStar.Product
             {
                 Result.Add(ETypeOfNg.OK);
             }
+            UnionRegionOfAIDI();
 
             return;
         }
@@ -284,17 +295,6 @@ namespace AntennaAIDetector_SouthStar.Product
 
             return;
         }
-
-
-        //
-        public void Union1()
-        {
-            RegionOfNg = DefectParam.Region + OverageParam.Region;
-            RegionOfNg = RegionOfNg + OffsetParam.Region;
-            RegionOfNg = RegionOfNg + TipParam.Region;
-            RegionOfNg = RegionOfNg + BadConnectionParam.Region;
-
-            return;
-        }
+        
     }
 }
