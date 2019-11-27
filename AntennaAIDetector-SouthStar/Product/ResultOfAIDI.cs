@@ -42,11 +42,6 @@ namespace AntennaAIDetector_SouthStar.Product
                 InitializeRawRegion();
             }
         }
-        //
-        public void CalculateRegion()
-        {
-            throw new NotImplementedException();
-        }
         
     }
 }
