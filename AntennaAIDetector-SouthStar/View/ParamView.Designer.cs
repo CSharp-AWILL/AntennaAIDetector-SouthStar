@@ -69,6 +69,8 @@
             this.numericUpDown_Overage_CurrAreaOfRight = new System.Windows.Forms.NumericUpDown();
             this.panel22 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
+            this.panel40 = new System.Windows.Forms.Panel();
+            this.button_Overage_Adjust = new System.Windows.Forms.Button();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.checkBox_Offset_IsAddToDetection = new System.Windows.Forms.CheckBox();
@@ -96,11 +98,6 @@
             this.numericUpDown_Offset_DownFilter = new System.Windows.Forms.NumericUpDown();
             this.panel34 = new System.Windows.Forms.Panel();
             this.label14 = new System.Windows.Forms.Label();
-            this.panel35 = new System.Windows.Forms.Panel();
-            this.button_SetCurrPos = new System.Windows.Forms.Button();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.checkBox_Tip_IsAddToDetection = new System.Windows.Forms.CheckBox();
             this.panel36 = new System.Windows.Forms.Panel();
             this.numericUpDown_Offset_CurrX = new System.Windows.Forms.NumericUpDown();
             this.panel37 = new System.Windows.Forms.Panel();
@@ -109,8 +106,11 @@
             this.numericUpDown_Offset_CurrY = new System.Windows.Forms.NumericUpDown();
             this.panel39 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
-            this.panel40 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.panel35 = new System.Windows.Forms.Panel();
+            this.button_Offset_Adjust = new System.Windows.Forms.Button();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.checkBox_Tip_IsAddToDetection = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Defect_ObvNumFilter)).BeginInit();
@@ -141,6 +141,7 @@
             this.panel21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Overage_CurrAreaOfRight)).BeginInit();
             this.panel22.SuspendLayout();
+            this.panel40.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel23.SuspendLayout();
@@ -161,16 +162,15 @@
             this.panel33.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Offset_DownFilter)).BeginInit();
             this.panel34.SuspendLayout();
-            this.panel35.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
-            this.panel6.SuspendLayout();
             this.panel36.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Offset_CurrX)).BeginInit();
             this.panel37.SuspendLayout();
             this.panel38.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Offset_CurrY)).BeginInit();
             this.panel39.SuspendLayout();
-            this.panel40.SuspendLayout();
+            this.panel35.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -638,6 +638,29 @@
             this.label8.Text = "(面积-右)";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // panel40
+            // 
+            this.panel40.Controls.Add(this.button_Overage_Adjust);
+            this.panel40.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel40.Location = new System.Drawing.Point(0, 175);
+            this.panel40.Margin = new System.Windows.Forms.Padding(0);
+            this.panel40.Name = "panel40";
+            this.panel40.Size = new System.Drawing.Size(162, 35);
+            this.panel40.TabIndex = 9;
+            // 
+            // button_Overage_Adjust
+            // 
+            this.button_Overage_Adjust.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_Overage_Adjust.AutoSize = true;
+            this.button_Overage_Adjust.Location = new System.Drawing.Point(48, 9);
+            this.button_Overage_Adjust.Name = "button_Overage_Adjust";
+            this.button_Overage_Adjust.Size = new System.Drawing.Size(75, 23);
+            this.button_Overage_Adjust.TabIndex = 0;
+            this.button_Overage_Adjust.Text = "调校";
+            this.button_Overage_Adjust.UseVisualStyleBackColor = true;
+            this.button_Overage_Adjust.Click += new System.EventHandler(this.button_Overage_Adjust_Click);
+            // 
             // flowLayoutPanel3
             // 
             this.flowLayoutPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -955,9 +978,111 @@
             this.label14.Text = "Down";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // panel36
+            // 
+            this.panel36.Controls.Add(this.numericUpDown_Offset_CurrX);
+            this.panel36.Controls.Add(this.panel37);
+            this.panel36.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel36.Location = new System.Drawing.Point(0, 245);
+            this.panel36.Margin = new System.Windows.Forms.Padding(0);
+            this.panel36.Name = "panel36";
+            this.panel36.Size = new System.Drawing.Size(162, 35);
+            this.panel36.TabIndex = 8;
+            // 
+            // numericUpDown_Offset_CurrX
+            // 
+            this.numericUpDown_Offset_CurrX.DecimalPlaces = 1;
+            this.numericUpDown_Offset_CurrX.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.numericUpDown_Offset_CurrX.Enabled = false;
+            this.numericUpDown_Offset_CurrX.Location = new System.Drawing.Point(61, 14);
+            this.numericUpDown_Offset_CurrX.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numericUpDown_Offset_CurrX.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown_Offset_CurrX.Name = "numericUpDown_Offset_CurrX";
+            this.numericUpDown_Offset_CurrX.Size = new System.Drawing.Size(101, 21);
+            this.numericUpDown_Offset_CurrX.TabIndex = 1;
+            // 
+            // panel37
+            // 
+            this.panel37.Controls.Add(this.label15);
+            this.panel37.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel37.Location = new System.Drawing.Point(0, 0);
+            this.panel37.Name = "panel37";
+            this.panel37.Size = new System.Drawing.Size(61, 35);
+            this.panel37.TabIndex = 0;
+            // 
+            // label15
+            // 
+            this.label15.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label15.Enabled = false;
+            this.label15.Location = new System.Drawing.Point(0, 23);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(61, 12);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "(X)";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panel38
+            // 
+            this.panel38.Controls.Add(this.numericUpDown_Offset_CurrY);
+            this.panel38.Controls.Add(this.panel39);
+            this.panel38.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel38.Location = new System.Drawing.Point(0, 280);
+            this.panel38.Margin = new System.Windows.Forms.Padding(0);
+            this.panel38.Name = "panel38";
+            this.panel38.Size = new System.Drawing.Size(162, 35);
+            this.panel38.TabIndex = 9;
+            // 
+            // numericUpDown_Offset_CurrY
+            // 
+            this.numericUpDown_Offset_CurrY.DecimalPlaces = 1;
+            this.numericUpDown_Offset_CurrY.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.numericUpDown_Offset_CurrY.Enabled = false;
+            this.numericUpDown_Offset_CurrY.Location = new System.Drawing.Point(61, 14);
+            this.numericUpDown_Offset_CurrY.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numericUpDown_Offset_CurrY.Minimum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown_Offset_CurrY.Name = "numericUpDown_Offset_CurrY";
+            this.numericUpDown_Offset_CurrY.Size = new System.Drawing.Size(101, 21);
+            this.numericUpDown_Offset_CurrY.TabIndex = 1;
+            // 
+            // panel39
+            // 
+            this.panel39.Controls.Add(this.label16);
+            this.panel39.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel39.Location = new System.Drawing.Point(0, 0);
+            this.panel39.Name = "panel39";
+            this.panel39.Size = new System.Drawing.Size(61, 35);
+            this.panel39.TabIndex = 0;
+            // 
+            // label16
+            // 
+            this.label16.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label16.Enabled = false;
+            this.label16.Location = new System.Drawing.Point(0, 23);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(61, 12);
+            this.label16.TabIndex = 0;
+            this.label16.Text = "(Y)";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // panel35
             // 
-            this.panel35.Controls.Add(this.button_SetCurrPos);
+            this.panel35.Controls.Add(this.button_Offset_Adjust);
             this.panel35.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel35.Location = new System.Drawing.Point(0, 315);
             this.panel35.Margin = new System.Windows.Forms.Padding(0);
@@ -965,17 +1090,18 @@
             this.panel35.Size = new System.Drawing.Size(162, 35);
             this.panel35.TabIndex = 8;
             // 
-            // button_SetCurrPos
+            // button_Offset_Adjust
             // 
-            this.button_SetCurrPos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.button_Offset_Adjust.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_SetCurrPos.AutoSize = true;
-            this.button_SetCurrPos.Location = new System.Drawing.Point(48, 9);
-            this.button_SetCurrPos.Name = "button_SetCurrPos";
-            this.button_SetCurrPos.Size = new System.Drawing.Size(75, 23);
-            this.button_SetCurrPos.TabIndex = 0;
-            this.button_SetCurrPos.Text = "调校";
-            this.button_SetCurrPos.UseVisualStyleBackColor = true;
+            this.button_Offset_Adjust.AutoSize = true;
+            this.button_Offset_Adjust.Location = new System.Drawing.Point(48, 9);
+            this.button_Offset_Adjust.Name = "button_Offset_Adjust";
+            this.button_Offset_Adjust.Size = new System.Drawing.Size(75, 23);
+            this.button_Offset_Adjust.TabIndex = 0;
+            this.button_Offset_Adjust.Text = "调校";
+            this.button_Offset_Adjust.UseVisualStyleBackColor = true;
+            this.button_Offset_Adjust.Click += new System.EventHandler(this.button_Offset_Adjust_Click);
             // 
             // flowLayoutPanel4
             // 
@@ -1010,126 +1136,6 @@
             this.checkBox_Tip_IsAddToDetection.TabIndex = 1;
             this.checkBox_Tip_IsAddToDetection.Text = "检测拉尖";
             this.checkBox_Tip_IsAddToDetection.UseVisualStyleBackColor = true;
-            // 
-            // panel36
-            // 
-            this.panel36.Controls.Add(this.numericUpDown_Offset_CurrX);
-            this.panel36.Controls.Add(this.panel37);
-            this.panel36.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel36.Location = new System.Drawing.Point(0, 245);
-            this.panel36.Margin = new System.Windows.Forms.Padding(0);
-            this.panel36.Name = "panel36";
-            this.panel36.Size = new System.Drawing.Size(162, 35);
-            this.panel36.TabIndex = 8;
-            // 
-            // numericUpDown_Offset_CurrX
-            // 
-            this.numericUpDown_Offset_CurrX.DecimalPlaces = 1;
-            this.numericUpDown_Offset_CurrX.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.numericUpDown_Offset_CurrX.Location = new System.Drawing.Point(61, 14);
-            this.numericUpDown_Offset_CurrX.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.numericUpDown_Offset_CurrX.Minimum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDown_Offset_CurrX.Name = "numericUpDown_Offset_CurrX";
-            this.numericUpDown_Offset_CurrX.Size = new System.Drawing.Size(101, 21);
-            this.numericUpDown_Offset_CurrX.TabIndex = 1;
-            // 
-            // panel37
-            // 
-            this.panel37.Controls.Add(this.label15);
-            this.panel37.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel37.Location = new System.Drawing.Point(0, 0);
-            this.panel37.Name = "panel37";
-            this.panel37.Size = new System.Drawing.Size(61, 35);
-            this.panel37.TabIndex = 0;
-            // 
-            // label15
-            // 
-            this.label15.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label15.Location = new System.Drawing.Point(0, 23);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(61, 12);
-            this.label15.TabIndex = 0;
-            this.label15.Text = "(X)";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // panel38
-            // 
-            this.panel38.Controls.Add(this.numericUpDown_Offset_CurrY);
-            this.panel38.Controls.Add(this.panel39);
-            this.panel38.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel38.Location = new System.Drawing.Point(0, 280);
-            this.panel38.Margin = new System.Windows.Forms.Padding(0);
-            this.panel38.Name = "panel38";
-            this.panel38.Size = new System.Drawing.Size(162, 35);
-            this.panel38.TabIndex = 9;
-            // 
-            // numericUpDown_Offset_CurrY
-            // 
-            this.numericUpDown_Offset_CurrY.DecimalPlaces = 1;
-            this.numericUpDown_Offset_CurrY.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.numericUpDown_Offset_CurrY.Location = new System.Drawing.Point(61, 14);
-            this.numericUpDown_Offset_CurrY.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.numericUpDown_Offset_CurrY.Minimum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDown_Offset_CurrY.Name = "numericUpDown_Offset_CurrY";
-            this.numericUpDown_Offset_CurrY.Size = new System.Drawing.Size(101, 21);
-            this.numericUpDown_Offset_CurrY.TabIndex = 1;
-            // 
-            // panel39
-            // 
-            this.panel39.Controls.Add(this.label16);
-            this.panel39.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel39.Location = new System.Drawing.Point(0, 0);
-            this.panel39.Name = "panel39";
-            this.panel39.Size = new System.Drawing.Size(61, 35);
-            this.panel39.TabIndex = 0;
-            // 
-            // label16
-            // 
-            this.label16.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label16.Location = new System.Drawing.Point(0, 23);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(61, 12);
-            this.label16.TabIndex = 0;
-            this.label16.Text = "(Y)";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // panel40
-            // 
-            this.panel40.Controls.Add(this.button1);
-            this.panel40.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel40.Location = new System.Drawing.Point(0, 175);
-            this.panel40.Margin = new System.Windows.Forms.Padding(0);
-            this.panel40.Name = "panel40";
-            this.panel40.Size = new System.Drawing.Size(162, 35);
-            this.panel40.TabIndex = 9;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.AutoSize = true;
-            this.button1.Location = new System.Drawing.Point(48, 9);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "调校";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // ParamView
             // 
@@ -1176,6 +1182,8 @@
             this.panel21.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Overage_CurrAreaOfRight)).EndInit();
             this.panel22.ResumeLayout(false);
+            this.panel40.ResumeLayout(false);
+            this.panel40.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
@@ -1197,19 +1205,17 @@
             this.panel33.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Offset_DownFilter)).EndInit();
             this.panel34.ResumeLayout(false);
-            this.panel35.ResumeLayout(false);
-            this.panel35.PerformLayout();
-            this.flowLayoutPanel4.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.panel36.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Offset_CurrX)).EndInit();
             this.panel37.ResumeLayout(false);
             this.panel38.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Offset_CurrY)).EndInit();
             this.panel39.ResumeLayout(false);
-            this.panel40.ResumeLayout(false);
-            this.panel40.PerformLayout();
+            this.panel35.ResumeLayout(false);
+            this.panel35.PerformLayout();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1288,7 +1294,7 @@
         private System.Windows.Forms.Panel panel34;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Panel panel35;
-        private System.Windows.Forms.Button button_SetCurrPos;
+        private System.Windows.Forms.Button button_Offset_Adjust;
         private System.Windows.Forms.Panel panel36;
         private System.Windows.Forms.NumericUpDown numericUpDown_Offset_CurrX;
         private System.Windows.Forms.Panel panel37;
@@ -1298,6 +1304,6 @@
         private System.Windows.Forms.Panel panel39;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Panel panel40;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_Overage_Adjust;
     }
 }

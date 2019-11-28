@@ -22,8 +22,8 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
         public double LeftFilter { get; set; } = 0.0;
         public double RightFilter { get; set; } = 0.0;
         //
-        public double CurrX { get; set; } = 0.0;
-        public double CurrY { get; set; } = 0.0;
+        public double CurrX { get; /*private*/ set; } = 0.0;
+        public double CurrY { get; /*private*/ set; } = 0.0;
         //
         public ResultOfAIDI ResultOfAIDI { get; set; } = new ResultOfAIDI(null);
         public ShapeOf2D Region { get; set; } = new ShapeOf2D();

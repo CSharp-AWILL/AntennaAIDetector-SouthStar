@@ -68,6 +68,7 @@ namespace AntennaAIDetector_SouthStar.Detector
         private void ToolStripMenuItem_Run_Click(object sender, EventArgs e)
         {
             _defaultView.Process();
+            _paramView.RefreshControl();
             RefreshStatusStrip();
 
             return;

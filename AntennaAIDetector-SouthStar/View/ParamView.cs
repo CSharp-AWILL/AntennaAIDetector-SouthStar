@@ -23,7 +23,7 @@ namespace AntennaAIDetector_SouthStar.View
 
         private void DoDataBindings()
         {
-            var mode = DataSourceUpdateMode.OnPropertyChanged | DataSourceUpdateMode.OnValidation;
+            var mode = DataSourceUpdateMode.OnPropertyChanged/* | DataSourceUpdateMode.OnValidation*/;
 
             //
             this.checkBox_Defect_IsAddToDetection.DataBindings.Add(new Binding("Checked", _productManager.DefectParam, "IsAddToDetection", true, mode));
@@ -55,5 +55,40 @@ namespace AntennaAIDetector_SouthStar.View
             return;
         }
 
+        public void RefreshControl()
+        {
+            //
+            this.numericUpDown_Overage_CurrAreaOfLeft.Value = Convert.ToDecimal(_productManager.OverageParam.CurrAreaOfLeft);
+            this.numericUpDown_Overage_CurrAreaOfRight.Value = Convert.ToDecimal(_productManager.OverageParam.CurrAreaOfRight);
+            //
+            this.numericUpDown_Offset_CurrX.Value = Convert.ToDecimal(_productManager.OffsetParam.CurrX);
+            this.numericUpDown_Offset_CurrY.Value = Convert.ToDecimal(_productManager.OffsetParam.CurrY);
+
+            return;
+        }
+
+        #region Event
+
+        private void button_Overage_Adjust_Click(object sender, EventArgs e)
+        {
+            _productManager.AdjustOverageAsCurrent();
+            //
+            this.numericUpDown_Overage_AreaOfLeftFilter.Value = Convert.ToDecimal(_productManager.OverageParam.AreaOfLeftFilter);
+            this.numericUpDown_Overage_AreaOfRightFilter.Value = Convert.ToDecimal(_productManager.OverageParam.AreaOfRightFilter);
+
+            return;
+        }
+
+        private void button_Offset_Adjust_Click(object sender, EventArgs e)
+        {
+            _productManager.AdjustOffsetAsCurrent();
+            //
+            this.numericUpDown_Offset_StandardXFilter.Value = Convert.ToDecimal(_productManager.OffsetParam.StandardXFilter);
+            this.numericUpDown_Offset_StandardYFilter.Value = Convert.ToDecimal(_productManager.OffsetParam.StandardYFilter);
+
+            return;
+        }
+
+        #endregion
     }
 }

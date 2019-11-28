@@ -188,6 +188,21 @@ namespace AntennaAIDetector_SouthStar.Product
             return;
         }
 
+        public void AdjustOffsetAsCurrent()
+        {
+            OffsetParam.StandardXFilter = OffsetParam.CurrX;
+            OffsetParam.StandardYFilter = OffsetParam.CurrY;
+
+            return;
+        }
+
+        public void AdjustOverageAsCurrent()
+        {
+            OverageParam.AreaOfLeftFilter = OverageParam.CurrAreaOfLeft;
+            OverageParam.AreaOfRightFilter = OverageParam.CurrAreaOfRight;
+
+            return;
+        }
         //
         public void ProcessResultOfAIDI()
         {
