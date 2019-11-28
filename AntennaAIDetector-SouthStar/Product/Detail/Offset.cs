@@ -82,6 +82,8 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
                     {
                         Region += aidiResult.Region;
                     }
+                    CurrX = aidiResult.CenterX;
+                    CurrY = aidiResult.CenterY;
                 }
             }
 
