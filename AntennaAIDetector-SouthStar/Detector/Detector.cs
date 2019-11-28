@@ -17,11 +17,12 @@ namespace AntennaAIDetector_SouthStar.Detector
     [Module("AntennaAIDetector", "Detector", "")]
     public class Detector : ModuleData, IModule, IDisplay
     {
-        
-        private List<AqShap> _displayShapes = new List<AqShap>();
+        private static AffineMatrix DEFAULT_MATRIX = new AffineMatrix(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
         [InputData]
         public Bitmap ImageIn { get; set; } = null;
+        [InputData]
+        public AffineMatrix PosMatrix { get; set; } = DEFAULT_MATRIX;
         //
         [InputData]
         public List<AIDIShape> OutputOfDefectAIDI { get; set; } = new List<AIDIShape>();
@@ -39,11 +40,7 @@ namespace AntennaAIDetector_SouthStar.Detector
         #region IDisplay
 
         public Bitmap DisplayBitmap { get; set; } = null;
-        public List<AqShap> DisplayShapes
-        {
-            get { return _displayShapes; }
-            set { _displayShapes = value; }
-        }
+        public List<AqShap> DisplayShapes { get; set; } = new List<AqShap>();
         public string DisplayWindowName { get; set; } = "Image0";
         public bool IsDisplay { get; set; } = true;
         public bool IsUpdate { get; set; } = false;
@@ -64,7 +61,6 @@ namespace AntennaAIDetector_SouthStar.Detector
         {
             ShapeOf2D result = new ShapeOf2D();
 
-            _displayShapes = new List<AqShap>();
             if (IsDisplayOfDefect)
             {
                 result += ProductManager.DefectParam.Region;
@@ -86,7 +82,8 @@ namespace AntennaAIDetector_SouthStar.Detector
                 result += ProductManager.TipParam.Region;
             }
 
-            DisplayContour.GetContours(result.XldPointYs, result.XldPointXs, result.XldPointsNums, out _displayShapes, AqVision.Graphic.AqColorEnum.Red, 2);
+            DisplayContour.GetContours(result.XldPointYs, result.XldPointXs, result.XldPointsNums, out var _displayShapes, AqVision.Graphic.AqColorEnum.Red, 2);
+            DisplayShapes = _displayShapes;
 
             return;
         }
