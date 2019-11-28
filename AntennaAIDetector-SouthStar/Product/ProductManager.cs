@@ -178,6 +178,12 @@ namespace AntennaAIDetector_SouthStar.Product
             xmlParameter.Add("OverageParam.AreaOfRightFilter", OverageParam.AreaOfRightFilter);
             // Offset
             xmlParameter.Add("OffsetParam.IsAddToDetection", OffsetParam.IsAddToDetection);
+            xmlParameter.Add("OffsetParam.StandardXFilter", OffsetParam.StandardXFilter);
+            xmlParameter.Add("OffsetParam.StandardYFilter", OffsetParam.StandardYFilter);
+            xmlParameter.Add("OffsetParam.UpFilter", OffsetParam.UpFilter);
+            xmlParameter.Add("OffsetParam.DownFilter", OffsetParam.DownFilter);
+            xmlParameter.Add("OffsetParam.LeftFilter", OffsetParam.LeftFilter);
+            xmlParameter.Add("OffsetParam.RightFilter", OffsetParam.RightFilter);
             // Tip
             xmlParameter.Add("TipParam.IsAddToDetection", TipParam.IsAddToDetection);
             // BadConnection
