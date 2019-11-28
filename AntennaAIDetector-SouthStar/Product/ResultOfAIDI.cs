@@ -39,6 +39,7 @@ namespace AntennaAIDetector_SouthStar.Product
                 {
                     ResultDetailOfAIDI.Add(new ShapeOfAIDI(badAIDIShape));
                 }
+                ResultDetailOfAIDI.Sort();
                 InitializeRawRegion();
             }
         }

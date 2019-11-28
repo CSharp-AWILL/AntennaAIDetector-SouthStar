@@ -4,7 +4,7 @@ using Aqrose.Framework.Utility.DataStructure;
 
 namespace AntennaAIDetector_SouthStar.Core
 {
-    public class ShapeOfAIDI
+    public class ShapeOfAIDI:IComparable<ShapeOfAIDI>
     {
         public double Area { get; private set; } = 0.0;
         public double CenterX { get; private set; } = 0.0;
@@ -44,5 +44,26 @@ namespace AntennaAIDetector_SouthStar.Core
             Region = new ShapeOf2D(pointYs, pointXs, pointNums);
 
         }
+
+        #region IComparable
+
+        public int CompareTo(ShapeOfAIDI obj)
+        {
+            if (this.Area > obj.Area)
+            {
+                return 1;
+            }
+            else if (this.Area == obj.Area)
+            {
+                return 0;
+            }
+            else
+            {
+                return -1;
+            }
+
+        }
+
+        #endregion
     }
 }
