@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm\Affine.cs" />
+    <Compile Include="Core\Matrix.cs" />
     <Compile Include="Detector\Detector.cs" />
     <Compile Include="Detector\DetectorForm.cs">
       <SubType>Form</SubType>

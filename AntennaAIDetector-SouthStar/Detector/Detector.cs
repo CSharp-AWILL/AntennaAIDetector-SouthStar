@@ -17,12 +17,10 @@ namespace AntennaAIDetector_SouthStar.Detector
     [Module("AntennaAIDetector", "Detector", "")]
     public class Detector : ModuleData, IModule, IDisplay
     {
-        private static AffineMatrix DEFAULT_MATRIX = new AffineMatrix(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-
         [InputData]
         public Bitmap ImageIn { get; set; } = null;
         [InputData]
-        public AffineMatrix PosMatrix { get; set; } = DEFAULT_MATRIX;
+        public AffineMatrix PosMatrix { get; set; } = new Matrix();
         //
         [InputData]
         public List<AIDIShape> OutputOfDefectAIDI { get; set; } = new List<AIDIShape>();
@@ -95,6 +93,8 @@ namespace AntennaAIDetector_SouthStar.Detector
             ProductManager.OverageParam.ResultOfAIDI = new ResultOfAIDI(OutputOfOverageAIDI);
             ProductManager.OffsetParam.ResultOfAIDI = new ResultOfAIDI(OutputOfOffsetAIDI);
             ProductManager.TipParam.ResultOfAIDI = new ResultOfAIDI(OutputOfTipAIDI);
+            //
+            ProductManager.OffsetParam.Matrix = (Matrix)PosMatrix;
 
             return;
         }

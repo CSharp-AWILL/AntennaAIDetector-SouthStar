@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using AntennaAIDetector_SouthStar.Algorithm;
 using AntennaAIDetector_SouthStar.Core;
 using Aqrose.Framework.Utility.DataStructure;
 
@@ -15,6 +15,9 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             }
         }
 
+        //
+        public Matrix Matrix { get; set; } = null;
+
         public double StandardXFilter { get; set; } = 0.0;
         public double StandardYFilter { get; set; } = 0.0;
         public double UpFilter { get; set; } = 0.0;
@@ -30,6 +33,22 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
 
         public Offset()
         {
+        }
+
+        private void CorrectPos(PointShape org, out PointShape res)
+        {
+            if (null == org)
+            {
+                res = null;
+            }
+            if (null == Matrix)
+            {
+                Matrix = new Matrix();
+            }
+            org.GetPoint(out var orgX, out var orgY);
+            Affine.AffineTransPoint2D(Matrix, org, out res);
+
+            return;
         }
 
         private bool IsInRange(PointShape point)
@@ -57,7 +76,8 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             {
                 foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI.GetRange(ResultOfAIDI.ResultDetailOfAIDI.Count - 1, 1))
                 {
-                    if (!IsInRange(new PointShape(aidiResult.CenterX, aidiResult.CenterY)))
+                    CorrectPos(new PointShape(aidiResult.CenterX, aidiResult.CenterY), out var point);
+                    if (!IsInRange(point))
                     {
                         Region += aidiResult.Region;
                     }
