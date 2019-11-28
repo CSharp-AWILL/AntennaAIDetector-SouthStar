@@ -43,6 +43,19 @@ namespace AntennaAIDetector_SouthStar.View
             DoDataBindings();
             InitializeComboxWndName(this.comboBoxDisplayWindowName, _detector.DisplayWindowName);
             //FormRefresh(true);
+            DoCheckBoxDelegate();
+        }
+
+        private void DoCheckBoxDelegate()
+        {
+            this.checkBox_Defect_IsShow.Click += new System.EventHandler(this.checkBox_Clicked);
+            this.checkBox_BadConnection_IsShow.Click += new System.EventHandler(this.checkBox_Clicked);
+            this.checkBox_Overage_IsShow.Click += new System.EventHandler(this.checkBox_Clicked);
+            this.checkBox_Offset_IsShow.Click += new System.EventHandler(this.checkBox_Clicked);
+            this.checkBox_Tip_IsShow.Click += new System.EventHandler(this.checkBox_Clicked);
+            this.checkBoxShow.Click+=new System.EventHandler(this.checkBox_Clicked);
+
+            return;
         }
 
         private void DoDataBindings()
@@ -68,54 +81,57 @@ namespace AntennaAIDetector_SouthStar.View
             if (null != _detector.ImageIn)
             {
                 this.aqDisplay1.Image = _detector.ImageIn.Clone() as Bitmap;
-                //
-                if (_detector.IsDisplayOfDefect)
+                if (_detector.IsDisplay)
                 {
-                    if (null != _detector.ProductManager.DefectParam.Region && 0 != _detector.ProductManager.DefectParam.Region.XldPointsNums.Count)
+                    //
+                    if (_detector.IsDisplayOfDefect)
                     {
-                        var temp = _detector.ProductManager.DefectParam.Region;
-                        DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Green, 2);
-                        DisplayContour.Display(this.aqDisplay1, shape);
+                        if (null != _detector.ProductManager.DefectParam.Region && 0 != _detector.ProductManager.DefectParam.Region.XldPointsNums.Count)
+                        {
+                            var temp = _detector.ProductManager.DefectParam.Region;
+                            DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Green, 2);
+                            DisplayContour.Display(this.aqDisplay1, shape);
+                        }
                     }
-                }
-                //
-                if (_detector.IsDisplayOfBadConnection)
-                {
-                    if (null != _detector.ProductManager.BadConnectionParam.Region && 0 != _detector.ProductManager.BadConnectionParam.Region.XldPointsNums.Count)
+                    //
+                    if (_detector.IsDisplayOfBadConnection)
                     {
-                        var temp = _detector.ProductManager.BadConnectionParam.Region;
-                        DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Red, 2);
-                        DisplayContour.Display(this.aqDisplay1, shape);
+                        if (null != _detector.ProductManager.BadConnectionParam.Region && 0 != _detector.ProductManager.BadConnectionParam.Region.XldPointsNums.Count)
+                        {
+                            var temp = _detector.ProductManager.BadConnectionParam.Region;
+                            DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Red, 2);
+                            DisplayContour.Display(this.aqDisplay1, shape);
+                        }
                     }
-                }
-                //
-                if (_detector.IsDisplayOfOverage)
-                {
-                    if (null != _detector.ProductManager.OverageParam.Region && 0 != _detector.ProductManager.OverageParam.Region.XldPointsNums.Count)
+                    //
+                    if (_detector.IsDisplayOfOverage)
                     {
-                        var temp = _detector.ProductManager.OverageParam.Region;
-                        DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Blue, 2);
-                        DisplayContour.Display(this.aqDisplay1, shape);
+                        if (null != _detector.ProductManager.OverageParam.Region && 0 != _detector.ProductManager.OverageParam.Region.XldPointsNums.Count)
+                        {
+                            var temp = _detector.ProductManager.OverageParam.Region;
+                            DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Blue, 2);
+                            DisplayContour.Display(this.aqDisplay1, shape);
+                        }
                     }
-                }
-                //
-                if (_detector.IsDisplayOfOffset)
-                {
-                    if (null != _detector.ProductManager.OffsetParam.Region && 0 != _detector.ProductManager.OffsetParam.Region.XldPointsNums.Count)
+                    //
+                    if (_detector.IsDisplayOfOffset)
                     {
-                        var temp = _detector.ProductManager.OffsetParam.Region;
-                        DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Yellow, 2);
-                        DisplayContour.Display(this.aqDisplay1, shape);
+                        if (null != _detector.ProductManager.OffsetParam.Region && 0 != _detector.ProductManager.OffsetParam.Region.XldPointsNums.Count)
+                        {
+                            var temp = _detector.ProductManager.OffsetParam.Region;
+                            DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Yellow, 2);
+                            DisplayContour.Display(this.aqDisplay1, shape);
+                        }
                     }
-                }
-                //
-                if (_detector.IsDisplayOfTip)
-                {
-                    if (null != _detector.ProductManager.TipParam.Region && 0 != _detector.ProductManager.TipParam.Region.XldPointsNums.Count)
+                    //
+                    if (_detector.IsDisplayOfTip)
                     {
-                        var temp = _detector.ProductManager.TipParam.Region;
-                        DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Orange, 2);
-                        DisplayContour.Display(this.aqDisplay1, shape);
+                        if (null != _detector.ProductManager.TipParam.Region && 0 != _detector.ProductManager.TipParam.Region.XldPointsNums.Count)
+                        {
+                            var temp = _detector.ProductManager.TipParam.Region;
+                            DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Orange, 2);
+                            DisplayContour.Display(this.aqDisplay1, shape);
+                        }
                     }
                 }
             }
@@ -157,6 +173,13 @@ namespace AntennaAIDetector_SouthStar.View
             //    _isFirstOpen = false;
             //}
             FormRefresh(true);
+
+            return;
+        }
+
+        private void checkBox_Clicked(object sender, System.EventArgs e)
+        {
+            FormRefresh(false);
 
             return;
         }
