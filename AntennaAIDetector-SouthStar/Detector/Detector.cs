@@ -168,6 +168,9 @@ namespace AntennaAIDetector_SouthStar.Detector
         {
             if (null != ImageIn)
             {
+                //
+                DisplayShapes = new List<AqShap>();
+
                 Process();
                 IsResultOK = ProductManager.IsResultOK;
 
