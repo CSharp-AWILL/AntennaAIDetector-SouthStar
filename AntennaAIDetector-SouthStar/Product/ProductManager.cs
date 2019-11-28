@@ -115,6 +115,36 @@ namespace AntennaAIDetector_SouthStar.Product
                 {
                     OffsetParam.IsAddToDetection = Convert.ToBoolean(strParamInfo);
                 }
+                strParamInfo = xmlParameter.GetParamData("OffsetParam.StandardXFilter");
+                if (strParamInfo != "")
+                {
+                    OffsetParam.StandardXFilter = Convert.ToDouble(strParamInfo);
+                }
+                strParamInfo = xmlParameter.GetParamData("OffsetParam.StandardYFilter");
+                if (strParamInfo != "")
+                {
+                    OffsetParam.StandardYFilter = Convert.ToDouble(strParamInfo);
+                }
+                strParamInfo = xmlParameter.GetParamData("OffsetParam.UpFilter");
+                if (strParamInfo != "")
+                {
+                    OffsetParam.UpFilter = Convert.ToDouble(strParamInfo);
+                }
+                strParamInfo = xmlParameter.GetParamData("OffsetParam.DownFilter");
+                if (strParamInfo != "")
+                {
+                    OffsetParam.DownFilter = Convert.ToDouble(strParamInfo);
+                }
+                strParamInfo = xmlParameter.GetParamData("OffsetParam.LeftFilter");
+                if (strParamInfo != "")
+                {
+                    OffsetParam.LeftFilter = Convert.ToDouble(strParamInfo);
+                }
+                strParamInfo = xmlParameter.GetParamData("OffsetParam.RightFilter");
+                if (strParamInfo != "")
+                {
+                    OffsetParam.RightFilter = Convert.ToDouble(strParamInfo);
+                }
                 // Tip
                 strParamInfo = xmlParameter.GetParamData("TipParam.IsAddToDetection");
                 if (strParamInfo != "")

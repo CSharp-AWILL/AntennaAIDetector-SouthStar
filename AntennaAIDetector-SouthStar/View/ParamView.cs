@@ -41,15 +41,19 @@ namespace AntennaAIDetector_SouthStar.View
             this.numericUpDown_Overage_CurrAreaOfRight.DataBindings.Add(new Binding("Text", _productManager.OverageParam, "CurrAreaOfRight", true, mode));
             //
             this.checkBox_Offset_IsAddToDetection.DataBindings.Add(new Binding("Checked", _productManager.OffsetParam, "IsAddToDetection", true, mode));
+            this.numericUpDown_Offset_StandardXFilter.DataBindings.Add(new Binding("Text", _productManager.OffsetParam, "StandardXFilter", true, mode));
+            this.numericUpDown_Offset_StandardYFilter.DataBindings.Add(new Binding("Text", _productManager.OffsetParam, "StandardYFilter", true, mode));
+            this.numericUpDown_Offset_LeftFilter.DataBindings.Add(new Binding("Text", _productManager.OffsetParam, "LeftFilter", true, mode));
+            this.numericUpDown_Offset_RightFilter.DataBindings.Add(new Binding("Text", _productManager.OffsetParam, "RightFilter", true, mode));
+            this.numericUpDown_Offset_UpFilter.DataBindings.Add(new Binding("Text", _productManager.OffsetParam, "UpFilter", true, mode));
+            this.numericUpDown_Offset_DownFilter.DataBindings.Add(new Binding("Text", _productManager.OffsetParam, "DownFilter", true, mode));
+            this.numericUpDown_Offset_CurrX.DataBindings.Add(new Binding("Text", _productManager.OffsetParam, "CurrX", true, mode));
+            this.numericUpDown_Offset_CurrY.DataBindings.Add(new Binding("Text", _productManager.OffsetParam, "CurrY", true, mode));
             //
             this.checkBox_Tip_IsAddToDetection.DataBindings.Add(new Binding("Checked", _productManager.TipParam, "IsAddToDetection", true, mode));
 
             return;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

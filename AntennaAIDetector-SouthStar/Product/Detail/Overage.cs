@@ -54,38 +54,44 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
         }
 
         #region IEvaluateAIDI
+
         public void CalculateRegion()
         {
-            if (!TryGetXOfAIDIResult())
+            if (null != ResultOfAIDI.ResultDetailOfAIDI && 2 <= ResultOfAIDI.ResultDetailOfAIDI.Count && TryGetXOfAIDIResult())
+            {
+                foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI.GetRange(ResultOfAIDI.ResultDetailOfAIDI.Count - 2, 2))
+                {
+                    if (_xOfAIDIResult[0] == aidiResult.CenterX)
+                    {
+                        // left
+                        CurrAreaOfLeft = aidiResult.Area;
+                        if (aidiResult.Area >= AreaOfLeftFilter)
+                        {
+                            Region += aidiResult.Region;
+                        }
+                    }
+                    else
+                    {
+                        // right
+                        CurrAreaOfRight = aidiResult.Area;
+                        if (aidiResult.Area >= AreaOfRightFilter)
+                        {
+                            Region += aidiResult.Region;
+                        }
+                    }
+                }
+            }
+            else
             {
                 foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI)
                 {
                     Region += aidiResult.Region;
                 }
-                return;
             }
-            foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI.GetRange(ResultOfAIDI.ResultDetailOfAIDI.Count - 2, 2))
-            {
-                if (_xOfAIDIResult[0] == aidiResult.CenterX)
-                {
-                    // left
-                    CurrAreaOfLeft = aidiResult.Area;
-                    if (aidiResult.Area  >= AreaOfLeftFilter)
-                    {
-                        Region += aidiResult.Region;
-                    }
-                }
-                else
-                {
-                    // right
-                    CurrAreaOfRight = aidiResult.Area;
-                    if (aidiResult.Area  >= AreaOfRightFilter)
-                    {
-                        Region += aidiResult.Region;
-                    }
-                }
-            }
+
+            return;
         }
+
         #endregion
     }
 }
