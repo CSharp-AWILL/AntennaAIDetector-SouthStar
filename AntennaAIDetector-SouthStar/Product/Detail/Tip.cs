@@ -25,6 +25,7 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
         public void CalculateRegion()
         {
             // LABEL: do nothing
+            Region = new ShapeOf2D();
             Region = ResultOfAIDI.RawRegion;
         }
         #endregion

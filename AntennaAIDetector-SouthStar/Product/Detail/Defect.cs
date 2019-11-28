@@ -34,6 +34,8 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             ShapeOf2D regionOfTiny = new ShapeOf2D();
             ShapeOf2D regionOfObv = new ShapeOf2D();
 
+            // clear region
+            Region = new ShapeOf2D();
             // filter
             foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI)
             {

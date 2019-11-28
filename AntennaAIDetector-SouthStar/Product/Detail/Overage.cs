@@ -57,6 +57,7 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
 
         public void CalculateRegion()
         {
+            Region = new ShapeOf2D();
             if (null != ResultOfAIDI.ResultDetailOfAIDI && 2 <= ResultOfAIDI.ResultDetailOfAIDI.Count && TryGetXOfAIDIResult())
             {
                 foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI.GetRange(ResultOfAIDI.ResultDetailOfAIDI.Count - 2, 2))
