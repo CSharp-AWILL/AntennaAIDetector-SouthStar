@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AntennaAIDetector_SouthStar.Core;
 
 namespace AntennaAIDetector_SouthStar.Product.Detail
@@ -32,27 +33,22 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
         private bool TryGetXOfAIDIResult()
         {
             List<double> tempX = new List<double>();
-            foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI)
+            if (2 > ResultOfAIDI.ResultDetailOfAIDI.Count)
+            {
+                return false;
+            }
+            foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI.GetRange(ResultOfAIDI.ResultDetailOfAIDI.Count-2, 2))
             {
                 tempX.Add(aidiResult.CenterX);
             }
             // assert
-            if (2 != tempX.Count || tempX[0] != tempX[1])
+            if (2 != tempX.Count || tempX[0] == tempX[1])
             {
-                _xOfAIDIResult = tempX;
                 return false;
             }
             // sort
-            if (tempX[0] > tempX[1])
-            {
-                _xOfAIDIResult.Add(tempX[1]);
-                _xOfAIDIResult.Add(tempX[0]);
-            }
-            else
-            {
-                _xOfAIDIResult.Add(tempX[0]);
-                _xOfAIDIResult.Add(tempX[1]);
-            }
+            tempX.Sort();
+            _xOfAIDIResult = tempX;
 
             return true;
         }
@@ -68,7 +64,7 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
                 }
                 return;
             }
-            foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI)
+            foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI.GetRange(ResultOfAIDI.ResultDetailOfAIDI.Count - 2, 2))
             {
                 if (_xOfAIDIResult[0] == aidiResult.CenterX)
                 {
