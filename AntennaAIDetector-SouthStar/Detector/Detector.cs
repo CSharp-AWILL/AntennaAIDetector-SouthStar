@@ -94,7 +94,7 @@ namespace AntennaAIDetector_SouthStar.Detector
             ProductManager.OffsetParam.ResultOfAIDI = new ResultOfAIDI(OutputOfOffsetAIDI);
             ProductManager.TipParam.ResultOfAIDI = new ResultOfAIDI(OutputOfTipAIDI);
             //
-            ProductManager.OffsetParam.Matrix = (Matrix)PosMatrix;
+            ProductManager.OffsetParam.Matrix = new Matrix(PosMatrix);
 
             return;
         }
