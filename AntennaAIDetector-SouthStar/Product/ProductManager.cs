@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using AntennaAIDetector_SouthStar.Core;
 using AntennaAIDetector_SouthStar.Product.Detail;
-using Aqrose.Framework.Utility.DataStructure;
 using Aqrose.Framework.Utility.Tools;
 
 namespace AntennaAIDetector_SouthStar.Product
@@ -101,30 +99,15 @@ namespace AntennaAIDetector_SouthStar.Product
                 {
                     OverageParam.IsAddToDetection = Convert.ToBoolean(strParamInfo);
                 }
-                strParamInfo = xmlParameter.GetParamData("OverageParam.StandardAreaFilter");
+                strParamInfo = xmlParameter.GetParamData("OverageParam.AreaOfLeftFilter");
                 if (strParamInfo != "")
                 {
-                    OverageParam.StandardAreaFilter = Convert.ToDouble(strParamInfo);
+                    OverageParam.AreaOfLeftFilter = Convert.ToDouble(strParamInfo);
                 }
-                strParamInfo = xmlParameter.GetParamData("OverageParam.TinyAreaFilter");
+                strParamInfo = xmlParameter.GetParamData("OverageParam.AreaOfRightFilter");
                 if (strParamInfo != "")
                 {
-                    OverageParam.TinyAreaFilter = Convert.ToDouble(strParamInfo);
-                }
-                strParamInfo = xmlParameter.GetParamData("OverageParam.TinyNumFilter");
-                if (strParamInfo != "")
-                {
-                    OverageParam.TinyNumFilter = Convert.ToInt32(strParamInfo);
-                }
-                strParamInfo = xmlParameter.GetParamData("OverageParam.ObvAreaFilter");
-                if (strParamInfo != "")
-                {
-                    OverageParam.ObvAreaFilter = Convert.ToDouble(strParamInfo);
-                }
-                strParamInfo = xmlParameter.GetParamData("OverageParam.ObvNumFilter");
-                if (strParamInfo != "")
-                {
-                    OverageParam.ObvNumFilter = Convert.ToInt32(strParamInfo);
+                    OverageParam.AreaOfRightFilter = Convert.ToDouble(strParamInfo);
                 }
                 // Offset
                 strParamInfo = xmlParameter.GetParamData("OffsetParam.IsAddToDetection");
@@ -161,11 +144,8 @@ namespace AntennaAIDetector_SouthStar.Product
             xmlParameter.Add("DefectParam.ObvNumFilter", DefectParam.ObvNumFilter);
             // Overage
             xmlParameter.Add("OverageParam.IsAddToDetection", OverageParam.IsAddToDetection);
-            xmlParameter.Add("OverageParam.StandardAreaFilter", OverageParam.StandardAreaFilter);
-            xmlParameter.Add("OverageParam.TinyAreaFilter", OverageParam.TinyAreaFilter);
-            xmlParameter.Add("OverageParam.TinyNumFilter", OverageParam.TinyNumFilter);
-            xmlParameter.Add("OverageParam.ObvAreaFilter", OverageParam.ObvAreaFilter);
-            xmlParameter.Add("OverageParam.ObvNumFilter", OverageParam.ObvNumFilter);
+            xmlParameter.Add("OverageParam.AreaOfLeftFilter", OverageParam.AreaOfLeftFilter);
+            xmlParameter.Add("OverageParam.AreaOfRightFilter", OverageParam.AreaOfRightFilter);
             // Offset
             xmlParameter.Add("OffsetParam.IsAddToDetection", OffsetParam.IsAddToDetection);
             // Tip
@@ -183,29 +163,49 @@ namespace AntennaAIDetector_SouthStar.Product
         {
             Result.Clear();
             // TODO: analyze result
-            if (DefectParam.IsAddToDetection && (!DefectParam.IsResultOKOfAIDI))
+            if (DefectParam.IsAddToDetection)
             {
-                Result.Add(ETypeOfNg.DEFECT);
-            }
-            if (OverageParam.IsAddToDetection && (!OverageParam.IsResultOKOfAIDI))
-            {
-                Result.Add(ETypeOfNg.OVERAGE);
-            }
-            if (OffsetParam.IsAddToDetection && (!OffsetParam.IsResultOKOfAIDI))
-            {
-                Result.Add(ETypeOfNg.OFFSET);
+                DefectParam.CalculateRegion();
+                if (!DefectParam.IsResultOK)
+                {
+                   Result.Add(ETypeOfNg.DEFECT);
+                }
             }
             //
-            if (TipParam.IsAddToDetection &&(!TipParam.IsResultOKOfAIDI))
+            if (OverageParam.IsAddToDetection)
+            {
+                OverageParam.CalculateRegion();
+                if (!OverageParam.IsResultOK)
+                {
+                   Result.Add(ETypeOfNg.OVERAGE);
+                }
+            }
+            //
+            if (OffsetParam.IsAddToDetection)
+            {
+                OffsetParam.CalculateRegion();
+                if (!OffsetParam.IsResultOK)
+                {
+                   Result.Add(ETypeOfNg.OFFSET);
+                }
+            }
+            //
+            if (TipParam.IsAddToDetection)
             {
                 TipParam.CalculateRegion();
-                Result.Add(ETypeOfNg.TIP);
+                if (!TipParam.IsResultOK)
+                {
+                   Result.Add(ETypeOfNg.TIP);
+                }
             }
             //
-            if (BadConnectionParam.IsAddToDetection &&(!BadConnectionParam.IsResultOKOfAIDI))
+            if (BadConnectionParam.IsAddToDetection)
             {
                 BadConnectionParam.CalculateRegion();
-                Result.Add(ETypeOfNg.BADCONNECTION);
+                if (!BadConnectionParam.IsResultOK)
+                {
+                   Result.Add(ETypeOfNg.BADCONNECTION);
+                }
             }
 
             //

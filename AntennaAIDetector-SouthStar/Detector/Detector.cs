@@ -21,18 +21,7 @@ namespace AntennaAIDetector_SouthStar.Detector
         private List<AqShap> _displayShapes = new List<AqShap>();
 
         [InputData]
-        public Bitmap ImageIn { get; set; } = new Bitmap(100,100);
-        //
-        [InputData]
-        public bool IsResultOKOfDefectAIDI { get; set; } = false;
-        [InputData]
-        public bool IsResultOKOfBadConnectionAIDI { get; set; } = false;
-        [InputData]
-        public bool IsResultOKOfOverageAIDI { get; set; } = false;
-        [InputData]
-        public bool IsResultOKOfOffsetAIDI { get; set; } = false;
-        [InputData]
-        public bool IsResultOKOfTipAIDI { get; set; } = false;
+        public Bitmap ImageIn { get; set; } = null;
         //
         [InputData]
         public List<AIDIShape> OutputOfDefectAIDI { get; set; } = new List<AIDIShape>();
@@ -104,13 +93,6 @@ namespace AntennaAIDetector_SouthStar.Detector
 
         private void InjectInputDataToProductManager()
         {
-            //
-            ProductManager.DefectParam.IsResultOKOfAIDI = IsResultOKOfDefectAIDI;
-            ProductManager.BadConnectionParam.IsResultOKOfAIDI = IsResultOKOfBadConnectionAIDI;
-            ProductManager.OverageParam.IsResultOKOfAIDI = IsResultOKOfOverageAIDI;
-            ProductManager.OffsetParam.IsResultOKOfAIDI = IsResultOKOfOffsetAIDI;
-            ProductManager.TipParam.IsResultOKOfAIDI = IsResultOKOfTipAIDI;
-            //
             ProductManager.DefectParam.ResultOfAIDI = new ResultOfAIDI(OutputOfDefectAIDI);
             ProductManager.BadConnectionParam.ResultOfAIDI = new ResultOfAIDI(OutputOfBadConnectionAIDI);
             ProductManager.OverageParam.ResultOfAIDI = new ResultOfAIDI(OutputOfOverageAIDI);

@@ -14,7 +14,7 @@ namespace AntennaAIDetector_SouthStar.Core
         public double Score { get; private set; } = 0.0;
         public string Type { get; private set; } = "";
         public List<PointShape> Contours { get; private set; } = new List<PointShape>();
-        public ShapeOf2D ShapeOf2D { get; private set; } = new ShapeOf2D();
+        public ShapeOf2D Region { get; private set; } = new ShapeOf2D();
 
         public ShapeOfAIDI(AIDIShape badShape)
         {
@@ -41,7 +41,7 @@ namespace AntennaAIDetector_SouthStar.Core
                 Contours.Add(point);
             }
             pointNums.Add(badShape.contours.Count);
-            ShapeOf2D = new ShapeOf2D(pointYs, pointXs, pointNums);
+            Region = new ShapeOf2D(pointYs, pointXs, pointNums);
 
         }
     }

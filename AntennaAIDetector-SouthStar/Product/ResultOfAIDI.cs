@@ -19,7 +19,7 @@ namespace AntennaAIDetector_SouthStar.Product
             RawRegion = new ShapeOf2D();
             foreach (var temp in ResultDetailOfAIDI)
             {
-                RawRegion += temp.ShapeOf2D;
+                RawRegion += temp.Region;
             }
 
             return;
