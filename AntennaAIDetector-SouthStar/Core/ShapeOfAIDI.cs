@@ -40,7 +40,20 @@ namespace AntennaAIDetector_SouthStar.Core
                 
                 Contours.Add(point);
             }
-            pointNums.Add(badShape.contours.Count);
+            // badShape.contours is not closed
+            foreach (var badPoint in badShape.contours.GetRange(0, 1))
+            {
+                var pointX = Convert.ToDouble(badPoint.x);
+                var pointY = Convert.ToDouble(badPoint.y);
+                var point = new PointShape(pointX, pointY);
+
+                pointXs.Add(pointX);
+                pointYs.Add(pointY);
+
+                Contours.Add(point);
+            }
+            //pointNums.Add(badShape.contours.Count);
+            pointNums.Add(badShape.contours.Count + 1);
             Region = new ShapeOf2D(pointYs, pointXs, pointNums);
 
         }
