@@ -42,11 +42,14 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             // filter
             CurrTinyArea = double.MaxValue;
             CurrObvArea = double.MinValue;
+
+            // reverse ResultOfAIDI.ResultDetailOfAIDI maybe better
+            ResultOfAIDI.ResultDetailOfAIDI.Reverse();
             foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI)
             {
                 CurrTinyArea = aidiResult.Area < CurrTinyArea ? aidiResult.Area : CurrTinyArea;
                 CurrObvArea = aidiResult.Area > CurrObvArea ? aidiResult.Area : CurrObvArea;
-                
+
                 if (aidiResult.Area >= TinyAreaFilter)
                 {
                     ++numOfTiny;
@@ -57,6 +60,10 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
                         ++numOfObv;
                         regionOfObv += aidiResult.Region;
                     }
+                }
+                else
+                {
+                    break;
                 }
             }
 
