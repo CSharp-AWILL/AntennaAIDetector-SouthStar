@@ -31,6 +31,8 @@ namespace AntennaAIDetector_SouthStar.View
             this.numericUpDown_Defect_TinyNumFilter.DataBindings.Add(new Binding("Text", _productManager.DefectParam, "TinyNumFilter", true, mode));
             this.numericUpDown_Defect_ObvAreaFilter.DataBindings.Add(new Binding("Text", _productManager.DefectParam, "ObvAreaFilter", true, mode));
             this.numericUpDown_Defect_ObvNumFilter.DataBindings.Add(new Binding("Text", _productManager.DefectParam, "ObvNumFilter", true, mode));
+            this.numericUpDown_Defect_CurrTinyArea.DataBindings.Add(new Binding("Text", _productManager.DefectParam, "CurrTinyArea", true, mode));
+            this.numericUpDown_Defect_CurrObvArea.DataBindings.Add(new Binding("Text", _productManager.DefectParam, "CurrObvArea", true, mode));
             //
             this.checkBox_BadConnection_IsAddToDetection.DataBindings.Add(new Binding("Checked", _productManager.BadConnectionParam, "IsAddToDetection", true, mode));
             //
