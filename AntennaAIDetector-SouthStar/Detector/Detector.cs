@@ -13,7 +13,7 @@ using AqVision.Graphic.AqVision.shape;
 
 namespace AntennaAIDetector_SouthStar.Detector
 {
-    [Module("AntennaAIDetector", "Detector", "")]
+    [Module("Detector", "AntennaAIDetector", "")]
     public class Detector : ModuleData, IModule, IDisplay
     {
         [InputData]
