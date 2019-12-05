@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 
 namespace AntennaAIDetector_SouthStar.Core
 {
@@ -80,6 +81,30 @@ namespace AntennaAIDetector_SouthStar.Core
             }
 
             return res;
+        }
+
+        public static void ConvertRectToShapeOf2D(Rectangle rectangle, out ShapeOf2D res)
+        {
+            res = new ShapeOf2D();
+
+            //
+            res.XldPointXs.Add(rectangle.X);
+            res.XldPointXs.Add(rectangle.X + rectangle.Width);
+            res.XldPointXs.Add(rectangle.X + rectangle.Width);
+            res.XldPointXs.Add(rectangle.X);
+            res.XldPointXs.Add(rectangle.X);
+
+            //
+            res.XldPointYs.Add(rectangle.Y);
+            res.XldPointYs.Add(rectangle.Y);
+            res.XldPointYs.Add(rectangle.Y + rectangle.Height);
+            res.XldPointYs.Add(rectangle.Y + rectangle.Height);
+            res.XldPointYs.Add(rectangle.Y);
+
+            //
+            res.XldPointsNums.Add(5);
+
+            return;
         }
 
     }
