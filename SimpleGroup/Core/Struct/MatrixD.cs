@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Aqrose.Framework.Utility.DataStructure;
 
-namespace AntennaAIDetector_SouthStar.Core
+namespace SimpleGroup.Core.Struct
 {
-    public class Matrix:AffineMatrix
+    public class MatrixD:AffineMatrix
     {
         public double ModelX { get; private set; } = 0.0;
         public double ModelY { get; private set; } = 0.0;
@@ -16,11 +16,11 @@ namespace AntennaAIDetector_SouthStar.Core
         public double ResultY { get; private set; } = 0.0;
         public double ResultA { get; private set; } = 0.0;
 
-        public Matrix() : base(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+        public MatrixD() : base(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
         {
         }
 
-        public Matrix(AffineMatrix affineMatrix):this()
+        public MatrixD(AffineMatrix affineMatrix):this()
         {
             affineMatrix.GetAffineMatrix(out var modelX, out var modelY, out var modelA, out var resultX, out var resultY, out var resultA);
             ModelX = modelX;
@@ -31,7 +31,7 @@ namespace AntennaAIDetector_SouthStar.Core
             ResultA = resultA;
         }
 
-        public Matrix(double modelX, double modelY, double modelA, double resultX, double resultY, double resultA) : base(modelX, modelY, modelA, resultX, resultY, resultA)
+        public MatrixD(double modelX, double modelY, double modelA, double resultX, double resultY, double resultA) : base(modelX, modelY, modelA, resultX, resultY, resultA)
         {
         }
 

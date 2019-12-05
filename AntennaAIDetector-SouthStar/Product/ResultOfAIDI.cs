@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AntennaAIDetector_SouthStar.Core;
+using SimpleGroup.Core.Struct;
 using Aqrose.Framework.Utility.DataStructure;
 
 namespace AntennaAIDetector_SouthStar.Product

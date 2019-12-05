@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using AntennaAIDetector_SouthStar.Core;
+using SimpleGroup.Core.Struct;
 using Aqrose.Framework.Core.Attributes;
 using Aqrose.Framework.Core.DataType;
 using Aqrose.Framework.Core.Interface;
@@ -70,8 +70,11 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
             roi.Y = Math.Min(roi.Y, src.Height);
             roi.Width = Math.Min(roi.Width, src.Width - roi.X);
             roi.Height = Math.Min(roi.Height, src.Height - roi.Y);
+            ImageOperateTools.BitmapCropImage(src, roi, out var res);
 
-            return src.Clone(roi, System.Drawing.Imaging.PixelFormat.DontCare);
+            return res;
+            // slow
+            //return src.Clone(roi, System.Drawing.Imaging.PixelFormat.DontCare);
         }
 
         #region IModule
@@ -148,7 +151,7 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
             {
                 var temp = CropImage();
                 //int count = 0;
-                while (!_device.TryRefreshImages(temp))
+                while (!_device.TryPushImages(temp))
                 {
                     Thread.Sleep(100);
                     MessageManager.Instance().Warn("Producer.Run: 队列非空，等待……");

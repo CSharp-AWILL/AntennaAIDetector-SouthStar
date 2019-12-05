@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntennaAIDetector-SouthStar", "AntennaAIDetector-SouthStar\AntennaAIDetector-SouthStar.csproj", "{133BD75F-ADC4-450A-BB36-023A3C6EECF0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGroup", "SimpleGroup\SimpleGroup.csproj", "{BF3C73DE-5C0B-46F3-A990-A66D965BE4A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{133BD75F-ADC4-450A-BB36-023A3C6EECF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{133BD75F-ADC4-450A-BB36-023A3C6EECF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{133BD75F-ADC4-450A-BB36-023A3C6EECF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF3C73DE-5C0B-46F3-A990-A66D965BE4A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF3C73DE-5C0B-46F3-A990-A66D965BE4A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF3C73DE-5C0B-46F3-A990-A66D965BE4A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF3C73DE-5C0B-46F3-A990-A66D965BE4A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

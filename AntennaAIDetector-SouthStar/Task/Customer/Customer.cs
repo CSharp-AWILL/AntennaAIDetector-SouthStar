@@ -22,6 +22,20 @@ namespace AntennaAIDetector_SouthStar.Task.Customer
         [OutputData]
         public Bitmap Image { get; set; } = null;
 
+        public int Amount
+        {
+            get
+            {
+                if (null == _device)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return _device.Length;
+                }
+            }
+        }
         public int Index { get; set; } = 0;
 
         #region IDisplay
@@ -85,7 +99,7 @@ namespace AntennaAIDetector_SouthStar.Task.Customer
         public void Run()
         {
             IsResultOK = false;
-            Image = _device.GetBitmap(Index);
+            Image = _device.PopBitmap(Index);
 
             //
             if (null != Image)
@@ -102,6 +116,15 @@ namespace AntennaAIDetector_SouthStar.Task.Customer
                     IsUpdate = false;
                 }
             }
+
+            return;
+        }
+
+        public bool Test()
+        {
+            Image = _device.GetBitmap(Index);
+
+            return null != Image;
         }
 
         public void SaveModule(string projectDirectory, string nodeName)

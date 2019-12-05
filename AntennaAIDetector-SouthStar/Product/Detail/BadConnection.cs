@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using AntennaAIDetector_SouthStar.Core;
+using SimpleGroup.Core.Struct;
 
 namespace AntennaAIDetector_SouthStar.Product.Detail
 {

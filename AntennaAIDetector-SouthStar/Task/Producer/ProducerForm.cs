@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AntennaAIDetector_SouthStar.Core;
+using SimpleGroup.Core.Struct;
 using Aqrose.Framework.Utility.Tools;
 using Aqrose.Framework.Utility.WindowConfig;
 
@@ -234,10 +234,13 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
             int index = 0;
             foreach (var temp in res)
             {
-                if (null != temp)
+                if (null == temp)
                 {
-                    temp.Save("E:/xia-" + (index++) + ".bmp");
+                    MessageBox.Show("无图像！");
+
+                    return;
                 }
+                temp.Save("E:/xia-" + (index++) + ".bmp");
             }
 
             return;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 
-namespace AntennaAIDetector_SouthStar.Core
+namespace SimpleGroup.Core.Struct
 {
     public class ShapeOf2D
     {

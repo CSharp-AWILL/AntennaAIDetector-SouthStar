@@ -91,8 +91,8 @@
             this.comboBoxDisplayWindowName = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.aqDisplay1 = new AqVision.Controls.AqDisplay();
             this.button_Test = new System.Windows.Forms.Button();
+            this.aqDisplay1 = new AqVision.Controls.AqDisplay();
             this.statusStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -1054,6 +1054,16 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "窗口名";
             // 
+            // button_Test
+            // 
+            this.button_Test.Location = new System.Drawing.Point(3, 3);
+            this.button_Test.Name = "button_Test";
+            this.button_Test.Size = new System.Drawing.Size(69, 23);
+            this.button_Test.TabIndex = 2;
+            this.button_Test.Text = "运行测试";
+            this.button_Test.UseVisualStyleBackColor = true;
+            this.button_Test.Click += new System.EventHandler(this.button_Test_Click);
+            // 
             // aqDisplay1
             // 
             this.aqDisplay1.BackColor = System.Drawing.Color.Black;
@@ -1078,16 +1088,6 @@
             this.aqDisplay1.Size = new System.Drawing.Size(704, 629);
             this.aqDisplay1.TabIndex = 0;
             // 
-            // button_Test
-            // 
-            this.button_Test.Location = new System.Drawing.Point(3, 3);
-            this.button_Test.Name = "button_Test";
-            this.button_Test.Size = new System.Drawing.Size(69, 23);
-            this.button_Test.TabIndex = 2;
-            this.button_Test.Text = "运行测试";
-            this.button_Test.UseVisualStyleBackColor = true;
-            this.button_Test.Click += new System.EventHandler(this.button_Test_Click);
-            // 
             // ProducerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1096,8 +1096,11 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip2);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1800, 1600);
             this.Name = "ProducerForm";
             this.ShowIcon = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "切割";
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using AntennaAIDetector_SouthStar.Core;
+using SimpleGroup.Core.Struct;
 using AntennaAIDetector_SouthStar.Product;
 using Aqrose.Framework.Core.Attributes;
 using Aqrose.Framework.Core.DataType;
@@ -13,14 +13,13 @@ using AqVision.Graphic.AqVision.shape;
 
 namespace AntennaAIDetector_SouthStar.Detector
 {
-
     [Module("AntennaAIDetector", "Detector", "")]
     public class Detector : ModuleData, IModule, IDisplay
     {
         [InputData]
         public Bitmap ImageIn { get; set; } = null;
         [InputData]
-        public AffineMatrix PosMatrix { get; set; } = new Matrix();
+        public AffineMatrix PosMatrix { get; set; } = new MatrixD();
         //
         [InputData]
         public List<AIDIShape> OutputOfDefectAIDI { get; set; } = new List<AIDIShape>();
@@ -94,7 +93,7 @@ namespace AntennaAIDetector_SouthStar.Detector
             ProductManager.OffsetParam.ResultOfAIDI = new ResultOfAIDI(OutputOfOffsetAIDI);
             ProductManager.TipParam.ResultOfAIDI = new ResultOfAIDI(OutputOfTipAIDI);
             //
-            ProductManager.OffsetParam.Matrix = new Matrix(PosMatrix);
+            ProductManager.OffsetParam.Matrix = new MatrixD(PosMatrix);
 
             return;
         }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Aqrose.Framework.Utility.DataStructure;
 
-namespace AntennaAIDetector_SouthStar.Core
+namespace SimpleGroup.Core.Struct
 {
     public class ShapeOfAIDI:IComparable<ShapeOfAIDI>
     {

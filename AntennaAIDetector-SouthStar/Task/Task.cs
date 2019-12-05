@@ -14,6 +14,20 @@ namespace AntennaAIDetector_SouthStar.Task
         private static object _padLock = new object();
 
         public List<Queue<Bitmap>> Images { get; set; } = new List<Queue<Bitmap>>();
+        public int Length
+        {
+            get
+            {
+                if (null == Images)
+                {
+                    return 0;
+                }
+                else
+                {
+                   return Images.Count;
+                }
+            }
+        }
 
         public Task()
         {
@@ -22,62 +36,37 @@ namespace AntennaAIDetector_SouthStar.Task
             //Counters.Add(0);
         }
 
-        private bool IsTaskOK(int index)
+        public Bitmap PopBitmap(int index)
         {
-            //if (null != Counters && null != Images && Counters.Count == Images.Count && index < Counters.Count)
+            lock (_padLock)
             {
-                //foreach (var temp in Counters)
+                if (null != Images && index < Images.Count && 0 < Images[index].Count)
                 {
-                    //if (Math.Abs(temp - Counters[index]) > 1)
-                    {
-                        //MessageManager.Instance().Alarm("Task.IsTaskOK: 计数器不同步！");
-
-                        //return false;
-                    }
+                    return Images[index].Dequeue().Clone() as Bitmap;
                 }
-
-                return true;
+                else
+                {
+                   return null;
+                }
             }
-            //else
-            {
-                //MessageManager.Instance().Alarm("Task.IsTaskOK: 计数器异常！");
-
-                //return false;
-            }
-        }
-
-        private void IncreaseCount(int index)
-        {
-            //if (null == Counters || index >= Counters.Count)
-            //{
-            //    MessageManager.Instance().Alarm("Task.Counters: 计数异常！");
-
-            //    return;
-            //}
-            //Counters[index] = (Counters[index] + 1) % int.MaxValue;
-
-            return;
         }
 
         public Bitmap GetBitmap(int index)
         {
             lock (_padLock)
             {
-                if (IsTaskOK(index))
+                if (null != Images && index < Images.Count && 0 < Images[index].Count)
                 {
-                    if (null != Images && index < Images.Count && 0 < Images[index].Count)
-                    {
-                        return Images[index].Dequeue().Clone() as Bitmap;
-                    }
-
-                    IncreaseCount(index);
+                    return Images[index].Peek().Clone() as Bitmap;
                 }
-
-                return null;
+                else
+                {
+                    return null;
+                }
             }
         }
 
-        public bool TryRefreshImages(List<Bitmap> source)
+        public bool TryPushImages(List<Bitmap> source)
         {
             lock (_padLock)
             {

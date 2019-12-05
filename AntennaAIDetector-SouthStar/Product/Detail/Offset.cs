@@ -1,5 +1,5 @@
 ﻿using AntennaAIDetector_SouthStar.Algorithm;
-using AntennaAIDetector_SouthStar.Core;
+using SimpleGroup.Core.Struct;
 using Aqrose.Framework.Utility.DataStructure;
 
 namespace AntennaAIDetector_SouthStar.Product.Detail
@@ -16,7 +16,7 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
         }
 
         //
-        public Matrix Matrix { get; set; } = null;
+        public MatrixD Matrix { get; set; } = null;
 
         public double StandardXFilter { get; set; } = 0.0;
         public double StandardYFilter { get; set; } = 0.0;
@@ -43,7 +43,7 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             }
             if (null == Matrix)
             {
-                Matrix = new Matrix();
+                Matrix = new MatrixD();
             }
             org.GetPoint(out var orgX, out var orgY);
             Affine.AffineTransPoint2D(Matrix, org, out res);

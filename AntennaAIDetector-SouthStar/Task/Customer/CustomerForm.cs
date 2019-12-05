@@ -19,16 +19,48 @@ namespace AntennaAIDetector_SouthStar.Task.Customer
             _customer = customer;
             InitializeComponent();
             InitializeComboxWndName(this.comboBoxDisplayWindowName, _customer.DisplayWindowName);
+            InitializeComboxIndex(this.comboBox_Index, _customer);
             DoDataBindings();
+            FormRefresh(true);
         }
 
         private void DoDataBindings()
         {
             var mode = DataSourceUpdateMode.OnPropertyChanged | DataSourceUpdateMode.OnValidation;
 
-            this.numericUpDown1.DataBindings.Add(new Binding("Text", _customer, "Index", true, mode));
+            this.comboBox_Index.DataBindings.Add(new Binding("Text", _customer, "Index", true, mode));
+
             //
             this.comboBoxDisplayWindowName.DataBindings.Add(new Binding("Text", _customer, "DisplayWindowName", true, mode));
+            this.checkBoxShow.DataBindings.Add(new Binding("Checked", _customer, "IsDisplay", true, mode));
+
+            return;
+        }
+
+        private void InitializeComboxIndex(ComboBox comboBox, Customer customer)
+        {
+            for (int index = 0; index < customer.Amount; ++index)
+            {
+                comboBox.Items.Add(index.ToString());
+            }
+            customer.Index = Math.Min(customer.Index, customer.Amount);
+
+            return;
+        }
+
+        private void FormRefresh(bool isAutoFit)
+        {
+            this.aqDisplay1.InteractiveGraphics.Clear();
+            if (null != _customer.Image)
+            {
+                this.aqDisplay1.Image = _customer.Image.Clone() as Bitmap;
+            }
+
+            if (isAutoFit)
+            {
+                this.aqDisplay1.FitToScreen();
+            }
+            this.aqDisplay1.Update();
 
             return;
         }
@@ -50,5 +82,22 @@ namespace AntennaAIDetector_SouthStar.Task.Customer
             return;
         }
 
+        #region Event
+
+        private void button_Test_Click(object sender, EventArgs e)
+        {
+            if (!_customer.Test())
+            {
+                MessageBox.Show("无图像！");
+
+                return;
+            }
+
+            FormRefresh(true);
+
+            return;
+        }
+
+        #endregion
     }
 }
