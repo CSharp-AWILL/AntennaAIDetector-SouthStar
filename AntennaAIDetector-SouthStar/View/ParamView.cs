@@ -37,10 +37,13 @@ namespace AntennaAIDetector_SouthStar.View
             this.checkBox_BadConnection_IsAddToDetection.DataBindings.Add(new Binding("Checked", _productManager.BadConnectionParam, "IsAddToDetection", true, mode));
             //
             this.checkBox_Overage_IsAddToDetection.DataBindings.Add(new Binding("Checked", _productManager.OverageParam, "IsAddToDetection", true, mode));
+            this.numericUpDown_Overage_Number.DataBindings.Add(new Binding("Text", _productManager.OverageParam, "Number", true, mode));
             this.numericUpDown_Overage_AreaOfLeftFilter.DataBindings.Add(new Binding("Text", _productManager.OverageParam, "AreaOfLeftFilter", true, mode));
             this.numericUpDown_Overage_AreaOfRightFilter.DataBindings.Add(new Binding("Text", _productManager.OverageParam, "AreaOfRightFilter", true, mode));
+            this.numericUpDown_Overage_AreaOfRightFilter1.DataBindings.Add(new Binding("Text", _productManager.OverageParam, "AreaOfRightFilter1", true, mode));
             this.numericUpDown_Overage_CurrAreaOfLeft.DataBindings.Add(new Binding("Text", _productManager.OverageParam, "CurrAreaOfLeft", true, mode));
             this.numericUpDown_Overage_CurrAreaOfRight.DataBindings.Add(new Binding("Text", _productManager.OverageParam, "CurrAreaOfRight", true, mode));
+            this.numericUpDown_Overage_CurrAreaOfRight1.DataBindings.Add(new Binding("Text", _productManager.OverageParam, "CurrAreaOfRight1", true, mode));
             //
             this.checkBox_Offset_IsAddToDetection.DataBindings.Add(new Binding("Checked", _productManager.OffsetParam, "IsAddToDetection", true, mode));
             this.numericUpDown_Offset_StandardXFilter.DataBindings.Add(new Binding("Text", _productManager.OffsetParam, "StandardXFilter", true, mode));
@@ -75,6 +78,10 @@ namespace AntennaAIDetector_SouthStar.View
         {
             _productManager.AdjustOverageAsCurrent();
             //
+            if (3 == _productManager.OverageParam.Number)
+            {
+                this.numericUpDown_Overage_AreaOfRightFilter1.Value = Convert.ToDecimal(_productManager.OverageParam.AreaOfRightFilter1);
+            }
             this.numericUpDown_Overage_AreaOfLeftFilter.Value = Convert.ToDecimal(_productManager.OverageParam.AreaOfLeftFilter);
             this.numericUpDown_Overage_AreaOfRightFilter.Value = Convert.ToDecimal(_productManager.OverageParam.AreaOfRightFilter);
 
@@ -92,5 +99,7 @@ namespace AntennaAIDetector_SouthStar.View
         }
 
         #endregion
+
+
     }
 }

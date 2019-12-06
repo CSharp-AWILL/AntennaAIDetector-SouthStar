@@ -99,6 +99,11 @@ namespace AntennaAIDetector_SouthStar.Product
                 {
                     OverageParam.IsAddToDetection = Convert.ToBoolean(strParamInfo);
                 }
+                strParamInfo = xmlParameter.GetParamData("OverageParam.Number");
+                if (strParamInfo != "")
+                {
+                    OverageParam.Number = Convert.ToInt32(strParamInfo);
+                }
                 strParamInfo = xmlParameter.GetParamData("OverageParam.AreaOfLeftFilter");
                 if (strParamInfo != "")
                 {
@@ -108,6 +113,11 @@ namespace AntennaAIDetector_SouthStar.Product
                 if (strParamInfo != "")
                 {
                     OverageParam.AreaOfRightFilter = Convert.ToDouble(strParamInfo);
+                }
+                strParamInfo = xmlParameter.GetParamData("OverageParam.AreaOfRightFilter1");
+                if (strParamInfo != "")
+                {
+                    OverageParam.AreaOfRightFilter1 = Convert.ToDouble(strParamInfo);
                 }
                 // Offset
                 strParamInfo = xmlParameter.GetParamData("OffsetParam.IsAddToDetection");
@@ -174,8 +184,10 @@ namespace AntennaAIDetector_SouthStar.Product
             xmlParameter.Add("DefectParam.ObvNumFilter", DefectParam.ObvNumFilter);
             // Overage
             xmlParameter.Add("OverageParam.IsAddToDetection", OverageParam.IsAddToDetection);
+            xmlParameter.Add("OverageParam.AreaOfLeftFilter", OverageParam.Number);
             xmlParameter.Add("OverageParam.AreaOfLeftFilter", OverageParam.AreaOfLeftFilter);
             xmlParameter.Add("OverageParam.AreaOfRightFilter", OverageParam.AreaOfRightFilter);
+            xmlParameter.Add("OverageParam.AreaOfRightFilter1", OverageParam.AreaOfRightFilter1);
             // Offset
             xmlParameter.Add("OffsetParam.IsAddToDetection", OffsetParam.IsAddToDetection);
             xmlParameter.Add("OffsetParam.StandardXFilter", OffsetParam.StandardXFilter);

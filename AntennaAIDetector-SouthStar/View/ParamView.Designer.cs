@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel43 = new System.Windows.Forms.Panel();
+            this.numericUpDown_Defect_CurrObvArea = new System.Windows.Forms.NumericUpDown();
+            this.panel44 = new System.Windows.Forms.Panel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.panel41 = new System.Windows.Forms.Panel();
+            this.numericUpDown_Defect_CurrTinyArea = new System.Windows.Forms.NumericUpDown();
+            this.panel42 = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
             this.panel13 = new System.Windows.Forms.Panel();
             this.numericUpDown_Defect_ObvNumFilter = new System.Windows.Forms.NumericUpDown();
             this.panel14 = new System.Windows.Forms.Panel();
@@ -61,6 +69,10 @@
             this.numericUpDown_Overage_AreaOfRightFilter = new System.Windows.Forms.NumericUpDown();
             this.panel18 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
+            this.panel45 = new System.Windows.Forms.Panel();
+            this.numericUpDown_Overage_AreaOfRightFilter1 = new System.Windows.Forms.NumericUpDown();
+            this.panel46 = new System.Windows.Forms.Panel();
+            this.label19 = new System.Windows.Forms.Label();
             this.panel19 = new System.Windows.Forms.Panel();
             this.numericUpDown_Overage_CurrAreaOfLeft = new System.Windows.Forms.NumericUpDown();
             this.panel20 = new System.Windows.Forms.Panel();
@@ -69,6 +81,14 @@
             this.numericUpDown_Overage_CurrAreaOfRight = new System.Windows.Forms.NumericUpDown();
             this.panel22 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
+            this.panel47 = new System.Windows.Forms.Panel();
+            this.numericUpDown_Overage_CurrAreaOfRight1 = new System.Windows.Forms.NumericUpDown();
+            this.panel48 = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
+            this.panel49 = new System.Windows.Forms.Panel();
+            this.numericUpDown_Overage_Number = new System.Windows.Forms.NumericUpDown();
+            this.panel50 = new System.Windows.Forms.Panel();
+            this.label21 = new System.Windows.Forms.Label();
             this.panel40 = new System.Windows.Forms.Panel();
             this.button_Overage_Adjust = new System.Windows.Forms.Button();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
@@ -111,15 +131,13 @@
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.checkBox_Tip_IsAddToDetection = new System.Windows.Forms.CheckBox();
-            this.panel41 = new System.Windows.Forms.Panel();
-            this.numericUpDown_Defect_CurrTinyArea = new System.Windows.Forms.NumericUpDown();
-            this.panel42 = new System.Windows.Forms.Panel();
-            this.label17 = new System.Windows.Forms.Label();
-            this.panel43 = new System.Windows.Forms.Panel();
-            this.numericUpDown_Defect_CurrObvArea = new System.Windows.Forms.NumericUpDown();
-            this.panel44 = new System.Windows.Forms.Panel();
-            this.label18 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.panel43.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Defect_CurrObvArea)).BeginInit();
+            this.panel44.SuspendLayout();
+            this.panel41.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Defect_CurrTinyArea)).BeginInit();
+            this.panel42.SuspendLayout();
             this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Defect_ObvNumFilter)).BeginInit();
             this.panel14.SuspendLayout();
@@ -143,12 +161,21 @@
             this.panel17.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Overage_AreaOfRightFilter)).BeginInit();
             this.panel18.SuspendLayout();
+            this.panel45.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Overage_AreaOfRightFilter1)).BeginInit();
+            this.panel46.SuspendLayout();
             this.panel19.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Overage_CurrAreaOfLeft)).BeginInit();
             this.panel20.SuspendLayout();
             this.panel21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Overage_CurrAreaOfRight)).BeginInit();
             this.panel22.SuspendLayout();
+            this.panel47.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Overage_CurrAreaOfRight1)).BeginInit();
+            this.panel48.SuspendLayout();
+            this.panel49.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Overage_Number)).BeginInit();
+            this.panel50.SuspendLayout();
             this.panel40.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -179,12 +206,6 @@
             this.panel35.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.panel41.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Defect_CurrTinyArea)).BeginInit();
-            this.panel42.SuspendLayout();
-            this.panel43.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Defect_CurrObvArea)).BeginInit();
-            this.panel44.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -203,6 +224,98 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(164, 611);
             this.panel1.TabIndex = 0;
+            // 
+            // panel43
+            // 
+            this.panel43.Controls.Add(this.numericUpDown_Defect_CurrObvArea);
+            this.panel43.Controls.Add(this.panel44);
+            this.panel43.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel43.Location = new System.Drawing.Point(0, 210);
+            this.panel43.Margin = new System.Windows.Forms.Padding(0);
+            this.panel43.Name = "panel43";
+            this.panel43.Size = new System.Drawing.Size(162, 35);
+            this.panel43.TabIndex = 6;
+            // 
+            // numericUpDown_Defect_CurrObvArea
+            // 
+            this.numericUpDown_Defect_CurrObvArea.DecimalPlaces = 1;
+            this.numericUpDown_Defect_CurrObvArea.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.numericUpDown_Defect_CurrObvArea.Enabled = false;
+            this.numericUpDown_Defect_CurrObvArea.Location = new System.Drawing.Point(61, 14);
+            this.numericUpDown_Defect_CurrObvArea.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numericUpDown_Defect_CurrObvArea.Name = "numericUpDown_Defect_CurrObvArea";
+            this.numericUpDown_Defect_CurrObvArea.Size = new System.Drawing.Size(101, 21);
+            this.numericUpDown_Defect_CurrObvArea.TabIndex = 1;
+            // 
+            // panel44
+            // 
+            this.panel44.Controls.Add(this.label18);
+            this.panel44.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel44.Location = new System.Drawing.Point(0, 0);
+            this.panel44.Name = "panel44";
+            this.panel44.Size = new System.Drawing.Size(61, 35);
+            this.panel44.TabIndex = 0;
+            // 
+            // label18
+            // 
+            this.label18.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label18.Enabled = false;
+            this.label18.Location = new System.Drawing.Point(0, 23);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(61, 12);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "(大-面积)";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panel41
+            // 
+            this.panel41.Controls.Add(this.numericUpDown_Defect_CurrTinyArea);
+            this.panel41.Controls.Add(this.panel42);
+            this.panel41.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel41.Location = new System.Drawing.Point(0, 175);
+            this.panel41.Margin = new System.Windows.Forms.Padding(0);
+            this.panel41.Name = "panel41";
+            this.panel41.Size = new System.Drawing.Size(162, 35);
+            this.panel41.TabIndex = 5;
+            // 
+            // numericUpDown_Defect_CurrTinyArea
+            // 
+            this.numericUpDown_Defect_CurrTinyArea.DecimalPlaces = 1;
+            this.numericUpDown_Defect_CurrTinyArea.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.numericUpDown_Defect_CurrTinyArea.Enabled = false;
+            this.numericUpDown_Defect_CurrTinyArea.Location = new System.Drawing.Point(61, 14);
+            this.numericUpDown_Defect_CurrTinyArea.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numericUpDown_Defect_CurrTinyArea.Name = "numericUpDown_Defect_CurrTinyArea";
+            this.numericUpDown_Defect_CurrTinyArea.Size = new System.Drawing.Size(101, 21);
+            this.numericUpDown_Defect_CurrTinyArea.TabIndex = 1;
+            // 
+            // panel42
+            // 
+            this.panel42.Controls.Add(this.label17);
+            this.panel42.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel42.Location = new System.Drawing.Point(0, 0);
+            this.panel42.Name = "panel42";
+            this.panel42.Size = new System.Drawing.Size(61, 35);
+            this.panel42.TabIndex = 0;
+            // 
+            // label17
+            // 
+            this.label17.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label17.Enabled = false;
+            this.label17.Location = new System.Drawing.Point(0, 23);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(61, 12);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "(小-面积)";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panel13
             // 
@@ -441,8 +554,11 @@
             this.flowLayoutPanel2.Controls.Add(this.panel4);
             this.flowLayoutPanel2.Controls.Add(this.panel15);
             this.flowLayoutPanel2.Controls.Add(this.panel17);
+            this.flowLayoutPanel2.Controls.Add(this.panel45);
             this.flowLayoutPanel2.Controls.Add(this.panel19);
             this.flowLayoutPanel2.Controls.Add(this.panel21);
+            this.flowLayoutPanel2.Controls.Add(this.panel47);
+            this.flowLayoutPanel2.Controls.Add(this.panel49);
             this.flowLayoutPanel2.Controls.Add(this.panel40);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(328, 0);
@@ -562,12 +678,57 @@
             this.label6.Text = "面积-右";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // panel45
+            // 
+            this.panel45.Controls.Add(this.numericUpDown_Overage_AreaOfRightFilter1);
+            this.panel45.Controls.Add(this.panel46);
+            this.panel45.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel45.Location = new System.Drawing.Point(0, 105);
+            this.panel45.Margin = new System.Windows.Forms.Padding(0);
+            this.panel45.Name = "panel45";
+            this.panel45.Size = new System.Drawing.Size(162, 35);
+            this.panel45.TabIndex = 4;
+            // 
+            // numericUpDown_Overage_AreaOfRightFilter1
+            // 
+            this.numericUpDown_Overage_AreaOfRightFilter1.DecimalPlaces = 1;
+            this.numericUpDown_Overage_AreaOfRightFilter1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.numericUpDown_Overage_AreaOfRightFilter1.Location = new System.Drawing.Point(61, 14);
+            this.numericUpDown_Overage_AreaOfRightFilter1.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numericUpDown_Overage_AreaOfRightFilter1.Name = "numericUpDown_Overage_AreaOfRightFilter1";
+            this.numericUpDown_Overage_AreaOfRightFilter1.Size = new System.Drawing.Size(101, 21);
+            this.numericUpDown_Overage_AreaOfRightFilter1.TabIndex = 1;
+            // 
+            // panel46
+            // 
+            this.panel46.Controls.Add(this.label19);
+            this.panel46.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel46.Location = new System.Drawing.Point(0, 0);
+            this.panel46.Name = "panel46";
+            this.panel46.Size = new System.Drawing.Size(61, 35);
+            this.panel46.TabIndex = 0;
+            // 
+            // label19
+            // 
+            this.label19.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label19.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label19.Location = new System.Drawing.Point(0, 23);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(61, 12);
+            this.label19.TabIndex = 0;
+            this.label19.Text = "面积-右1";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // panel19
             // 
             this.panel19.Controls.Add(this.numericUpDown_Overage_CurrAreaOfLeft);
             this.panel19.Controls.Add(this.panel20);
             this.panel19.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel19.Location = new System.Drawing.Point(0, 105);
+            this.panel19.Location = new System.Drawing.Point(0, 140);
             this.panel19.Margin = new System.Windows.Forms.Padding(0);
             this.panel19.Name = "panel19";
             this.panel19.Size = new System.Drawing.Size(162, 35);
@@ -613,7 +774,7 @@
             this.panel21.Controls.Add(this.numericUpDown_Overage_CurrAreaOfRight);
             this.panel21.Controls.Add(this.panel22);
             this.panel21.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel21.Location = new System.Drawing.Point(0, 140);
+            this.panel21.Location = new System.Drawing.Point(0, 175);
             this.panel21.Margin = new System.Windows.Forms.Padding(0);
             this.panel21.Name = "panel21";
             this.panel21.Size = new System.Drawing.Size(162, 35);
@@ -654,15 +815,119 @@
             this.label8.Text = "(面积-右)";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // panel47
+            // 
+            this.panel47.Controls.Add(this.numericUpDown_Overage_CurrAreaOfRight1);
+            this.panel47.Controls.Add(this.panel48);
+            this.panel47.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel47.Location = new System.Drawing.Point(0, 210);
+            this.panel47.Margin = new System.Windows.Forms.Padding(0);
+            this.panel47.Name = "panel47";
+            this.panel47.Size = new System.Drawing.Size(162, 35);
+            this.panel47.TabIndex = 6;
+            // 
+            // numericUpDown_Overage_CurrAreaOfRight1
+            // 
+            this.numericUpDown_Overage_CurrAreaOfRight1.DecimalPlaces = 1;
+            this.numericUpDown_Overage_CurrAreaOfRight1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.numericUpDown_Overage_CurrAreaOfRight1.Enabled = false;
+            this.numericUpDown_Overage_CurrAreaOfRight1.Location = new System.Drawing.Point(61, 14);
+            this.numericUpDown_Overage_CurrAreaOfRight1.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numericUpDown_Overage_CurrAreaOfRight1.Name = "numericUpDown_Overage_CurrAreaOfRight1";
+            this.numericUpDown_Overage_CurrAreaOfRight1.Size = new System.Drawing.Size(101, 21);
+            this.numericUpDown_Overage_CurrAreaOfRight1.TabIndex = 1;
+            // 
+            // panel48
+            // 
+            this.panel48.Controls.Add(this.label20);
+            this.panel48.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel48.Location = new System.Drawing.Point(0, 0);
+            this.panel48.Name = "panel48";
+            this.panel48.Size = new System.Drawing.Size(61, 35);
+            this.panel48.TabIndex = 0;
+            // 
+            // label20
+            // 
+            this.label20.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label20.Enabled = false;
+            this.label20.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label20.Location = new System.Drawing.Point(0, 23);
+            this.label20.Margin = new System.Windows.Forms.Padding(0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(61, 12);
+            this.label20.TabIndex = 0;
+            this.label20.Text = "(面积-右1)";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panel49
+            // 
+            this.panel49.Controls.Add(this.numericUpDown_Overage_Number);
+            this.panel49.Controls.Add(this.panel50);
+            this.panel49.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel49.Location = new System.Drawing.Point(0, 245);
+            this.panel49.Margin = new System.Windows.Forms.Padding(0);
+            this.panel49.Name = "panel49";
+            this.panel49.Size = new System.Drawing.Size(162, 35);
+            this.panel49.TabIndex = 7;
+            // 
+            // numericUpDown_Overage_Number
+            // 
+            this.numericUpDown_Overage_Number.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.numericUpDown_Overage_Number.Location = new System.Drawing.Point(61, 14);
+            this.numericUpDown_Overage_Number.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDown_Overage_Number.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDown_Overage_Number.Name = "numericUpDown_Overage_Number";
+            this.numericUpDown_Overage_Number.Size = new System.Drawing.Size(101, 21);
+            this.numericUpDown_Overage_Number.TabIndex = 1;
+            this.numericUpDown_Overage_Number.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // panel50
+            // 
+            this.panel50.Controls.Add(this.label21);
+            this.panel50.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel50.Location = new System.Drawing.Point(0, 0);
+            this.panel50.Name = "panel50";
+            this.panel50.Size = new System.Drawing.Size(61, 35);
+            this.panel50.TabIndex = 0;
+            // 
+            // label21
+            // 
+            this.label21.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label21.Enabled = false;
+            this.label21.Font = new System.Drawing.Font("宋体", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label21.Location = new System.Drawing.Point(0, 23);
+            this.label21.Margin = new System.Windows.Forms.Padding(0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(61, 12);
+            this.label21.TabIndex = 0;
+            this.label21.Text = "个数";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // panel40
             // 
             this.panel40.Controls.Add(this.button_Overage_Adjust);
             this.panel40.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel40.Location = new System.Drawing.Point(0, 175);
+            this.panel40.Location = new System.Drawing.Point(0, 280);
             this.panel40.Margin = new System.Windows.Forms.Padding(0);
             this.panel40.Name = "panel40";
             this.panel40.Size = new System.Drawing.Size(162, 35);
-            this.panel40.TabIndex = 9;
+            this.panel40.TabIndex = 11;
             // 
             // button_Overage_Adjust
             // 
@@ -1153,98 +1418,6 @@
             this.checkBox_Tip_IsAddToDetection.Text = "检测拉尖";
             this.checkBox_Tip_IsAddToDetection.UseVisualStyleBackColor = true;
             // 
-            // panel41
-            // 
-            this.panel41.Controls.Add(this.numericUpDown_Defect_CurrTinyArea);
-            this.panel41.Controls.Add(this.panel42);
-            this.panel41.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel41.Location = new System.Drawing.Point(0, 175);
-            this.panel41.Margin = new System.Windows.Forms.Padding(0);
-            this.panel41.Name = "panel41";
-            this.panel41.Size = new System.Drawing.Size(162, 35);
-            this.panel41.TabIndex = 5;
-            // 
-            // numericUpDown_Defect_CurrTinyArea
-            // 
-            this.numericUpDown_Defect_CurrTinyArea.DecimalPlaces = 1;
-            this.numericUpDown_Defect_CurrTinyArea.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.numericUpDown_Defect_CurrTinyArea.Enabled = false;
-            this.numericUpDown_Defect_CurrTinyArea.Location = new System.Drawing.Point(61, 14);
-            this.numericUpDown_Defect_CurrTinyArea.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.numericUpDown_Defect_CurrTinyArea.Name = "numericUpDown_Defect_CurrTinyArea";
-            this.numericUpDown_Defect_CurrTinyArea.Size = new System.Drawing.Size(101, 21);
-            this.numericUpDown_Defect_CurrTinyArea.TabIndex = 1;
-            // 
-            // panel42
-            // 
-            this.panel42.Controls.Add(this.label17);
-            this.panel42.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel42.Location = new System.Drawing.Point(0, 0);
-            this.panel42.Name = "panel42";
-            this.panel42.Size = new System.Drawing.Size(61, 35);
-            this.panel42.TabIndex = 0;
-            // 
-            // label17
-            // 
-            this.label17.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label17.Enabled = false;
-            this.label17.Location = new System.Drawing.Point(0, 23);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(61, 12);
-            this.label17.TabIndex = 0;
-            this.label17.Text = "(小-面积)";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // panel43
-            // 
-            this.panel43.Controls.Add(this.numericUpDown_Defect_CurrObvArea);
-            this.panel43.Controls.Add(this.panel44);
-            this.panel43.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel43.Location = new System.Drawing.Point(0, 210);
-            this.panel43.Margin = new System.Windows.Forms.Padding(0);
-            this.panel43.Name = "panel43";
-            this.panel43.Size = new System.Drawing.Size(162, 35);
-            this.panel43.TabIndex = 6;
-            // 
-            // numericUpDown_Defect_CurrObvArea
-            // 
-            this.numericUpDown_Defect_CurrObvArea.DecimalPlaces = 1;
-            this.numericUpDown_Defect_CurrObvArea.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.numericUpDown_Defect_CurrObvArea.Enabled = false;
-            this.numericUpDown_Defect_CurrObvArea.Location = new System.Drawing.Point(61, 14);
-            this.numericUpDown_Defect_CurrObvArea.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.numericUpDown_Defect_CurrObvArea.Name = "numericUpDown_Defect_CurrObvArea";
-            this.numericUpDown_Defect_CurrObvArea.Size = new System.Drawing.Size(101, 21);
-            this.numericUpDown_Defect_CurrObvArea.TabIndex = 1;
-            // 
-            // panel44
-            // 
-            this.panel44.Controls.Add(this.label18);
-            this.panel44.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel44.Location = new System.Drawing.Point(0, 0);
-            this.panel44.Name = "panel44";
-            this.panel44.Size = new System.Drawing.Size(61, 35);
-            this.panel44.TabIndex = 0;
-            // 
-            // label18
-            // 
-            this.label18.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label18.Enabled = false;
-            this.label18.Location = new System.Drawing.Point(0, 23);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(61, 12);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "(大-面积)";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // ParamView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1258,6 +1431,12 @@
             this.Name = "ParamView";
             this.Size = new System.Drawing.Size(964, 611);
             this.panel1.ResumeLayout(false);
+            this.panel43.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Defect_CurrObvArea)).EndInit();
+            this.panel44.ResumeLayout(false);
+            this.panel41.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Defect_CurrTinyArea)).EndInit();
+            this.panel42.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Defect_ObvNumFilter)).EndInit();
             this.panel14.ResumeLayout(false);
@@ -1284,12 +1463,21 @@
             this.panel17.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Overage_AreaOfRightFilter)).EndInit();
             this.panel18.ResumeLayout(false);
+            this.panel45.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Overage_AreaOfRightFilter1)).EndInit();
+            this.panel46.ResumeLayout(false);
             this.panel19.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Overage_CurrAreaOfLeft)).EndInit();
             this.panel20.ResumeLayout(false);
             this.panel21.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Overage_CurrAreaOfRight)).EndInit();
             this.panel22.ResumeLayout(false);
+            this.panel47.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Overage_CurrAreaOfRight1)).EndInit();
+            this.panel48.ResumeLayout(false);
+            this.panel49.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Overage_Number)).EndInit();
+            this.panel50.ResumeLayout(false);
             this.panel40.ResumeLayout(false);
             this.panel40.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
@@ -1324,12 +1512,6 @@
             this.flowLayoutPanel4.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            this.panel41.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Defect_CurrTinyArea)).EndInit();
-            this.panel42.ResumeLayout(false);
-            this.panel43.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Defect_CurrObvArea)).EndInit();
-            this.panel44.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1417,8 +1599,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_Offset_CurrY;
         private System.Windows.Forms.Panel panel39;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Panel panel40;
-        private System.Windows.Forms.Button button_Overage_Adjust;
         private System.Windows.Forms.Panel panel43;
         private System.Windows.Forms.NumericUpDown numericUpDown_Defect_CurrObvArea;
         private System.Windows.Forms.Panel panel44;
@@ -1427,5 +1607,19 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_Defect_CurrTinyArea;
         private System.Windows.Forms.Panel panel42;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Panel panel45;
+        private System.Windows.Forms.NumericUpDown numericUpDown_Overage_AreaOfRightFilter1;
+        private System.Windows.Forms.Panel panel46;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Panel panel47;
+        private System.Windows.Forms.NumericUpDown numericUpDown_Overage_CurrAreaOfRight1;
+        private System.Windows.Forms.Panel panel48;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Panel panel49;
+        private System.Windows.Forms.NumericUpDown numericUpDown_Overage_Number;
+        private System.Windows.Forms.Panel panel50;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Panel panel40;
+        private System.Windows.Forms.Button button_Overage_Adjust;
     }
 }
