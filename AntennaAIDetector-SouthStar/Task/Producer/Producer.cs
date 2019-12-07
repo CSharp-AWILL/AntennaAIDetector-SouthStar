@@ -150,12 +150,16 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
             if (null != ImageIn)
             {
                 var temp = CropImage();
-                //int count = 0;
+                int count = 0;
                 while (!_device.TryPushImages(temp))
                 {
                     Thread.Sleep(100);
                     MessageManager.Instance().Warn("Producer.Run: 队列非空，等待……");
-                    //++count;
+                    if (++count > 20)
+                    {
+                        MessageManager.Instance().Alarm("Producer.Run: 超时……");
+                        return;
+                    }
                 }
 
                 if (IsDisplay)
