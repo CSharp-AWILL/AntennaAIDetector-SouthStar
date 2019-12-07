@@ -19,7 +19,7 @@ namespace AntennaAIDetector_SouthStar.Detector
         [InputData]
         public Bitmap ImageIn { get; set; } = null;
         [InputData]
-        public AffineMatrix PosMatrix { get; set; } = new MatrixD();
+        public AffineMatrix PosMatrix { get; set; } = null;
         //
         [InputData]
         public List<AIDIShape> OutputOfDefectAIDI { get; set; } = new List<AIDIShape>();
