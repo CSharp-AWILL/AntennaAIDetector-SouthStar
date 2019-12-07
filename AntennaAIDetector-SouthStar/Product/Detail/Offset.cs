@@ -45,7 +45,6 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             {
                 Matrix = new MatrixD();
             }
-            org.GetPoint(out var orgX, out var orgY);
             Affine.AffineTransPoint2D(Matrix, org, out res);
 
             return;
@@ -57,7 +56,8 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             {
                 return false;
             }
-
+            //CorrectPos(new PointShape(StandardXFilter, StandardYFilter), out var standardPoint);
+            //standardPoint.GetPoint(out var standardX, out var standardY);
             point.GetPoint(out var x, out var y);
             if (StandardXFilter - LeftFilter >= x || StandardXFilter + RightFilter <= x || StandardYFilter - UpFilter >= y || StandardYFilter + DownFilter <= y)
             {
@@ -77,8 +77,7 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             {
                 foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI.GetRange(ResultOfAIDI.ResultDetailOfAIDI.Count - 1, 1))
                 {
-                    CorrectPos(new PointShape(aidiResult.CenterX, aidiResult.CenterY), out var point);
-                    if (!IsInRange(point))
+                    if (!IsInRange(new PointShape(aidiResult.CenterX, aidiResult.CenterY)))
                     {
                         Region += aidiResult.Region;
                     }
