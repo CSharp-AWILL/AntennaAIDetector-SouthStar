@@ -12,10 +12,10 @@ using Aqrose.Framework.Core.Interface;
 using Aqrose.Framework.Utility.Tools;
 using AqVision.Graphic.AqVision.shape;
 
-namespace AntennaAIDetector_SouthStar.Task.Customer
+namespace AntennaAIDetector_SouthStar.Task.Consumer
 {
-    [Module("Customer", "AntennaAIDetector", "")]
-    public class Customer : ModuleData, IModule, IDisplay
+    [Module("Consumer", "AntennaAIDetector", "")]
+    public class Consumer : ModuleData, IModule, IDisplay
     {
         private Task _device = null;
 
@@ -48,7 +48,7 @@ namespace AntennaAIDetector_SouthStar.Task.Customer
 
         #endregion
 
-        public Customer()
+        public Consumer()
         {
             _device = TaskPool.GetInstance();
         }
@@ -62,7 +62,7 @@ namespace AntennaAIDetector_SouthStar.Task.Customer
 
         public void InitModule(string projectDirectory, string nodeName)
         {
-            string configFile = projectDirectory + @"\Customer-" + nodeName + ".xml";
+            string configFile = projectDirectory + @"\Consumer-" + nodeName + ".xml";
             string strParamInfo = "";
             XmlParameter xmlParameter = null;
             if (File.Exists(configFile))
@@ -129,7 +129,7 @@ namespace AntennaAIDetector_SouthStar.Task.Customer
 
         public void SaveModule(string projectDirectory, string nodeName)
         {
-            string configFile = projectDirectory + @"\Customer-" + nodeName + ".xml";
+            string configFile = projectDirectory + @"\Consumer-" + nodeName + ".xml";
             XmlParameter xmlParameter = new XmlParameter();
 
             #region IDisplay
@@ -149,7 +149,7 @@ namespace AntennaAIDetector_SouthStar.Task.Customer
 
         public bool StartSetForm()
         {
-            var form = new CustomerForm(this);
+            var form = new ConsumerForm(this);
             form.ShowDialog();
             form.Close();
 

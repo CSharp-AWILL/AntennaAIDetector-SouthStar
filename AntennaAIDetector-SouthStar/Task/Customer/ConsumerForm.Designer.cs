@@ -1,6 +1,6 @@
-﻿namespace AntennaAIDetector_SouthStar.Task.Customer
+﻿namespace AntennaAIDetector_SouthStar.Task.Consumer
 {
-    partial class CustomerForm
+    partial class ConsumerForm
     {
         /// <summary>
         /// Required designer variable.
@@ -303,7 +303,7 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "下标";
             // 
-            // CustomerForm
+            // ConsumerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -312,7 +312,7 @@
             this.Controls.Add(this.statusStrip2);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1800, 1600);
-            this.Name = "CustomerForm";
+            this.Name = "ConsumerForm";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

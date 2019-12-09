@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Aqrose.Framework.Utility.WindowConfig;
 
-namespace AntennaAIDetector_SouthStar.Task.Customer
+namespace AntennaAIDetector_SouthStar.Task.Consumer
 {
-    public partial class CustomerForm : Form
+    public partial class ConsumerForm : Form
     {
-        private Customer _customer = null;
-        public CustomerForm(Customer customer)
+        private Consumer _Consumer = null;
+        public ConsumerForm(Consumer Consumer)
         {
-            _customer = customer;
+            _Consumer = Consumer;
             InitializeComponent();
-            InitializeComboxWndName(this.comboBoxDisplayWindowName, _customer.DisplayWindowName);
-            InitializeComboxIndex(this.comboBox_Index, _customer);
+            InitializeComboxWndName(this.comboBoxDisplayWindowName, _Consumer.DisplayWindowName);
+            InitializeComboxIndex(this.comboBox_Index, _Consumer);
             DoDataBindings();
             FormRefresh(true);
         }
@@ -28,22 +28,22 @@ namespace AntennaAIDetector_SouthStar.Task.Customer
         {
             var mode = DataSourceUpdateMode.OnPropertyChanged | DataSourceUpdateMode.OnValidation;
 
-            this.comboBox_Index.DataBindings.Add(new Binding("Text", _customer, "Index", true, mode));
+            this.comboBox_Index.DataBindings.Add(new Binding("Text", _Consumer, "Index", true, mode));
 
             //
-            this.comboBoxDisplayWindowName.DataBindings.Add(new Binding("Text", _customer, "DisplayWindowName", true, mode));
-            this.checkBoxShow.DataBindings.Add(new Binding("Checked", _customer, "IsDisplay", true, mode));
+            this.comboBoxDisplayWindowName.DataBindings.Add(new Binding("Text", _Consumer, "DisplayWindowName", true, mode));
+            this.checkBoxShow.DataBindings.Add(new Binding("Checked", _Consumer, "IsDisplay", true, mode));
 
             return;
         }
 
-        private void InitializeComboxIndex(ComboBox comboBox, Customer customer)
+        private void InitializeComboxIndex(ComboBox comboBox, Consumer Consumer)
         {
-            for (int index = 0; index < customer.Amount; ++index)
+            for (int index = 0; index < Consumer.Amount; ++index)
             {
                 comboBox.Items.Add(index.ToString());
             }
-            customer.Index = Math.Min(customer.Index, customer.Amount);
+            Consumer.Index = Math.Min(Consumer.Index, Consumer.Amount);
 
             return;
         }
@@ -51,9 +51,9 @@ namespace AntennaAIDetector_SouthStar.Task.Customer
         private void FormRefresh(bool isAutoFit)
         {
             this.aqDisplay1.InteractiveGraphics.Clear();
-            if (null != _customer.Image)
+            if (null != _Consumer.Image)
             {
-                this.aqDisplay1.Image = _customer.Image.Clone() as Bitmap;
+                this.aqDisplay1.Image = _Consumer.Image.Clone() as Bitmap;
             }
 
             if (isAutoFit)
@@ -77,7 +77,7 @@ namespace AntennaAIDetector_SouthStar.Task.Customer
             {
                 comboBox.Items.Add(obj);
             }
-            _customer.DisplayWindowName = windowNameList.Contains(windowName) ? windowName : windowNameList[0];
+            _Consumer.DisplayWindowName = windowNameList.Contains(windowName) ? windowName : windowNameList[0];
 
             return;
         }
@@ -86,7 +86,7 @@ namespace AntennaAIDetector_SouthStar.Task.Customer
 
         private void button_Test_Click(object sender, EventArgs e)
         {
-            if (!_customer.Test())
+            if (!_Consumer.Test())
             {
                 MessageBox.Show("无图像！");
 
