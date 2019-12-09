@@ -67,6 +67,14 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
 
         #region IEvaluateAIDI
 
+        public void Reset()
+        {
+            ResultOfAIDI = new ResultOfAIDI(null);
+            Region = new ShapeOf2D();
+
+            return;
+        }
+
         public void CalculateRegion()
         {
             Region = new ShapeOf2D();

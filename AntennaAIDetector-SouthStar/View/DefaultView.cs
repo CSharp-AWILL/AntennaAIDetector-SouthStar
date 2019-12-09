@@ -4,6 +4,7 @@ using AntennaAIDetector_SouthStar.Detector;
 using Aqrose.Framework.Core.DataType;
 using Aqrose.Framework.Utility.Tools;
 using Aqrose.Framework.Utility.WindowConfig;
+using SimpleGroup.Core.Struct;
 
 namespace AntennaAIDetector_SouthStar.View
 {
@@ -122,6 +123,14 @@ namespace AntennaAIDetector_SouthStar.View
                             DisplayContour.GetContours(temp.XldPointYs, temp.XldPointXs, temp.XldPointsNums, out var shape, AqVision.Graphic.AqColorEnum.Yellow, 2);
                             DisplayContour.Display(this.aqDisplay1, shape);
                         }
+                        //
+                        ShapeOf2D.ConverPoint2DToCross(_detector.ProductManager.OffsetParam.StandardPoint, 3, out var standardPoint);
+                        DisplayContour.GetContours(standardPoint.XldPointYs, standardPoint.XldPointXs, standardPoint.XldPointsNums, out var shapeOfStandardPoint, AqVision.Graphic.AqColorEnum.Yellow, 4);
+                        DisplayContour.Display(this.aqDisplay1, shapeOfStandardPoint);
+                        //
+                        ShapeOf2D.ConverPoint2DToCross(_detector.ProductManager.OffsetParam.CurrPoint, 3, out var currPoint);
+                        DisplayContour.GetContours(currPoint.XldPointYs, currPoint.XldPointXs, currPoint.XldPointsNums, out var shapeOfCurrPoint, AqVision.Graphic.AqColorEnum.Yellow, 2);
+                        DisplayContour.Display(this.aqDisplay1, shapeOfCurrPoint);
                     }
                     //
                     if (_detector.IsDisplayOfTip)

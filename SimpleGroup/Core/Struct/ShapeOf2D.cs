@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace SimpleGroup.Core.Struct
@@ -107,5 +108,29 @@ namespace SimpleGroup.Core.Struct
             return;
         }
 
+        public static void ConverPoint2DToCross(PointF point, int size, out ShapeOf2D res)
+        {
+            res = new ShapeOf2D();
+            if (null == point)
+            {
+                return;
+            }
+
+            size = Math.Max(1, size);
+            //
+            res.XldPointXs.Add(point.X - size);
+            res.XldPointXs.Add(point.X + size);
+            res.XldPointYs.Add(point.Y);
+            res.XldPointYs.Add(point.Y);
+            res.XldPointsNums.Add(2);
+            //
+            res.XldPointXs.Add(point.X);
+            res.XldPointXs.Add(point.X);
+            res.XldPointYs.Add(point.Y - size);
+            res.XldPointYs.Add(point.Y + size);
+            res.XldPointsNums.Add(2);
+
+            return;
+        }
     }
 }

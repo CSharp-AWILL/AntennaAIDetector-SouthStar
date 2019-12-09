@@ -1,6 +1,7 @@
 ﻿using AntennaAIDetector_SouthStar.Algorithm;
 using SimpleGroup.Core.Struct;
 using Aqrose.Framework.Utility.DataStructure;
+using System.Drawing;
 
 namespace AntennaAIDetector_SouthStar.Product.Detail
 {
@@ -31,15 +32,35 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
         public ResultOfAIDI ResultOfAIDI { get; set; } = new ResultOfAIDI(null);
         public ShapeOf2D Region { get; set; } = new ShapeOf2D();
 
+        //
+        public PointF StandardPoint
+        {
+            get
+            {
+                CorrectPos(new PointF((float)StandardXFilter, (float)StandardYFilter), out var res);
+                return res;
+            }
+        }
+
+        public PointF CurrPoint
+        {
+            get
+            {
+                CorrectPos(new PointF((float)CurrX, (float)CurrY), out var res);
+                return res;
+            }
+        }
+
         public Offset()
         {
         }
 
-        private void CorrectPos(PointShape org, out PointShape res)
+        private void CorrectPos(PointF org, out PointF res)
         {
+            res = PointF.Empty;
             if (null == org)
             {
-                res = null;
+                return;
             }
             if (null == Matrix)
             {
@@ -50,7 +71,7 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             return;
         }
 
-        private bool IsInRange(PointShape point)
+        private bool IsInRange(PointF point)
         {
             if (null == point)
             {
@@ -58,8 +79,7 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             }
             //CorrectPos(new PointShape(StandardXFilter, StandardYFilter), out var standardPoint);
             //standardPoint.GetPoint(out var standardX, out var standardY);
-            point.GetPoint(out var x, out var y);
-            if (StandardXFilter - LeftFilter >= x || StandardXFilter + RightFilter <= x || StandardYFilter - UpFilter >= y || StandardYFilter + DownFilter <= y)
+            if (StandardXFilter - LeftFilter >= point.X || StandardXFilter + RightFilter <= point.X || StandardYFilter - UpFilter >= point.Y || StandardYFilter + DownFilter <= point.Y)
             {
                 return false;
             }
@@ -70,6 +90,15 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
         }
 
         #region IEvaluateAIDI
+
+        public void Reset()
+        {
+            ResultOfAIDI = new ResultOfAIDI(null);
+            Region = new ShapeOf2D();
+
+            return;
+        }
+
         public void CalculateRegion()
         {
             Region = new ShapeOf2D();
@@ -77,7 +106,7 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             {
                 foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI.GetRange(ResultOfAIDI.ResultDetailOfAIDI.Count - 1, 1))
                 {
-                    if (!IsInRange(new PointShape(aidiResult.CenterX, aidiResult.CenterY)))
+                    if (!IsInRange(new PointF((float)aidiResult.CenterX, (float)aidiResult.CenterY)))
                     {
                         Region += aidiResult.Region;
                     }
@@ -88,6 +117,7 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
 
             return;
         }
+
         #endregion
     }
 

@@ -2,6 +2,7 @@
 {
     public interface IEvaluateAIDI
     {
+        void Reset();
         void CalculateRegion();
     }
 }
