@@ -21,6 +21,14 @@ namespace AntennaAIDetector_SouthStar.Task.Consumer
 
         [OutputData]
         public Bitmap Image { get; set; } = null;
+        [OutputData]
+        public string IsOKString
+        {
+            get
+            {
+                return IsResultOK ? "OK" : "NG";
+            }
+        }
 
         public int Amount
         {
