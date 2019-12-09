@@ -59,6 +59,8 @@ namespace AntennaAIDetector_SouthStar.Task.Consumer
         public Consumer()
         {
             _device = TaskPool.GetInstance();
+            //
+            IsResultOK = false;
         }
 
         #region IModule
