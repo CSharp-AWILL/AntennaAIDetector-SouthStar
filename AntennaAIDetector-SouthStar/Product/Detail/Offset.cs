@@ -66,7 +66,7 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             {
                 Matrix = new MatrixD();
             }
-            Affine.AffineTransPoint2D(Matrix, org, out res);
+            Affine.AffineTransPoint2D(Matrix/*.GetReverseMatrixD()*/, org, out res);
 
             return;
         }

@@ -73,6 +73,11 @@ namespace AntennaAIDetector_SouthStar.Detector
             if (IsDisplayOfOffset)
             {
                 result += ProductManager.OffsetParam.Region;
+                //
+                ShapeOf2D.ConverPoint2DToCross(ProductManager.OffsetParam.CurrPoint, 3, out var currPoint);
+                result += currPoint;
+                ShapeOf2D.ConverPoint2DToCross(ProductManager.OffsetParam.StandardPoint, 5, out var standardPoint);
+                result += standardPoint;
             }
             if (IsDisplayOfTip)
             {

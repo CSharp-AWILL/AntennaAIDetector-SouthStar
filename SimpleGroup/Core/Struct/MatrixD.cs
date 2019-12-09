@@ -41,5 +41,10 @@ namespace SimpleGroup.Core.Struct
             ResultA = resultA;
         }
 
+        public MatrixD GetReverseMatrixD()
+        {
+            return new MatrixD(ResultX, ResultY, ResultA, ModelX, ModelY, ModelA);
+        }
+
     }
 }
