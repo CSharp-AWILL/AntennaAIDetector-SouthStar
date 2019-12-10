@@ -19,9 +19,9 @@ namespace AntennaAIDetector_SouthStar.Task
 
         static public Task GetInstance()
         {
-            if (null == _instance)
+            lock (PadLock)
             {
-                lock (PadLock)
+                if (null == _instance)
                 {
                     if (null == _instance)
                     {
@@ -29,9 +29,9 @@ namespace AntennaAIDetector_SouthStar.Task
                     }
                 }
             }
-
             return _instance;
         }
+
 
     }
 }
