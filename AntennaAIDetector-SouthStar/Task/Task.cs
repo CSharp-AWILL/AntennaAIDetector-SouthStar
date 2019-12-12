@@ -14,7 +14,7 @@ namespace AntennaAIDetector_SouthStar.Task
     {
         //public static readonly object PAD_LOCK = new object();
 
-        public List<Queue<Bitmap>> Images { get; set; } = new List<Queue<Bitmap>>();
+        public List<Queue<Bitmap>> ImageQueues { get; set; } = new List<Queue<Bitmap>>();
 
         public Task()
         {
@@ -24,9 +24,9 @@ namespace AntennaAIDetector_SouthStar.Task
         private int GetTaskAmount()
         {
             int amount = 0;
-            foreach (var image in Images)
+            foreach (var queue in ImageQueues)
             {
-                amount += image.Count;
+                amount += queue.Count;
             }
 
             return amount;
@@ -38,20 +38,20 @@ namespace AntennaAIDetector_SouthStar.Task
              * return -1: error
              * return n: the list of queue count
              */
-            if (null == Images)
+            if (null == ImageQueues)
             {
                 return -1;
             }
 
-            return Images.Count;
+            return ImageQueues.Count;
         }
 
         public Bitmap PopBitmap(int index)
         {
             Bitmap temp = null;
-            if (null != Images && index < Images.Count && 0 < Images[index].Count)
+            if (null != ImageQueues && index < ImageQueues.Count && 0 < ImageQueues[index].Count)
             {
-                temp = ImageOperateTools.ImageCopy(Images[index].Dequeue());
+                temp = ImageOperateTools.ImageCopy(ImageQueues[index].Dequeue());
                 //return Images[index].Dequeue().Clone() as Bitmap;
             }
 
@@ -60,9 +60,9 @@ namespace AntennaAIDetector_SouthStar.Task
 
         public Bitmap GetBitmap(int index)
         {
-            if (null != Images && index < Images.Count && 0 < Images[index].Count)
+            if (null != ImageQueues && index < ImageQueues.Count && 0 < ImageQueues[index].Count)
             {
-                return ImageOperateTools.ImageCopy(Images[index].Peek());
+                return ImageOperateTools.ImageCopy(ImageQueues[index].Peek());
                 //return Images[index].Peek().Clone() as Bitmap;
             }
             else
@@ -79,7 +79,7 @@ namespace AntennaAIDetector_SouthStar.Task
             }
 
             //
-            if (0 > GetTaskSize())
+            if (source.Count != GetTaskSize())
             {
                 MessageManager.Instance().Alarm("Task: unexcepted case!");
             }
@@ -87,7 +87,7 @@ namespace AntennaAIDetector_SouthStar.Task
             //
             for (int index = 0; index < source.Count; ++index)
             {
-                Images[index].Enqueue(source[index]);
+                ImageQueues[index].Enqueue(source[index]);
                 //Images[index].Enqueue(source[index].Clone() as Bitmap);
             }
 
@@ -96,12 +96,12 @@ namespace AntennaAIDetector_SouthStar.Task
 
         public void SetTaskSize(int number)
         {
-            Images = new List<Queue<Bitmap>>();
+            ImageQueues = new List<Queue<Bitmap>>();
             if (number > 0)
             {
                 for (int index = 0; index < number; ++index)
                 {
-                    Images.Add(new Queue<Bitmap>());
+                    ImageQueues.Add(new Queue<Bitmap>());
                 }
             }
 
@@ -120,7 +120,7 @@ namespace AntennaAIDetector_SouthStar.Task
 
             status = 0;
 
-            if (index >= GetTaskSize())
+            if (/*-1 == GetTaskSize() || */index >= GetTaskSize())
             {
                 status = -1;
 
@@ -133,7 +133,7 @@ namespace AntennaAIDetector_SouthStar.Task
                     status += GetTaskAmount();
                     break;
                 default:
-                    status += Images[index].Count;
+                    status += ImageQueues[index].Count;
                     break;
             }
 
