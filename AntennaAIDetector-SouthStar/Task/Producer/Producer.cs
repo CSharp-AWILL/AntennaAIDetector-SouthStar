@@ -48,7 +48,7 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
 
         private void SetTask()
         {
-            _device.SetType(Number);
+            _device.SetTaskSize(Number);
 
             return;
         }
@@ -150,16 +150,10 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
             if (null != ImageIn)
             {
                 var temp = CropImage();
-                int count = 0;
-                while (!_device.TryPushImages(temp))
+
+                lock (TaskPool.PAD_LOCK)
                 {
-                    Thread.Sleep(100);
-                    MessageManager.Instance().Warn("Producer.Run: 队列非空，等待……");
-                    if (++count > 20)
-                    {
-                        MessageManager.Instance().Alarm("Producer.Run: 超时……");
-                        return;
-                    }
+                    _device.TryPushImages(temp);
                 }
 
                 if (IsDisplay)
@@ -257,6 +251,18 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
             SetTask();
 
             return;
+        }
+
+        public int GetTaskSize()
+        {
+            if (null == _device)
+            {
+                MessageManager.Instance().Warn("Consumer: _device is null.");
+
+                return 0;
+            }
+
+            return _device.GetTaskSize();
         }
     }
 }

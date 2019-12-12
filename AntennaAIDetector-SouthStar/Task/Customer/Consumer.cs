@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Aqrose.Framework.Core.Attributes;
 using Aqrose.Framework.Core.DataType;
 using Aqrose.Framework.Core.Interface;
+using Aqrose.Framework.Utility.MessageManager;
 using Aqrose.Framework.Utility.Tools;
 using AqVision.Graphic.AqVision.shape;
 
@@ -30,20 +31,6 @@ namespace AntennaAIDetector_SouthStar.Task.Consumer
             }
         }
 
-        public int Amount
-        {
-            get
-            {
-                if (null == _device)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return _device.Length;
-                }
-            }
-        }
         public int Index { get; set; } = 0;
 
         #region IDisplay
@@ -109,7 +96,10 @@ namespace AntennaAIDetector_SouthStar.Task.Consumer
         public void Run()
         {
             IsResultOK = false;
-            Image = _device.PopBitmap(Index);
+            lock (TaskPool.PAD_LOCK)
+            {
+                Image = _device.PopBitmap(Index);
+            }
 
             //
             if (null != Image)
@@ -167,5 +157,17 @@ namespace AntennaAIDetector_SouthStar.Task.Consumer
         }
 
         #endregion
+
+        public int GetTaskSize()
+        {
+            if (null == _device)
+            {
+                MessageManager.Instance().Warn("Consumer: _device is null.");
+
+                return 0;
+            }
+
+            return _device.GetTaskSize();
+        }
     }
 }

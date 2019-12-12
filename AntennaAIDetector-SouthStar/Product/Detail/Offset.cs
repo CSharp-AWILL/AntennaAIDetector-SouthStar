@@ -57,6 +57,10 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
 
         private void CorrectPos(PointF org, out PointF res)
         {
+            res= org;
+            return;
+
+
             res = PointF.Empty;
             if (null == org)
             {

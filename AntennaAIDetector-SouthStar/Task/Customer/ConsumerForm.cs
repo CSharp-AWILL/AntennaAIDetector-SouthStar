@@ -37,13 +37,13 @@ namespace AntennaAIDetector_SouthStar.Task.Consumer
             return;
         }
 
-        private void InitializeComboxIndex(ComboBox comboBox, Consumer Consumer)
+        private void InitializeComboxIndex(ComboBox comboBox, Consumer consumer)
         {
-            for (int index = 0; index < Consumer.Amount; ++index)
+            for (int index = 0; index < consumer.GetTaskSize(); ++index)
             {
                 comboBox.Items.Add(index.ToString());
             }
-            Consumer.Index = Math.Min(Consumer.Index, Consumer.Amount);
+            consumer.Index = Math.Min(consumer.Index, consumer.GetTaskSize() - 1);
 
             return;
         }

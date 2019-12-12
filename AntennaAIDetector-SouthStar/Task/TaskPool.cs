@@ -13,15 +13,17 @@ namespace AntennaAIDetector_SouthStar.Task
 
         static public readonly object PadLock = new object();
 
+        public static readonly object PAD_LOCK = new object();
+
         private TaskPool()
         {
         }
 
         static public Task GetInstance()
         {
-            lock (PadLock)
+            if (null == _instance)
             {
-                if (null == _instance)
+                lock (PadLock)
                 {
                     if (null == _instance)
                     {
@@ -29,6 +31,7 @@ namespace AntennaAIDetector_SouthStar.Task
                     }
                 }
             }
+
             return _instance;
         }
 

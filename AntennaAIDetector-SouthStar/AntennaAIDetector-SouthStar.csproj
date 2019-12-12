@@ -101,6 +101,13 @@
     <Compile Include="Task\Producer\ProducerForm.Designer.cs">
       <DependentUpon>ProducerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Task\Spy\Spy.cs" />
+    <Compile Include="Task\Spy\SpyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Task\Spy\SpyForm.Designer.cs">
+      <DependentUpon>SpyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Task\Task.cs" />
     <Compile Include="Task\TaskPool.cs" />
     <Compile Include="View\DefaultView.cs">
@@ -125,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Task\Producer\ProducerForm.resx">
       <DependentUpon>ProducerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Task\Spy\SpyForm.resx">
+      <DependentUpon>SpyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\DefaultView.resx">
       <DependentUpon>DefaultView.cs</DependentUpon>
