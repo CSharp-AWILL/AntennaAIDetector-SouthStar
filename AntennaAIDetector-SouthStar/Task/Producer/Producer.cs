@@ -70,11 +70,11 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
             roi.Y = Math.Min(roi.Y, src.Height);
             roi.Width = Math.Min(roi.Width, src.Width - roi.X);
             roi.Height = Math.Min(roi.Height, src.Height - roi.Y);
-            ImageOperateTools.BitmapCropImage(src, roi, out var res);
+            //ImageOperateTools.BitmapCropImage(src, roi, out var res);
 
-            return res;
+            //return res;
             // slow
-            //return src.Clone(roi, System.Drawing.Imaging.PixelFormat.DontCare);
+            return src.Clone(roi, System.Drawing.Imaging.PixelFormat.DontCare);
         }
 
         #region IModule
@@ -151,10 +151,12 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
             {
                 var temp = CropImage();
 
+                MessageManager.Instance().Info("++++++Producer.Run(): begin.");
                 lock (TaskPool.PAD_LOCK)
                 {
                     _device.TryPushImages(temp);
                 }
+                MessageManager.Instance().Info("++++++Producer.Run(): end.");
 
                 if (IsDisplay)
                 {

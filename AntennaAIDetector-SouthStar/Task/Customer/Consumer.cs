@@ -96,10 +96,14 @@ namespace AntennaAIDetector_SouthStar.Task.Consumer
         public void Run()
         {
             IsResultOK = false;
+
+            MessageManager.Instance().Info("------Consumer.Run(): begin.");
             lock (TaskPool.PAD_LOCK)
             {
+                Thread.Sleep(10);
                 Image = _device.PopBitmap(Index);
             }
+            MessageManager.Instance().Info("------Consumer.Run(): end.");
 
             //
             if (null != Image)

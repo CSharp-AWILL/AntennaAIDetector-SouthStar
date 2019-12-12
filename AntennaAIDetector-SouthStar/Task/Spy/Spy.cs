@@ -56,10 +56,12 @@ namespace AntennaAIDetector_SouthStar.Task.Spy
 
         public void Run()
         {
+            MessageManager.Instance().Info("######Spy.Run(): begin.");
             lock (TaskPool.PAD_LOCK)
             {
                 IsEmpty = IsTaskQueueEmpty() ? "OK" : "NG";
             }
+            MessageManager.Instance().Info("######Spy.Run(): end.");
 
             return;
         }
