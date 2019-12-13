@@ -225,7 +225,17 @@ namespace AntennaAIDetector_SouthStar.Product
         public void ProcessResultOfAIDI()
         {
             Result.Clear();
-            // TODO: analyze result
+
+            //
+            if (OffsetParam.IsAddToDetection)
+            {
+                OffsetParam.CalculateRegion();
+                if (!OffsetParam.IsResultOK)
+                {
+                    Result.Add(ETypeOfNg.OFFSET);
+                }
+            }
+            //
             if (DefectParam.IsAddToDetection)
             {
                 DefectParam.CalculateRegion();
@@ -241,15 +251,6 @@ namespace AntennaAIDetector_SouthStar.Product
                 if (!OverageParam.IsResultOK)
                 {
                    Result.Add(ETypeOfNg.OVERAGE);
-                }
-            }
-            //
-            if (OffsetParam.IsAddToDetection)
-            {
-                OffsetParam.CalculateRegion();
-                if (!OffsetParam.IsResultOK)
-                {
-                   Result.Add(ETypeOfNg.OFFSET);
                 }
             }
             //
