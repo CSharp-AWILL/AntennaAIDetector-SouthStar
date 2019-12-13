@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Aqrose.Framework.Utility.MessageManager;
 using SimpleGroup.Core.Struct;
 
 namespace AntennaAIDetector_SouthStar.Product.Detail
@@ -52,38 +53,46 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             CurrTinyArea = double.MaxValue;
             CurrObvArea = double.MinValue;
 
-            // reverse ResultOfAIDI.ResultDetailOfAIDI maybe better
-            ResultOfAIDI.ResultDetailOfAIDI.Reverse();
-            foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI)
+            if (null != ResultOfAIDI.ResultDetailOfAIDI && 0 != ResultOfAIDI.ResultDetailOfAIDI.Count)
             {
-                CurrTinyArea = aidiResult.Area < CurrTinyArea ? aidiResult.Area : CurrTinyArea;
-                CurrObvArea = aidiResult.Area > CurrObvArea ? aidiResult.Area : CurrObvArea;
-
-                if (aidiResult.Area >= TinyAreaFilter)
+                // reverse ResultOfAIDI.ResultDetailOfAIDI maybe better
+                ResultOfAIDI.ResultDetailOfAIDI.Reverse();
+                // filter
+                foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI)
                 {
-                    ++numOfTiny;
-                    regionOfTiny += aidiResult.Region;
+                    CurrTinyArea = aidiResult.Area < CurrTinyArea ? aidiResult.Area : CurrTinyArea;
+                    CurrObvArea = aidiResult.Area > CurrObvArea ? aidiResult.Area : CurrObvArea;
 
-                    if (aidiResult.Area >= ObvAreaFilter)
+                    if (aidiResult.Area >= TinyAreaFilter)
                     {
-                        ++numOfObv;
-                        regionOfObv += aidiResult.Region;
+                        ++numOfTiny;
+                        regionOfTiny += aidiResult.Region;
+
+                        if (aidiResult.Area >= ObvAreaFilter)
+                        {
+                            ++numOfObv;
+                            regionOfObv += aidiResult.Region;
+                        }
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
-                else
+
+                // judge
+                if (numOfTiny >= TinyNumFilter)
                 {
-                    break;
+                    Region += regionOfTiny;
+                }
+                if (numOfObv >= ObvNumFilter)
+                {
+                    Region += regionOfObv;
                 }
             }
-
-            // judge
-            if (numOfTiny >= TinyNumFilter)
+            else
             {
-                Region += regionOfTiny;
-            }
-            if (numOfObv >= ObvNumFilter)
-            {
-                Region += regionOfObv;
+                MessageManager.Instance().Info("Defect.CalculateRegion(): received no data.");
             }
 
             return;

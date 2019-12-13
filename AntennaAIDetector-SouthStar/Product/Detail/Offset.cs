@@ -2,6 +2,7 @@
 using SimpleGroup.Core.Struct;
 using Aqrose.Framework.Utility.DataStructure;
 using System.Drawing;
+using Aqrose.Framework.Utility.MessageManager;
 
 namespace AntennaAIDetector_SouthStar.Product.Detail
 {
@@ -117,6 +118,10 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
                     CurrX = aidiResult.CenterX;
                     CurrY = aidiResult.CenterY;
                 }
+            }
+            else
+            {
+                MessageManager.Instance().Info("Offset.CalculateRegion(): received no data.");
             }
 
             return;

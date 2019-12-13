@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Aqrose.Framework.Utility.MessageManager;
 using SimpleGroup.Core.Struct;
 
 namespace AntennaAIDetector_SouthStar.Product.Detail
@@ -117,6 +118,7 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
                 {
                     Region += aidiResult.Region;
                 }
+                MessageManager.Instance().Info("Overage.CalculateRegion(): received no data or less than expected.");
             }
 
             return;
