@@ -158,6 +158,7 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
                 }
                 MessageManager.Instance().Info("++++++Producer.Run(): end.");
 
+                DisplayShapes = new List<AqShap>();
                 if (IsDisplay)
                 {
                     List<double> y = new List<double>();

@@ -48,6 +48,10 @@ namespace AntennaAIDetector_SouthStar.Detector
 
                 return res;
             }
+            set
+            {
+                ResultInfo = value;
+            }
         }
 
         public ProductManager ProductManager { get; set; } = new ProductManager();
@@ -190,12 +194,11 @@ namespace AntennaAIDetector_SouthStar.Detector
         {
             if (null != ImageIn)
             {
-                //
-                DisplayShapes = new List<AqShap>();
-
+                ResultInfo = new List<string>();
                 Process();
                 IsResultOK = ProductManager.IsResultOK;
 
+                DisplayShapes = new List<AqShap>();
                 if (IsDisplay)
                 {
                     RefreshDisplayShape();
