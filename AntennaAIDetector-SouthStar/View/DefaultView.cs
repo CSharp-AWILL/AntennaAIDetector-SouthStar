@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using AntennaAIDetector_SouthStar.Detector;
 using Aqrose.Framework.Core.DataType;
@@ -13,22 +14,6 @@ namespace AntennaAIDetector_SouthStar.View
         private Detector.Detector _detector = null;
         private double _timeOfRun = 0.0;
 
-        public string ResultInfo
-        {
-            get
-            {
-                string resultInfo = "";
-                if (null != _detector)
-                {
-                    foreach (var result in _detector.ProductManager.Result)
-                    {
-                        resultInfo += (EnumTools.GetDescription(result) + "  ");
-                    }
-                }
-
-                return "运行结果：" + resultInfo;
-            }
-        }
         public string TimeInfo
         {
             get
@@ -213,6 +198,20 @@ namespace AntennaAIDetector_SouthStar.View
             FormRefresh(true);
 
             return;
+        }
+
+        public string GetResultInfo()
+        {
+            string res = "运行结果：";
+            if (null != _detector)
+            {
+                foreach (var temp in _detector.ResultInfo)
+                {
+                    res += temp;
+                }
+            }
+
+            return res;
         }
 
     }

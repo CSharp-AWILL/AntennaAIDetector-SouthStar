@@ -41,7 +41,7 @@ namespace AntennaAIDetector_SouthStar.Detector
 
         private void RefreshStatusStrip()
         {
-            this.labelResult.Text = _defaultView.ResultInfo;
+            this.labelResult.Text = _defaultView.GetResultInfo();
             this.labelRunTime.Text = _defaultView.TimeInfo;
 
             return;

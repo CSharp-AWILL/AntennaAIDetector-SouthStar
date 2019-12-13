@@ -32,6 +32,24 @@ namespace AntennaAIDetector_SouthStar.Detector
         [InputData]
         public List<AIDIShape> OutputOfTipAIDI { get; set; } = new List<AIDIShape>();
 
+        [OutputData]
+        public List<string> ResultInfo
+        {
+            get
+            {
+                List<string> res = new List<string>();
+                if (null != ProductManager)
+                {
+                    foreach (var temp in ProductManager.Result)
+                    {
+                        res.Add(EnumTools.GetDescription(temp));
+                    }
+                }
+
+                return res;
+            }
+        }
+
         public ProductManager ProductManager { get; set; } = new ProductManager();
 
         #region IDisplay
