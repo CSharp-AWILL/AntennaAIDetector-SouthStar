@@ -13,7 +13,14 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
         {
             get
             {
-                return 0 == Region.XldPointsNums.Count;
+                if (null != ResultOfAIDI.ResultDetailOfAIDI && 0 != ResultOfAIDI.ResultDetailOfAIDI.Count)
+                {
+                    return 0 == Region.XldPointsNums.Count;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
