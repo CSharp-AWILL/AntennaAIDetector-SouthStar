@@ -20,6 +20,7 @@ namespace AntennaAIDetector_SouthStar.View
             InitializeComponent();
             LoadConfiguration(out var taskSize, out var totalSize);
             this.numericUpDown_TaskSize.Value = taskSize;
+            this.numericUpDown_TotalSize.Value = totalSize;
         }
 
         public static void LoadConfiguration(out int taskSize, out int totalSize)
@@ -33,13 +34,13 @@ namespace AntennaAIDetector_SouthStar.View
                 XmlParameter xmlParameter = new XmlParameter();
 
                 xmlParameter.ReadParameter(Application.StartupPath + @"\ParamFile.xml");
+
                 info = xmlParameter.GetParamData("TaskSize");
                 if (!string.IsNullOrWhiteSpace(info))
                 {
                     taskSize = Convert.ToInt32(info);
                 }
 
-                xmlParameter.ReadParameter(Application.StartupPath + @"\ParamFile.xml");
                 info = xmlParameter.GetParamData("TotalSize");
                 if (!string.IsNullOrWhiteSpace(info))
                 {

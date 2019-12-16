@@ -73,12 +73,19 @@ namespace AntennaAIDetector_SouthStar.Result
         public string GenerateHeaderString()
         {
             string res = "";
+            int groupCount = TotalSize / TaskSize + Convert.ToInt32(0 != TotalSize / TaskSize);
+            int index = 0;
 
-            for (int i = 0; i < TotalSize / TaskSize; ++i)
+            for (int i = 0; i < groupCount; ++i)
             {
                 for (int j = 0; j < TaskSize; ++j)
                 {
-                    res += (TotalSize.ToString() + "-" + (i * TaskSize + j).ToString() + ",");
+                    index = i * TaskSize + j;
+                    if (TotalSize <= index)
+                    {
+                        break;
+                    }
+                    res += (TotalSize.ToString() + "-" + index.ToString() + ",");
                 }
             }
 
@@ -88,28 +95,61 @@ namespace AntennaAIDetector_SouthStar.Result
         public string GenerateDstMessage()
         {
             string res = "";
-            string[] resultArray = new string[20] 
+            int indexOfResultQueue = 0;
+            int groupCount = TotalSize / TaskSize + Convert.ToInt32(0 != TotalSize / TaskSize);
+            /*
+             * first dim: channel
+             * second dim: index
+             */
+            string[][] resultArrayOfSingleChannel = new string[5][]
             {
-                "", "", "", "", "",
-                "", "", "", "", "",
-                "", "", "", "", "",
-                "", "", "", "", ""
+                new string[10]
+                {
+                    "", "", "", "", "",
+                    "", "", "", "", "",
+                },
+                new string[10]
+                {
+                    "", "", "", "", "",
+                    "", "", "", "", "",
+                },
+                new string[10]
+                {
+                    "", "", "", "", "",
+                    "", "", "", "", "",
+                },
+                new string[10]
+                {
+                    "", "", "", "", "",
+                    "", "", "", "", "",
+                },
+                new string[10]
+                {
+                    "", "", "", "", "",
+                    "", "", "", "", "",
+                },
             };
 
-            for (int i = 0; i < TotalSize / TaskSize; ++i)
+            // fill in
+            for (; 0 < _singleResults.Count; ++indexOfResultQueue)
+            {
+                var singleResult = _singleResults.Dequeue();
+                int channel = singleResult.Index;
+                int index = indexOfResultQueue / TaskSize;
+                resultArrayOfSingleChannel[channel][index]= singleResult.DefectInfo;
+            }
+            // pick out
+            for (int i = 0; i < groupCount; ++i)
             {
                 for (int j = 0; j < TaskSize; ++j)
                 {
-                    var singleResult = _singleResults.Dequeue();
-                    if (null != singleResult)
+                    var index = i * TaskSize + j;
+                    if (TotalSize <= index)
                     {
-                        resultArray[singleResult.Index + TaskSize * i] = singleResult.DefectInfo;
+                        break;
                     }
+                    res += (resultArrayOfSingleChannel[j][i] + ",");
                 }
-            }
-            for (int i = 0; i < TotalSize; ++i)
-            {
-                res += (resultArray[i] + ",");
             }
 
             return res;

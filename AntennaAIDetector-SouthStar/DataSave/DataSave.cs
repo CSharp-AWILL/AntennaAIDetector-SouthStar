@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
-using AntennaAIDetector_SouthStar.Product;
 using AntennaAIDetector_SouthStar.Result;
+using Aqrose.Framework.Core.Attributes;
+using Aqrose.Framework.Core.DataType;
+using Aqrose.Framework.Core.Interface;
 using Aqrose.Framework.Utility.MessageManager;
 
 namespace AntennaAIDetector_SouthStar.DataSave
 {
-    public class DataSave
+    [Module("DataSave", "AntennaAIDetector", "")]
+    public class DataSave : ModuleData, IModule
     {
         private string _timeInfoOfLast = "";
         private string _timeInfoOfCurr = "";
@@ -14,7 +17,7 @@ namespace AntennaAIDetector_SouthStar.DataSave
         public string DirectoryPath { get; set; } = "";
         public int SpanOfTime { get; set; } = 10;
         public int QueueSize { get; set; } = 300;
-        public Queue<ResultData> ResultDatas { get; private set; } = new Queue<ResultData>();
+        public Queue<string> ResultDatas { get; private set; } = new Queue<string>();
 
         public DataSave()
         {
@@ -47,7 +50,7 @@ namespace AntennaAIDetector_SouthStar.DataSave
         private void EnqueueResultDatas()
         {
             // TODO: confused part--when?
-            ResultData resultData = new ResultData();
+            string resultData = "";
 
 
             if (null != ResultDatas && QueueSize <= ResultDatas.Count)
@@ -74,7 +77,7 @@ namespace AntennaAIDetector_SouthStar.DataSave
             return false;
         }
 
-        private ResultData GetCurrResultData()
+        private string GetCurrResultData()
         {
             if (null == ResultDatas || 0 > ResultDatas.Count)
             {
@@ -86,6 +89,62 @@ namespace AntennaAIDetector_SouthStar.DataSave
             return ResultDatas.Peek();
         }
 
-        
+        public string GetHeader()
+        {
+            if (null == _device)
+            {
+                return "";
+            }
+
+            return _device.GenerateHeaderString();
+        }
+
+        #region IModule
+
+        public void InitModule(string projectDirectory, string nodeName)
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        public void SaveModule(string projectDirectory, string nodeName)
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        public void CloseModule()
+        {
+            //throw new System.NotImplementedException();
+        }
+
+        public void Run()
+        {
+            if (null == _device)
+            {
+                MessageManager.Instance().Alarm("DataSave.Run: null _device!");
+
+                return;
+            }
+
+            ResultDatas.Enqueue(_device.GenerateDstMessage());
+
+            return;
+        }
+
+        public bool StartSetForm()
+        {
+            DataSaveForm form = null;
+            if (null == this)
+            {
+                return false;
+            }
+
+            form = new DataSaveForm(this);
+            form.ShowDialog();
+            form.Close();
+
+            return true;
+        }
+
+        #endregion
     }
 }
