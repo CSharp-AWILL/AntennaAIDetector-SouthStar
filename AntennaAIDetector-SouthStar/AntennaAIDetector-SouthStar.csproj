@@ -96,12 +96,14 @@
     <Compile Include="Product\ResultOfAIDI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result\Result.cs" />
+    <Compile Include="Result\ResultDevice.cs" />
     <Compile Include="Result\ResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Result\ResultForm.Designer.cs">
       <DependentUpon>ResultForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Result\SingleResult.cs" />
     <Compile Include="Task\Customer\Consumer.cs" />
     <Compile Include="Task\Customer\ConsumerForm.cs">
       <SubType>Form</SubType>
@@ -137,16 +139,19 @@
     <Compile Include="View\ParamView.Designer.cs">
       <DependentUpon>ParamView.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\TaskSizeForm.cs">
+    <Compile Include="View\TaskModeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\TaskSizeForm.Designer.cs">
-      <DependentUpon>TaskSizeForm.cs</DependentUpon>
+    <Compile Include="View\TaskModeForm.Designer.cs">
+      <DependentUpon>TaskModeForm.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Detector\DetectorForm.resx">
       <DependentUpon>DetectorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Result\ResultForm.resx">
+      <DependentUpon>ResultForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Task\Customer\ConsumerForm.resx">
       <DependentUpon>ConsumerForm.cs</DependentUpon>
@@ -163,8 +168,8 @@
     <EmbeddedResource Include="View\ParamView.resx">
       <DependentUpon>ParamView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\TaskSizeForm.resx">
-      <DependentUpon>TaskSizeForm.cs</DependentUpon>
+    <EmbeddedResource Include="View\TaskModeForm.resx">
+      <DependentUpon>TaskModeForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

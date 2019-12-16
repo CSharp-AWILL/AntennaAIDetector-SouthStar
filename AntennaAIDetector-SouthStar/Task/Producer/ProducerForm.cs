@@ -97,23 +97,9 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
         private void RefreshControls()
         {
             //
-            TaskSizeForm.LoadConfiguration(out var taskSize, out var totalSize);
-            if (0 == _producer.Number)
-            {
-                this.button_AddRect.Enabled = true;
-                this.button_RemoveRect.Enabled = false;
-            }
-            else if (taskSize > _producer.Number)
-            {
-                this.button_AddRect.Enabled = true;
-                this.button_RemoveRect.Enabled = true;
-                MessageBox.Show("当前模式：数量为" + taskSize);
-            }
-            else
-            {
-                this.button_AddRect.Enabled = false;
-                this.button_RemoveRect.Enabled = true;
-            }
+            TaskModeForm.LoadConfiguration(out var taskSize, out var totalSize);
+            this.button_RemoveRect.Enabled = 0 != _producer.Number;
+            this.button_AddRect.Enabled = taskSize > _producer.Number;
 
             //
             for (int index = _producer.Number; index < _panel.Length; ++index)
@@ -249,10 +235,10 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
             return;
         }
 
-        private void button_SetTaskSize_Click(object sender, EventArgs e)
+        private void button_SetTaskMode_Click(object sender, EventArgs e)
         {
-            var form = new TaskSizeForm();
-            form.Show();
+            var form = new TaskModeForm();
+            form.ShowDialog();
 
             return;
         }

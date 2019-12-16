@@ -91,9 +91,9 @@
             this.comboBoxDisplayWindowName = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.button_SetTaskMode = new System.Windows.Forms.Button();
             this.button_Test = new System.Windows.Forms.Button();
             this.aqDisplay1 = new AqVision.Controls.AqDisplay();
-            this.button_SetTaskSize = new System.Windows.Forms.Button();
             this.statusStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -207,7 +207,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.button_SetTaskSize);
+            this.splitContainer1.Panel2.Controls.Add(this.button_SetTaskMode);
             this.splitContainer1.Panel2.Controls.Add(this.button_Test);
             this.splitContainer1.Panel2.Controls.Add(this.aqDisplay1);
             this.splitContainer1.Size = new System.Drawing.Size(1008, 629);
@@ -1056,6 +1056,16 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "窗口名";
             // 
+            // button_SetTaskMode
+            // 
+            this.button_SetTaskMode.Location = new System.Drawing.Point(3, 10);
+            this.button_SetTaskMode.Name = "button_SetTaskMode";
+            this.button_SetTaskMode.Size = new System.Drawing.Size(69, 23);
+            this.button_SetTaskMode.TabIndex = 3;
+            this.button_SetTaskMode.Text = "模式设置";
+            this.button_SetTaskMode.UseVisualStyleBackColor = true;
+            this.button_SetTaskMode.Click += new System.EventHandler(this.button_SetTaskMode_Click);
+            // 
             // button_Test
             // 
             this.button_Test.Location = new System.Drawing.Point(3, 39);
@@ -1089,16 +1099,6 @@
             this.aqDisplay1.Radius = 1F;
             this.aqDisplay1.Size = new System.Drawing.Size(704, 629);
             this.aqDisplay1.TabIndex = 0;
-            // 
-            // button_SetTaskSize
-            // 
-            this.button_SetTaskSize.Location = new System.Drawing.Point(3, 10);
-            this.button_SetTaskSize.Name = "button_SetTaskSize";
-            this.button_SetTaskSize.Size = new System.Drawing.Size(69, 23);
-            this.button_SetTaskSize.TabIndex = 3;
-            this.button_SetTaskSize.Text = "模式设置";
-            this.button_SetTaskSize.UseVisualStyleBackColor = true;
-            this.button_SetTaskSize.Click += new System.EventHandler(this.button_SetTaskSize_Click);
             // 
             // ProducerForm
             // 
@@ -1240,6 +1240,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_W1;
         private System.Windows.Forms.NumericUpDown numericUpDown_H1;
         private System.Windows.Forms.Button button_Test;
-        private System.Windows.Forms.Button button_SetTaskSize;
+        private System.Windows.Forms.Button button_SetTaskMode;
     }
 }

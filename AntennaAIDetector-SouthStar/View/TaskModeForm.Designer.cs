@@ -1,6 +1,6 @@
 ﻿namespace AntennaAIDetector_SouthStar.View
 {
-    partial class TaskSizeForm
+    partial class TaskModeForm
     {
         /// <summary>
         /// Required designer variable.

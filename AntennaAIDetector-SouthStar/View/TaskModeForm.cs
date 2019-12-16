@@ -11,11 +11,11 @@ using Aqrose.Framework.Utility.Tools;
 
 namespace AntennaAIDetector_SouthStar.View
 {
-    public partial class TaskSizeForm : Form
+    public partial class TaskModeForm : Form
     {
         private static object _padLock = new object();
 
-        public TaskSizeForm()
+        public TaskModeForm()
         {
             InitializeComponent();
             LoadConfiguration(out var taskSize, out var totalSize);

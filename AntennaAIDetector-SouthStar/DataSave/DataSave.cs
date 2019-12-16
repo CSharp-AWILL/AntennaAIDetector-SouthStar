@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AntennaAIDetector_SouthStar.Product;
+using AntennaAIDetector_SouthStar.Result;
 using Aqrose.Framework.Utility.MessageManager;
 
 namespace AntennaAIDetector_SouthStar.DataSave
 {
     public class DataSave
     {
-        private string TimeInfoOfLast = "";
-        private string TimeInfoOfCurr = "";
+        private string _timeInfoOfLast = "";
+        private string _timeInfoOfCurr = "";
+        private ResultDevice _device = null;
 
         public string DirectoryPath { get; set; } = "";
         public int SpanOfTime { get; set; } = 10;
@@ -20,6 +18,7 @@ namespace AntennaAIDetector_SouthStar.DataSave
 
         public DataSave()
         {
+            _device = ResultDevice.GetInstance();
         }
 
         private void WriteCsv()
