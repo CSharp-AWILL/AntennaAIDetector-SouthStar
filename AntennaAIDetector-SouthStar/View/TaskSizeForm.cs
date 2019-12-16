@@ -13,37 +13,56 @@ namespace AntennaAIDetector_SouthStar.View
 {
     public partial class TaskSizeForm : Form
     {
-        private int _taskSize = 3;
+        private static object _padLock = new object();
 
         public TaskSizeForm()
         {
             InitializeComponent();
-            LoadConfiguration();
+            LoadConfiguration(out var taskSize, out var totalSize);
+            this.numericUpDown_TaskSize.Value = taskSize;
         }
 
-        private void LoadConfiguration()
+        public static void LoadConfiguration(out int taskSize, out int totalSize)
         {
             string info = "";
-            XmlParameter xmlParameter = new XmlParameter();
+            taskSize = 0;
+            totalSize = 0;
 
-            xmlParameter.ReadParameter(Application.StartupPath + @"\ParamFile.xml");
-            info = xmlParameter.GetParamData("TaskSize");
-            if (!string.IsNullOrWhiteSpace(info))
+            lock (_padLock)
             {
-                _taskSize = Convert.ToInt32(info);
+                XmlParameter xmlParameter = new XmlParameter();
+
+                xmlParameter.ReadParameter(Application.StartupPath + @"\ParamFile.xml");
+                info = xmlParameter.GetParamData("TaskSize");
+                if (!string.IsNullOrWhiteSpace(info))
+                {
+                    taskSize = Convert.ToInt32(info);
+                }
+
+                xmlParameter.ReadParameter(Application.StartupPath + @"\ParamFile.xml");
+                info = xmlParameter.GetParamData("TotalSize");
+                if (!string.IsNullOrWhiteSpace(info))
+                {
+                    totalSize = Convert.ToInt32(info);
+                }
             }
-
-            this.numericUpDown_TaskSize.Value = _taskSize;
-
             return;
         }
 
         private void SaveConfiguration()
         {
-            XmlParameter xmlParameter = new XmlParameter();
+            lock (_padLock)
+            {
+                XmlParameter xmlParameter = new XmlParameter();
 
-            xmlParameter.Add("TaskSize", _taskSize);
-            xmlParameter.WriteParameter(Application.StartupPath + @"\ParamFile.xml");
+                var info = this.numericUpDown_TaskSize.Value;
+                xmlParameter.Add("TaskSize", Convert.ToInt32(info));
+
+                info = this.numericUpDown_TotalSize.Value;
+                xmlParameter.Add("TotalSize", Convert.ToInt32(info));
+
+                xmlParameter.WriteParameter(Application.StartupPath + @"\ParamFile.xml");
+            }
 
             return;
         }

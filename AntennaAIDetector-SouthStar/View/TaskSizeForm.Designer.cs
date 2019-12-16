@@ -32,13 +32,16 @@
             this.button_Cancel = new System.Windows.Forms.Button();
             this.numericUpDown_TaskSize = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numericUpDown_TotalSize = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TaskSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TotalSize)).BeginInit();
             this.SuspendLayout();
             // 
             // button_Ensure
             // 
             this.button_Ensure.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button_Ensure.Location = new System.Drawing.Point(67, 123);
+            this.button_Ensure.Location = new System.Drawing.Point(67, 143);
             this.button_Ensure.Name = "button_Ensure";
             this.button_Ensure.Size = new System.Drawing.Size(75, 23);
             this.button_Ensure.TabIndex = 0;
@@ -48,7 +51,7 @@
             // 
             // button_Cancel
             // 
-            this.button_Cancel.Location = new System.Drawing.Point(228, 123);
+            this.button_Cancel.Location = new System.Drawing.Point(228, 143);
             this.button_Cancel.Name = "button_Cancel";
             this.button_Cancel.Size = new System.Drawing.Size(75, 23);
             this.button_Cancel.TabIndex = 1;
@@ -58,14 +61,9 @@
             // 
             // numericUpDown_TaskSize
             // 
-            this.numericUpDown_TaskSize.Location = new System.Drawing.Point(168, 60);
+            this.numericUpDown_TaskSize.Location = new System.Drawing.Point(168, 39);
             this.numericUpDown_TaskSize.Maximum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.numericUpDown_TaskSize.Minimum = new decimal(new int[] {
-            2,
+            20,
             0,
             0,
             0});
@@ -81,11 +79,37 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(65, 64);
+            this.label1.Location = new System.Drawing.Point(65, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 12);
             this.label1.TabIndex = 3;
             this.label1.Text = "视野内产品数量：";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(65, 88);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(77, 12);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "产品总数量：";
+            // 
+            // numericUpDown_TotalSize
+            // 
+            this.numericUpDown_TotalSize.Location = new System.Drawing.Point(168, 84);
+            this.numericUpDown_TotalSize.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numericUpDown_TotalSize.Name = "numericUpDown_TotalSize";
+            this.numericUpDown_TotalSize.Size = new System.Drawing.Size(120, 21);
+            this.numericUpDown_TotalSize.TabIndex = 4;
+            this.numericUpDown_TotalSize.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // TaskSizeForm
             // 
@@ -93,6 +117,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 201);
             this.ControlBox = false;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.numericUpDown_TotalSize);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericUpDown_TaskSize);
             this.Controls.Add(this.button_Cancel);
@@ -110,6 +136,7 @@
             this.Text = "模式设置";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TaskSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TotalSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,5 +148,7 @@
         private System.Windows.Forms.Button button_Cancel;
         private System.Windows.Forms.NumericUpDown numericUpDown_TaskSize;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown numericUpDown_TotalSize;
     }
 }

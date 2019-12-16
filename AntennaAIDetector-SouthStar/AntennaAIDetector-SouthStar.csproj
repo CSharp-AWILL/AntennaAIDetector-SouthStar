@@ -95,6 +95,13 @@
     <Compile Include="Product\ResultData.cs" />
     <Compile Include="Product\ResultOfAIDI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Result\Result.cs" />
+    <Compile Include="Result\ResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Result\ResultForm.Designer.cs">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Task\Customer\Consumer.cs" />
     <Compile Include="Task\Customer\ConsumerForm.cs">
       <SubType>Form</SubType>
@@ -130,6 +137,12 @@
     <Compile Include="View\ParamView.Designer.cs">
       <DependentUpon>ParamView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\TaskSizeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\TaskSizeForm.Designer.cs">
+      <DependentUpon>TaskSizeForm.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Detector\DetectorForm.resx">
@@ -149,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ParamView.resx">
       <DependentUpon>ParamView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TaskSizeForm.resx">
+      <DependentUpon>TaskSizeForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
