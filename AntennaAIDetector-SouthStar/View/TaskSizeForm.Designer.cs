@@ -132,7 +132,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "模式设置";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_TaskSize)).EndInit();

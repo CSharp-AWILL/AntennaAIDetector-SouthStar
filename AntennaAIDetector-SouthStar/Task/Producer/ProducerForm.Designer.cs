@@ -1112,7 +1112,7 @@
             this.Name = "ProducerForm";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "切割";
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();

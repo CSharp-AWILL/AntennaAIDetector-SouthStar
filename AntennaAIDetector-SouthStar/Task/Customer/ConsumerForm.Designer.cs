@@ -315,7 +315,7 @@
             this.Name = "ConsumerForm";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "取图";
             this.groupBox1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);

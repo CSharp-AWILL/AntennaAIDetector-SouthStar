@@ -65,9 +65,10 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(380, 200);
             this.Name = "SpyForm";
+            this.Opacity = 0.8D;
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "任务监控";
             this.ResumeLayout(false);
             this.PerformLayout();
