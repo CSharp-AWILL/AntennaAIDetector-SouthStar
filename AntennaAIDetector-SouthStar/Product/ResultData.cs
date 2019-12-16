@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AntennaAIDetector_SouthStar.Product
 {
-    class ResultData
+    public class ResultData
     {
     }
 }
