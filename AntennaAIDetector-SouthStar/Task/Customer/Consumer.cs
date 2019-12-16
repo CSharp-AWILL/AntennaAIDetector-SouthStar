@@ -30,7 +30,7 @@ namespace AntennaAIDetector_SouthStar.Task.Consumer
                 return IsResultOK ? "OK" : "NG";
             }
         }
-
+        [OutputData]
         public int Index { get; set; } = 0;
 
         #region IDisplay

@@ -10,12 +10,15 @@ using Aqrose.Framework.Core.Interface;
 using Aqrose.Framework.Utility.DataStructure;
 using Aqrose.Framework.Utility.Tools;
 using AqVision.Graphic.AqVision.shape;
+using AntennaAIDetector_SouthStar.Result;
 
 namespace AntennaAIDetector_SouthStar.Detector
 {
     [Module("Detector", "AntennaAIDetector", "")]
     public class Detector : ModuleData, IModule, IDisplay
     {
+        [InputData]
+        public int IndexOfChannel { get; set; } = 0;
         [InputData]
         public Bitmap ImageIn { get; set; } = null;
         [InputData]
@@ -53,6 +56,8 @@ namespace AntennaAIDetector_SouthStar.Detector
                 ResultInfo = value;
             }
         }
+        [OutputData]
+        public SingleResult SingleResult { get; set; } = null;
 
         public ProductManager ProductManager { get; set; } = new ProductManager();
 
@@ -192,11 +197,13 @@ namespace AntennaAIDetector_SouthStar.Detector
 
         public void Run()
         {
+            SingleResult = null;
             if (null != ImageIn)
             {
                 ResultInfo = new List<string>();
                 Process();
                 IsResultOK = ProductManager.IsResultOK;
+                SingleResult = new SingleResult(IndexOfChannel, 0 < ResultInfo.Count ? ResultInfo[0] : "Undefined");
 
                 DisplayShapes = new List<AqShap>();
                 if (IsDisplay)
