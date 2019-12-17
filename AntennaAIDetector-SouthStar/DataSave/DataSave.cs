@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using AntennaAIDetector_SouthStar.Result;
 using Aqrose.Framework.Core.Attributes;
 using Aqrose.Framework.Core.DataType;
 using Aqrose.Framework.Core.Interface;
 using Aqrose.Framework.Utility.MessageManager;
+using Aqrose.Framework.Utility.Tools;
 
 namespace AntennaAIDetector_SouthStar.DataSave
 {
@@ -12,9 +15,32 @@ namespace AntennaAIDetector_SouthStar.DataSave
     {
         private string _timeInfoOfLast = "";
         private string _timeInfoOfCurr = "";
+        private string _directoryPath = "";
+        private string _codeOfProduct = "";
         private ResultDevice _device = null;
 
-        public string DirectoryPath { get; set; } = "";
+        public string DirectoryPath
+        {
+            get
+            {
+                return _directoryPath;
+            }
+            set
+            {
+                _directoryPath = string.IsNullOrWhiteSpace(value) ? @"D:\AqCsv\" : value;
+            }
+        }
+        public string CodeOfProduct
+        {
+            get
+            {
+                return _codeOfProduct;
+            }
+            set
+            {
+                _codeOfProduct = string.IsNullOrWhiteSpace(value) ? @"default" : value;
+            }
+        }
         public int SpanOfTime { get; set; } = 10;
         public int QueueSize { get; set; } = 300;
         public Queue<string> ResultDatas { get; private set; } = new Queue<string>();
@@ -22,36 +48,57 @@ namespace AntennaAIDetector_SouthStar.DataSave
         public DataSave()
         {
             _device = ResultDevice.GetInstance();
+            DirectoryPath = "";
+            CodeOfProduct = "";
         }
 
-        private void WriteCsv()
+        private void WriteCsv(string content)
         {
-            var resultData = GetCurrResultData();
+            string filePath = "";
+            string header = "";
+            System.IO.FileStream fs = null;
+            System.IO.StreamWriter sw = null;
 
-            if (null == resultData)
+            if (null == content)
             {
                 MessageManager.Instance().Info("DataSave.WriteCsv: null resultData.");
 
                 return;
             }
 
-            if (CanGenerateNewCsvFile())
+            // 
+            filePath = GetFilePath();
+            try
             {
-                MessageManager.Instance().Info("DataSave.WriteCsv: generate new csv file.");
-                // TODO: generate new csv file
+                if (!File.Exists(filePath))
+                {
+                    fs = new System.IO.FileStream(filePath, System.IO.FileMode.Create,
+                            System.IO.FileAccess.Write);
+                    sw = new System.IO.StreamWriter(fs, System.Text.Encoding.UTF8);
+                    header = GetHeader();
+                    sw.WriteLine(header);
+                }
 
+                sw.WriteLine(content);
+                sw.Close();
+                fs.Close();
             }
-
-            // TODO: write csv
+            catch (Exception e)
+            {
+                MessageManager.Instance().Alarm("DataSave: 保存数据失败," + e.Message);
+            }
 
             return;
         }
 
-        private void EnqueueResultDatas()
+        private void EnqueueResultDatas(string resultData)
         {
-            // TODO: confused part--when?
-            string resultData = "";
+            if (string.IsNullOrWhiteSpace(resultData))
+            {
+                MessageManager.Instance().Info("DataSave.EnqueueResultDatas: null resultData.");
 
+                return;
+            }
 
             if (null != ResultDatas && QueueSize <= ResultDatas.Count)
             {
@@ -64,29 +111,95 @@ namespace AntennaAIDetector_SouthStar.DataSave
 
         private string GetTimeInfo()
         {
-            string timeInfo = "";
-            // TODO: get current time info
+            return DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss"); ;
+        }
 
-            return timeInfo;
+        private bool TryParseTimeInfo(string timeInfo, out DateTime dateTime)
+        {
+            dateTime = new DateTime();
+            if ("" != timeInfo)
+            {
+                var info = timeInfo.Split('-');
+                if (6 != info.Length)
+                {
+                    MessageManager.Instance().Warn("DataSave.ParseTimeInfo: unexpected time info string!");
+
+                    return false;
+                }
+
+                dateTime = new DateTime(Convert.ToInt32(info[0]), Convert.ToInt32(info[1]), Convert.ToInt32(info[2]), Convert.ToInt32(info[3]), Convert.ToInt32(info[4]), Convert.ToInt32(info[5]));
+            }
+
+            return true;
         }
 
         private bool CanGenerateNewCsvFile()
         {
-            // TODO: judge whether generate new csv file or not
+            bool result = false;
 
-            return false;
-        }
-
-        private string GetCurrResultData()
-        {
-            if (null == ResultDatas || 0 > ResultDatas.Count)
+            if ("" == _timeInfoOfCurr)
             {
-                MessageManager.Instance().Info("DataSave.GetCurrResultData: empty results queue.");
+                _timeInfoOfCurr = GetTimeInfo();
+            }
+            if ("" == _timeInfoOfLast)
+            {
+                _timeInfoOfLast = _timeInfoOfCurr;
 
-                return null;
+                // attention
+                return true;
             }
 
-            return ResultDatas.Peek();
+            TryParseTimeInfo(_timeInfoOfLast, out DateTime dateTimeOfLast);
+            // only update current time info
+            _timeInfoOfCurr = GetTimeInfo();
+            TryParseTimeInfo(_timeInfoOfCurr, out DateTime dateTimeOfCurr);
+            TimeSpan timeSpan = dateTimeOfCurr - dateTimeOfLast;
+            var timeSpanOfStandard = TimeSpan.FromHours(SpanOfTime);
+            var isBigger = TimeSpan.Compare(timeSpan, timeSpanOfStandard);
+
+            result = 1 == isBigger;
+            if (result)
+            {
+                _timeInfoOfLast = _timeInfoOfCurr;
+                MessageManager.Instance().Info("DataSave.CanGenerateNewCsvFile: need generate a new csv file.");
+            }
+
+            return result;
+        }
+
+        private string GetDirPath()
+        {
+            string dirPath = DirectoryPath + @"\";
+            // dirPath
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+
+            return dirPath;
+        }
+
+        private string GetFilePath()
+        {
+            string dirPath = GetDirPath();
+            string filePath = dirPath + CodeOfProduct;
+            string timeInfo = "";
+            string[] time = null;
+
+            File.SetAttributes(dirPath, FileAttributes.Normal);
+
+            if (CanGenerateNewCsvFile())
+            {
+                time = _timeInfoOfCurr.Split('-');
+            }
+            else
+            {
+                time = _timeInfoOfLast.Split('-');
+            }
+            timeInfo = time[0] + time[1] + time[2] + time[3];
+            filePath += ("_d_" + timeInfo + @".csv");
+
+            return filePath;
         }
 
         public string GetHeader()
@@ -103,12 +216,51 @@ namespace AntennaAIDetector_SouthStar.DataSave
 
         public void InitModule(string projectDirectory, string nodeName)
         {
-            //throw new System.NotImplementedException();
+            string configFile = projectDirectory + @"\DataSave-" + nodeName + ".xml";
+            string strParamInfo = "";
+            XmlParameter xmlParameter = null;
+            if (File.Exists(configFile))
+            {
+                xmlParameter = new XmlParameter();
+                xmlParameter.ReadParameter(configFile);
+
+                strParamInfo = xmlParameter.GetParamData("DirectoryPath");
+                if (strParamInfo != "")
+                {
+                    DirectoryPath = strParamInfo;
+                }
+                strParamInfo = xmlParameter.GetParamData("CodeOfProduct");
+                if (strParamInfo != "")
+                {
+                    CodeOfProduct = strParamInfo;
+                }
+                strParamInfo = xmlParameter.GetParamData("SpanOfTime");
+                if (strParamInfo != "")
+                {
+                    SpanOfTime = Convert.ToInt32(strParamInfo);
+                }
+                strParamInfo = xmlParameter.GetParamData("QueueSize");
+                if (strParamInfo != "")
+                {
+                    QueueSize = Convert.ToInt32(strParamInfo);
+                }
+            }
+
+            return;
         }
 
         public void SaveModule(string projectDirectory, string nodeName)
         {
-            //throw new System.NotImplementedException();
+            string configFile = projectDirectory + @"\DataSave-" + nodeName + ".xml";
+            XmlParameter xmlParameter = new XmlParameter();
+            xmlParameter.Add("DirectoryPath", DirectoryPath);
+            xmlParameter.Add("CodeOfProduct", CodeOfProduct);
+            xmlParameter.Add("SpanOfTime", SpanOfTime);
+            xmlParameter.Add("QueueSize", QueueSize);
+
+            xmlParameter.WriteParameter(configFile);
+
+            return;
         }
 
         public void CloseModule()
@@ -118,6 +270,8 @@ namespace AntennaAIDetector_SouthStar.DataSave
 
         public void Run()
         {
+            string resultData = "";
+
             if (null == _device)
             {
                 MessageManager.Instance().Alarm("DataSave.Run: null _device!");
@@ -125,7 +279,10 @@ namespace AntennaAIDetector_SouthStar.DataSave
                 return;
             }
 
-            ResultDatas.Enqueue(_device.GenerateDstMessage());
+            resultData = _device.GenerateDstMessage();
+            //
+            WriteCsv(resultData);
+            EnqueueResultDatas(resultData);
 
             return;
         }

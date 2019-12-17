@@ -132,6 +132,12 @@
     <Compile Include="View\DefaultView.Designer.cs">
       <DependentUpon>DefaultView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FilePathView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\FilePathView.Designer.cs">
+      <DependentUpon>FilePathView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ParamView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -166,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\DefaultView.resx">
       <DependentUpon>DefaultView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FilePathView.resx">
+      <DependentUpon>FilePathView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ParamView.resx">
       <DependentUpon>ParamView.cs</DependentUpon>

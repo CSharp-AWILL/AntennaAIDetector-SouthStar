@@ -69,6 +69,7 @@ namespace AntennaAIDetector_SouthStar.Result
 
                 return;
             }
+
             lock (ResultDevice.PAD_LOCK)
             {
                 _device.Enqueue(SingleResult);

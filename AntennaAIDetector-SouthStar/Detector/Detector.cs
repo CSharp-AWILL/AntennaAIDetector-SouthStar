@@ -36,26 +36,7 @@ namespace AntennaAIDetector_SouthStar.Detector
         public List<AIDIShape> OutputOfTipAIDI { get; set; } = new List<AIDIShape>();
 
         [OutputData]
-        public List<string> ResultInfo
-        {
-            get
-            {
-                List<string> res = new List<string>();
-                if (null != ProductManager)
-                {
-                    foreach (var temp in ProductManager.Result)
-                    {
-                        res.Add(EnumTools.GetDescription(temp));
-                    }
-                }
-
-                return res;
-            }
-            set
-            {
-                ResultInfo = value;
-            }
-        }
+        public List<string> ResultInfo { get; set; } = new List<string>();
         [OutputData]
         public SingleResult SingleResult { get; set; } = null;
 
@@ -197,13 +178,13 @@ namespace AntennaAIDetector_SouthStar.Detector
 
         public void Run()
         {
+            ResultInfo = new List<string>();
             SingleResult = null;
+
             if (null != ImageIn)
             {
-                ResultInfo = new List<string>();
                 Process();
                 IsResultOK = ProductManager.IsResultOK;
-                SingleResult = new SingleResult(IndexOfChannel, 0 < ResultInfo.Count ? ResultInfo[0] : "Undefined");
 
                 DisplayShapes = new List<AqShap>();
                 if (IsDisplay)
@@ -262,6 +243,17 @@ namespace AntennaAIDetector_SouthStar.Detector
             ProductManager.SetResultAsUnprocessed();
             InjectInputDataToProductManager();
             ProductManager.ProcessResultOfAIDI();
+
+            //
+            ResultInfo = new List<string>();
+            if (null != ProductManager)
+            {
+                foreach (var temp in ProductManager.Result)
+                {
+                    ResultInfo.Add(EnumTools.GetDescription(temp));
+                }
+            }
+            SingleResult = new SingleResult(IndexOfChannel, 0 < ResultInfo.Count ? ResultInfo[0] : "Undefined");
 
             return;
         }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AntennaAIDetector_SouthStar.View;
 
 namespace AntennaAIDetector_SouthStar.DataSave
 {
@@ -14,12 +15,37 @@ namespace AntennaAIDetector_SouthStar.DataSave
     {
         private DataSave _dataSave = null;
         private string _header = "";
+
+        private FilePathView _filePathView = null;
+
         public DataSaveForm(DataSave dataSave)
         {
             _dataSave = dataSave;
             InitializeComponent();
-            GetHeader();
+            LoadViews();
+            DoDataBindings();
             RefreshDataGrid();
+        }
+        
+        private void LoadViews()
+        {
+            _filePathView = new FilePathView(_dataSave);
+            _filePathView.Dock = DockStyle.Fill;
+            this.panel1.Controls.Add(_filePathView);
+            this.panel1.Hide();
+
+            return;
+        }
+
+        private void DoDataBindings()
+        {
+            var mode = DataSourceUpdateMode.OnPropertyChanged | DataSourceUpdateMode.OnValidation;
+
+            //
+            this.numericUpDown_TimeSpanForNewFile.DataBindings.Add(new Binding("Text", _dataSave, "SpanOfTime", true, mode));
+            this.numericUpDown_QueueSize.DataBindings.Add(new Binding("Text", _dataSave, "QueueSize", true, mode));
+
+            return;
         }
 
         private void GetHeader()
@@ -33,6 +59,7 @@ namespace AntennaAIDetector_SouthStar.DataSave
         {
             this.dataGridView_ResultDatas.Rows.Clear();
 
+            GetHeader();
             var headerDetail = _header.Split(',');
             foreach (var tempColumnItem in headerDetail)
             {
@@ -50,5 +77,26 @@ namespace AntennaAIDetector_SouthStar.DataSave
 
             return;
         }
+
+        #region Event
+
+        private void ToolStripMenuItem_PathSettingView_Click(object sender, EventArgs e)
+        {
+            _dataSave.Run();
+            if ("打开路径设置" == this.ToolStripMenuItem_PathSettingView.Text)
+            {
+                this.panel1.Show();
+                this.ToolStripMenuItem_PathSettingView.Text = "关闭路径设置";
+            }
+            else
+            {
+                this.panel1.Hide();
+                this.ToolStripMenuItem_PathSettingView.Text = "打开路径设置";
+            }
+
+            return;
+        }
+
+        #endregion
     }
 }
