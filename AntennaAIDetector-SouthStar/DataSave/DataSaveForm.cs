@@ -82,7 +82,6 @@ namespace AntennaAIDetector_SouthStar.DataSave
 
         private void ToolStripMenuItem_PathSettingView_Click(object sender, EventArgs e)
         {
-            _dataSave.Run();
             if ("打开路径设置" == this.ToolStripMenuItem_PathSettingView.Text)
             {
                 this.panel1.Show();

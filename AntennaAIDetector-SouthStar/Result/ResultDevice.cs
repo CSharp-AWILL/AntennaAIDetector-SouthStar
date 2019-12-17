@@ -85,7 +85,7 @@ namespace AntennaAIDetector_SouthStar.Result
                     {
                         break;
                     }
-                    res += (TotalSize.ToString() + "-" + index.ToString() + ",");
+                    res += (TotalSize.ToString() + "_" + index.ToString() + ",");
                 }
             }
 
@@ -105,29 +105,29 @@ namespace AntennaAIDetector_SouthStar.Result
             {
                 new string[10]
                 {
-                    "", "", "", "", "",
-                    "", "", "", "", "",
+                    "x", "x", "x", "x", "x",
+                    "x", "x", "x", "x", "x"
                 },
                 new string[10]
                 {
-                    "", "", "", "", "",
-                    "", "", "", "", "",
+                    "x", "x", "x", "x", "x",
+                    "x", "x", "x", "x", "x"
                 },
                 new string[10]
                 {
-                    "", "", "", "", "",
-                    "", "", "", "", "",
+                    "x", "x", "x", "x", "x",
+                    "x", "x", "x", "x", "x"
                 },
                 new string[10]
                 {
-                    "", "", "", "", "",
-                    "", "", "", "", "",
+                    "x", "x", "x", "x", "x",
+                    "x", "x", "x", "x", "x"
                 },
                 new string[10]
                 {
-                    "", "", "", "", "",
-                    "", "", "", "", "",
-                },
+                    "x", "x", "x", "x", "x",
+                    "x", "x", "x", "x", "x"
+                }
             };
 
             // fill in
