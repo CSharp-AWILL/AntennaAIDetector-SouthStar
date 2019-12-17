@@ -36,6 +36,14 @@ namespace AntennaAIDetector_SouthStar.Detector
         public List<AIDIShape> OutputOfTipAIDI { get; set; } = new List<AIDIShape>();
 
         [OutputData]
+        public string IsOkString
+        {
+            get
+            {
+                return IsResultOK ? "OK" : "NG";
+            }
+        }
+        [OutputData]
         public List<string> ResultInfo { get; set; } = new List<string>();
         [OutputData]
         public SingleResult SingleResult { get; set; } = null;
