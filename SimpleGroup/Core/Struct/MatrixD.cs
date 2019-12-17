@@ -20,15 +20,18 @@ namespace SimpleGroup.Core.Struct
         {
         }
 
-        public MatrixD(AffineMatrix affineMatrix)
+        public MatrixD(AffineMatrix affineMatrix) : this()
         {
-            affineMatrix.GetAffineMatrix(out var modelX, out var modelY, out var modelA, out var resultX, out var resultY, out var resultA);
-            ModelX = modelX;
-            ModelY = modelY;
-            ModelA = modelA;
-            ResultX = resultX;
-            ResultY = resultY;
-            ResultA = resultA;
+            if (null != affineMatrix)
+            {
+                affineMatrix.GetAffineMatrix(out var modelX, out var modelY, out var modelA, out var resultX, out var resultY, out var resultA);
+                ModelX = modelX;
+                ModelY = modelY;
+                ModelA = modelA;
+                ResultX = resultX;
+                ResultY = resultY;
+                ResultA = resultA;
+            }
         }
 
         public MatrixD(double modelX, double modelY, double modelA, double resultX, double resultY, double resultA)
