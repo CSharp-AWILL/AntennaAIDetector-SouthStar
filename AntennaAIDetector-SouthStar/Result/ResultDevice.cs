@@ -95,7 +95,6 @@ namespace AntennaAIDetector_SouthStar.Result
         public string GenerateDstMessage()
         {
             string res = "";
-            int indexOfResultQueue = 0;
             int groupCount = TotalSize / TaskSize + Convert.ToInt32(0 != TotalSize / TaskSize);
             /*
              * first dim: channel
@@ -131,7 +130,7 @@ namespace AntennaAIDetector_SouthStar.Result
             };
 
             // fill in
-            for (; 0 < _singleResults.Count; ++indexOfResultQueue)
+            for (int indexOfResultQueue = 0; indexOfResultQueue < TotalSize; ++indexOfResultQueue)
             {
                 var singleResult = _singleResults.Dequeue();
                 int channel = singleResult.Index;
