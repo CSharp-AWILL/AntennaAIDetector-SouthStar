@@ -52,8 +52,8 @@ namespace AntennaAIDetector_SouthStar.Task
             if (null != ImageQueues && index < ImageQueues.Count && 0 < ImageQueues[index].Count)
             {
                 var image = ImageQueues[index].Dequeue();
-                temp = image.Clone(new Rectangle(0, 0, image.Width, image.Height), System.Drawing.Imaging.PixelFormat.DontCare);
-                //temp = ImageOperateTools.ImageCopy(ImageQueues[index].Dequeue());
+                //temp = image.Clone(new Rectangle(0, 0, image.Width, image.Height), System.Drawing.Imaging.PixelFormat.DontCare);
+                temp = ImageOperateTools.ImageCopy(ImageQueues[index].Dequeue());
                 //return Images[index].Dequeue().Clone() as Bitmap;
             }
             MessageManager.Instance().Info("Task.Pop: " + index);
@@ -90,9 +90,9 @@ namespace AntennaAIDetector_SouthStar.Task
             //
             for (int index = 0; index < source.Count; ++index)
             {
-                //var temp = ImageOperateTools.ImageCopy(source[index]);
-                var image = source[index];
-                var temp = image.Clone(new Rectangle(0, 0, image.Width, image.Height), System.Drawing.Imaging.PixelFormat.DontCare);
+                var temp = ImageOperateTools.ImageCopy(source[index]);
+                //var image = source[index];
+                //var temp = image.Clone(new Rectangle(0, 0, image.Width, image.Height), System.Drawing.Imaging.PixelFormat.DontCare);
                 ImageQueues[index].Enqueue(temp);
                 //Images[index].Enqueue(source[index].Clone() as Bitmap);
 
