@@ -47,6 +47,7 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             {
                 CorrectPos(new PointF((float)StandardXFilter, (float)StandardYFilter), out var res);
                 return res;
+                //return new PointF((float)StandardXFilter, (float)StandardYFilter);
             }
         }
 
@@ -54,8 +55,9 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
         {
             get
             {
-                CorrectPos(new PointF((float)CurrX, (float)CurrY), out var res);
-                return res;
+                //CorrectPos(new PointF((float)CurrX, (float)CurrY), out var res);
+                //return res;
+                return new PointF((float)CurrX, (float)CurrY);
             }
         }
 
@@ -65,8 +67,8 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
 
         private void CorrectPos(PointF org, out PointF res)
         {
-            res= org;
-            return;
+            //res= org;
+            //return;
 
 
             res = PointF.Empty;
@@ -83,15 +85,38 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             return;
         }
 
+        private bool IsInRange()
+        {
+            MessageManager.Instance().Info("StandardPoint.x:" + StandardPoint.X.ToString());
+            MessageManager.Instance().Info("StandardPoint.y:" + StandardPoint.Y.ToString());
+            MessageManager.Instance().Info("CurrPoint.x:" + CurrPoint.X.ToString());
+            MessageManager.Instance().Info("CurrPoint.y:" + CurrPoint.Y.ToString());
+            if (StandardPoint.X - LeftFilter >= CurrPoint.X || StandardPoint.X + RightFilter <= CurrPoint.X || StandardPoint.Y - UpFilter >= CurrPoint.Y || StandardPoint.Y + DownFilter <= CurrPoint.Y)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         private bool IsInRange(PointF point)
         {
             if (null == point)
             {
                 return false;
             }
-            //CorrectPos(new PointShape(StandardXFilter, StandardYFilter), out var standardPoint);
-            //standardPoint.GetPoint(out var standardX, out var standardY);
-            if (StandardXFilter - LeftFilter >= point.X || StandardXFilter + RightFilter <= point.X || StandardYFilter - UpFilter >= point.Y || StandardYFilter + DownFilter <= point.Y)
+            CorrectPos(new PointF((float)StandardXFilter, (float)StandardYFilter), out var standardPoint);
+            //if (StandardXFilter - LeftFilter >= point.X || StandardXFilter + RightFilter <= point.X || StandardYFilter - UpFilter >= point.Y || StandardYFilter + DownFilter <= point.Y)
+            //{
+            //    return false;
+            //}
+            //else
+            //{
+            //    return true;
+            //}
+            if (standardPoint.X - LeftFilter >= point.X || standardPoint.X + RightFilter <= point.X || standardPoint.Y - UpFilter >= point.Y || standardPoint.Y + DownFilter <= point.Y)
             {
                 return false;
             }
@@ -118,12 +143,17 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
             {
                 foreach (var aidiResult in ResultOfAIDI.ResultDetailOfAIDI.GetRange(ResultOfAIDI.ResultDetailOfAIDI.Count - 1, 1))
                 {
-                    if (!IsInRange(new PointF((float)aidiResult.CenterX, (float)aidiResult.CenterY)))
+                    CurrX = aidiResult.CenterX;
+                    CurrY = aidiResult.CenterY;
+                    //if (!IsInRange(new PointF((float)aidiResult.CenterX, (float)aidiResult.CenterY)))
+                    //{
+                    //    Region += aidiResult.Region;
+                    //}
+                    if (!IsInRange())
                     {
                         Region += aidiResult.Region;
                     }
-                    CurrX = aidiResult.CenterX;
-                    CurrY = aidiResult.CenterY;
+                    
                 }
             }
             else
