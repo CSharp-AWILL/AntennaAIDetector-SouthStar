@@ -154,6 +154,7 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
                 MessageManager.Instance().Info("++++++Producer.Run(): begin.");
                 lock (TaskPool.PAD_LOCK)
                 {
+                    _device.OriginImages.Add(ImageIn);
                     _device.TryPushImages(temp);
                 }
                 MessageManager.Instance().Info("++++++Producer.Run(): end.");

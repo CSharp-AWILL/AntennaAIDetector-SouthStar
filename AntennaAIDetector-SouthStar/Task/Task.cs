@@ -14,6 +14,7 @@ namespace AntennaAIDetector_SouthStar.Task
     {
         //public static readonly object PAD_LOCK = new object();
 
+        public List<Bitmap> OriginImages { get; set; } = new List<Bitmap>();
         public List<Queue<Bitmap>> ImageQueues { get; set; } = new List<Queue<Bitmap>>();
 
         public Task()

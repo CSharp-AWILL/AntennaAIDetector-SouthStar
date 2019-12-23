@@ -10,20 +10,33 @@ using Aqrose.Framework.Core.Attributes;
 using Aqrose.Framework.Core.DataType;
 using Aqrose.Framework.Core.Interface;
 using Aqrose.Framework.Utility.MessageManager;
+using Aqrose.Framework.Utility.Tools;
+using AqVision.Graphic.AqVision.shape;
+using SimpleGroup.Core.Struct;
 
 namespace AntennaAIDetector_SouthStar.TileImage
 {
     [Module("TileImage", "AntennaAIDetector", "")]
-    public class TileImage : ModuleData, IModule
+    public class TileImage : ModuleData, IModule, IDisplay
     {
+        private Task.Task _device = null;
         private Bitmap _wholeImage = null;
-        private List<Bitmap> _singleImages = new List<Bitmap>();
+        private ShapeOf2D _singleRois = new ShapeOf2D();
+        private List<Bitmap> _originImages { get; set; } = new List<Bitmap>();
 
-        [InputData]
-        public Bitmap ImageIn { get; set; } = null;
+        #region IDisplay
+
+        public Bitmap DisplayBitmap { get; set; } = null;
+        public List<AqShap> DisplayShapes { get; set; } = new List<AqShap>();
+        public string DisplayWindowName { get; set; } = "Image0";
+        public bool IsDisplay { get; set; } = true;
+        public bool IsUpdate { get; set; } = false;
+
+        #endregion
 
         public TileImage()
         {
+            _device = Task.TaskPool.GetInstance();
         }
 
         private void TileSingleImages()
@@ -32,19 +45,19 @@ namespace AntennaAIDetector_SouthStar.TileImage
 
             _wholeImage = null;
 
-            if (null == _singleImages)
+            if (null == _originImages)
             {
                 return;
             }
 
-            count = _singleImages.Count;
+            count = _originImages.Count;
             if (0 > count)
             {
                 return;
             }
 
             //
-            var singleImage = _singleImages[0];
+            var singleImage = _originImages[0];
             var bitmapDataOfSingleImage = singleImage.LockBits(new Rectangle(0, 0, singleImage.Width, singleImage.Height), ImageLockMode.ReadOnly, singleImage.PixelFormat);
             var ptrOfSingleImage = bitmapDataOfSingleImage.Scan0;
             int bytesOfSingleImage = Math.Abs(bitmapDataOfSingleImage.Stride) * singleImage.Height;
@@ -61,7 +74,7 @@ namespace AntennaAIDetector_SouthStar.TileImage
             {
                 for (int index = 0; index < count; ++index)
                 {
-                    singleImage = _singleImages[index];
+                    singleImage = _originImages[index];
                     bitmapDataOfSingleImage = singleImage.LockBits(new Rectangle(0, 0, singleImage.Width, singleImage.Height), ImageLockMode.ReadOnly, singleImage.PixelFormat);
                     ptrOfSingleImage = bitmapDataOfSingleImage.Scan0;
                     Marshal.Copy(ptrOfSingleImage, byteValuesOfSingleImage, 0, bytesOfSingleImage);
@@ -84,6 +97,43 @@ namespace AntennaAIDetector_SouthStar.TileImage
             return;
         }
 
+        private void GetSingleRois()
+        {
+            List<RectangleF> rectangles = new List<RectangleF>();
+            _singleRois = new ShapeOf2D();
+
+            if (null == _originImages)
+            {
+                return;
+            }
+
+            for (int index = 0; index < _originImages.Count; ++index)
+            {
+                var singleImage = _originImages[index];
+                var roi = new RectangleF((float)0, (float)0, (float)singleImage.Width, (float)singleImage.Height);
+                var center = new PointF((float)(singleImage.Width / 2.0), (float)(singleImage.Height / 2.0));
+                var offset = new PointF((float)0, (float)(singleImage.Height * index));
+                roi.Offset(offset);
+                center.X += offset.X;
+                center.Y += offset.Y;
+
+                ShapeOf2D.ConvertRectToShapeOf2D(Rectangle.Truncate(roi), out var edgeOfRoi);
+                ShapeOf2D.ConverPoint2DToCross(new PointF(roi.X, roi.Y), 50, out var ltOfRoi);
+                ShapeOf2D.ConverPoint2DToCross(new PointF(roi.X + roi.Width, roi.Y), 50, out var rtOfRoi);
+                ShapeOf2D.ConverPoint2DToCross(new PointF(roi.X, roi.Y + roi.Height), 50, out var lbOfRoi);
+                ShapeOf2D.ConverPoint2DToCross(new PointF(roi.X + roi.Width, roi.Y + roi.Height), 50, out var rbOfRoi);
+                ShapeOf2D.ConverPoint2DToCross(center, 20, out var centerOfRoi);
+
+                _singleRois += ltOfRoi;
+                _singleRois += rtOfRoi;
+                _singleRois += lbOfRoi;
+                _singleRois += rbOfRoi;
+                _singleRois += centerOfRoi;
+            }
+
+            return;
+        }
+
         #region IModule
 
         public void CloseModule()
@@ -100,14 +150,35 @@ namespace AntennaAIDetector_SouthStar.TileImage
         {
             //throw new NotImplementedException();
             _wholeImage = null;
-            if (null == ImageIn)
+            _originImages = new List<Bitmap>();
+
+            MessageManager.Instance().Info("++++++TileImage.Run(): begin.");
+            lock (Task.TaskPool.PadLock)
             {
-                return;
+                if (null != _device && null != _device.OriginImages && 0 < _device.OriginImages.Count)
+                {
+                    _originImages = _device.OriginImages;
+                    _device.OriginImages.Clear();
+                }
             }
-            _singleImages.Add(ImageIn);
-            _singleImages.Add(ImageIn);
             TileSingleImages();
-            _wholeImage.Save("E://a.bmp");
+            GetSingleRois();
+            MessageManager.Instance().Info("++++++TileImage.Run(): end.");
+
+            //
+            DisplayBitmap = null;
+            DisplayShapes = new List<AqShap>();
+            if (IsDisplay)
+            {
+                DisplayBitmap = _wholeImage;
+                DisplayContour.GetContours(_singleRois.XldPointYs, _singleRois.XldPointXs, _singleRois.XldPointsNums, out var contours, AqVision.Graphic.AqColorEnum.Yellow, 1);
+                DisplayShapes = contours;
+                IsUpdate = true;
+            }
+            else
+            {
+                IsUpdate = false;
+            }
 
             return;
         }
