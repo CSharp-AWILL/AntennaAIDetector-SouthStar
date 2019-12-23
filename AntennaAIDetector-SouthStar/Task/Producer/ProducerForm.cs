@@ -16,6 +16,7 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
 {
     public partial class ProducerForm : Form
     {
+        private Task _device = null;
         private Producer _producer = null;
         private NumericUpDown[,] _numericUpDown;
         private Panel[] _panel;
@@ -41,6 +42,7 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
 
         public ProducerForm(Producer producer)
         {
+            _device = TaskPool.GetInstance();
             _producer = producer;
             InitializeComponent();
             InitializeComboxWndName(this.comboBoxDisplayWindowName, _producer.DisplayWindowName);
@@ -97,16 +99,15 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
         private void RefreshControls()
         {
             //
-            TaskModeForm.LoadConfiguration(out var taskSize, out var totalSize);
-            this.button_RemoveRect.Enabled = 0 != _producer.Number;
-            this.button_AddRect.Enabled = taskSize > _producer.Number;
+            this.button_RemoveRect.Enabled = 0 != _device.TaskSize;
+            this.button_AddRect.Enabled = _device.Roi.Length > _device.TaskSize;
 
             //
-            for (int index = _producer.Number; index < _panel.Length; ++index)
+            for (int index = _device.TaskSize; index < _panel.Length; ++index)
             {
                 _panel[index].Hide();
             }
-            for (int index = _producer.Number - 1; index >= 0; --index)
+            for (int index = _device.TaskSize - 1; index >= 0; --index)
             {
                 _panel[index].Show();
                 _panel[index].BorderStyle = BorderStyle.FixedSingle;
@@ -117,12 +118,12 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
             }
 
             //
-            for (int index = 0; index < _producer.Rects.Length; ++index)
+            for (int index = 0; index < _device.Roi.Length; ++index)
             {
-                _numericUpDown[index, 0].Value = Convert.ToDecimal(_producer.Rects[index].X);
-                _numericUpDown[index, 1].Value = Convert.ToDecimal(_producer.Rects[index].Y);
-                _numericUpDown[index, 2].Value = Convert.ToDecimal(_producer.Rects[index].Width);
-                _numericUpDown[index, 3].Value = Convert.ToDecimal(_producer.Rects[index].Height);
+                _numericUpDown[index, 0].Value = Convert.ToDecimal(_device.Roi[index].X);
+                _numericUpDown[index, 1].Value = Convert.ToDecimal(_device.Roi[index].Y);
+                _numericUpDown[index, 2].Value = Convert.ToDecimal(_device.Roi[index].Width);
+                _numericUpDown[index, 3].Value = Convert.ToDecimal(_device.Roi[index].Height);
             }
 
             return;
@@ -131,12 +132,12 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
         private void UpdateRects()
         {
             //
-            for (int index = 0; index < _producer.Rects.Length; ++index)
+            for (int index = 0; index < _device.Roi.Length; ++index)
             {
-                _producer.Rects[index].X = Convert.ToInt32(_numericUpDown[index, 0].Value);
-                _producer.Rects[index].Y = Convert.ToInt32(_numericUpDown[index, 1].Value);
-                _producer.Rects[index].Width = Convert.ToInt32(_numericUpDown[index, 2].Value);
-                _producer.Rects[index].Height = Convert.ToInt32(_numericUpDown[index, 3].Value);
+                _device.Roi[index].X = Convert.ToInt32(_numericUpDown[index, 0].Value);
+                _device.Roi[index].Y = Convert.ToInt32(_numericUpDown[index, 1].Value);
+                _device.Roi[index].Width = Convert.ToInt32(_numericUpDown[index, 2].Value);
+                _device.Roi[index].Height = Convert.ToInt32(_numericUpDown[index, 3].Value);
             }
 
             return;
@@ -150,9 +151,9 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
                 this.aqDisplay1.Image = _producer.ImageIn.Clone() as Bitmap;
                 if (_producer.IsDisplay)
                 {
-                    for (int index = 0; index < _producer.Number; ++index)
+                    for (int index = 0; index < _device.TaskSize; ++index)
                     {
-                        ShapeOf2D.ConvertRectToShapeOf2D(_producer.Rects[index], out var shapeOf2D);
+                        ShapeOf2D.ConvertRectToShapeOf2D(Rectangle.Truncate(_device.Roi[index]), out var shapeOf2D);
                         DisplayContour.GetContours(shapeOf2D.XldPointYs, shapeOf2D.XldPointXs, shapeOf2D.XldPointsNums, out var contours, _aqColor[index], 2);
                         DisplayContour.Display(this.aqDisplay1, contours);
                     }
@@ -219,18 +220,7 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
 
         private void button_Test_Click(object sender, EventArgs e)
         {
-            var res = _producer.CropImage();
-            int index = 0;
-            foreach (var temp in res)
-            {
-                if (null == temp)
-                {
-                    MessageBox.Show("无图像！");
-
-                    return;
-                }
-                temp.Save("E:/xia-" + (index++) + ".bmp");
-            }
+            _producer.Test();
 
             return;
         }

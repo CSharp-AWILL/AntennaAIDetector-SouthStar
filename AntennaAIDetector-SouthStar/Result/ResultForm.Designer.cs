@@ -30,7 +30,6 @@
         {
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_TaskModeInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.button_UpdateTaskMode = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label_SingleResult = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
@@ -50,16 +49,6 @@
             // 
             this.toolStripStatusLabel_TaskModeInfo.Name = "toolStripStatusLabel_TaskModeInfo";
             this.toolStripStatusLabel_TaskModeInfo.Size = new System.Drawing.Size(0, 17);
-            // 
-            // button_UpdateTaskMode
-            // 
-            this.button_UpdateTaskMode.Location = new System.Drawing.Point(271, 131);
-            this.button_UpdateTaskMode.Name = "button_UpdateTaskMode";
-            this.button_UpdateTaskMode.Size = new System.Drawing.Size(75, 23);
-            this.button_UpdateTaskMode.TabIndex = 1;
-            this.button_UpdateTaskMode.Text = "更新模式";
-            this.button_UpdateTaskMode.UseVisualStyleBackColor = true;
-            this.button_UpdateTaskMode.Click += new System.EventHandler(this.button_UpdateTaskMode_Click);
             // 
             // label1
             // 
@@ -85,7 +74,6 @@
             this.ClientSize = new System.Drawing.Size(384, 201);
             this.Controls.Add(this.label_SingleResult);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button_UpdateTaskMode);
             this.Controls.Add(this.statusStrip1);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(400, 240);
@@ -108,7 +96,6 @@
 
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_TaskModeInfo;
-        private System.Windows.Forms.Button button_UpdateTaskMode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_SingleResult;
     }

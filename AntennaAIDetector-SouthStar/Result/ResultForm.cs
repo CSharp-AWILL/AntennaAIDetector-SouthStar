@@ -40,17 +40,6 @@ namespace AntennaAIDetector_SouthStar.Result
             return;
         }
 
-        #region Event
-
-        private void button_UpdateTaskMode_Click(object sender, EventArgs e)
-        {
-            _result.RetrieveTaskMode();
-            RefreshStatusStrip();
-
-            return;
-        }
-
-        #endregion
 
     }
 }

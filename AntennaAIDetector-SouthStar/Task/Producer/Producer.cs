@@ -20,12 +20,6 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
 
         [InputData]
         public Bitmap ImageIn { get; set; } = null;
-        public int Number { get; set; } = 0;
-        public Rectangle[] Rects { get; set; } = new Rectangle[6]
-        {
-            Rectangle.Empty, Rectangle.Empty, Rectangle.Empty,
-            Rectangle.Empty, Rectangle.Empty, Rectangle.Empty
-        };
 
         #region IDisplay
 
@@ -40,37 +34,6 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
         public Producer()
         {
             _device = TaskPool.GetInstance();
-        }
-
-        private void SetTask()
-        {
-            _device.SetTaskSize(Number);
-
-            return;
-        }
-
-        private Bitmap CropImage(Bitmap src, Rectangle roi)
-        {
-            if (null == src || null == roi || Rectangle.Empty == roi)
-            {
-                return null;
-            }
-
-            //
-            roi.X = Math.Max(roi.X, 0);
-            roi.Y = Math.Max(roi.Y, 0);
-            roi.Width = Math.Max(roi.Width, 0);
-            roi.Height = Math.Max(roi.Height, 0);
-            //
-            roi.X = Math.Min(roi.X, src.Width);
-            roi.Y = Math.Min(roi.Y, src.Height);
-            roi.Width = Math.Min(roi.Width, src.Width - roi.X);
-            roi.Height = Math.Min(roi.Height, src.Height - roi.Y);
-            ImageOperateTools.BitmapCropImage(src, roi, out var res);
-
-            return res;
-            // slow
-            //return src.Clone(roi, System.Drawing.Imaging.PixelFormat.DontCare);
         }
 
         #region IModule
@@ -105,38 +68,9 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
 
                 #endregion
 
-                //
-                strParamInfo = xmlParameter.GetParamData("Number");
-                if (strParamInfo != "")
-                {
-                    Number = Convert.ToInt32(strParamInfo);
-                }
-                SetTask();  // attention
-                for (int index = 0; index < Rects.Length; ++index)
-                {
-                    string param = "Rect-" + index;
-                    strParamInfo = xmlParameter.GetParamData(param + "-X");
-                    if (strParamInfo != "")
-                    {
-                        Rects[index].X = Convert.ToInt32(strParamInfo);
-                    }
-                    strParamInfo = xmlParameter.GetParamData(param + "-Y");
-                    if (strParamInfo != "")
-                    {
-                        Rects[index].Y = Convert.ToInt32(strParamInfo);
-                    }
-                    strParamInfo = xmlParameter.GetParamData(param + "-Width");
-                    if (strParamInfo != "")
-                    {
-                        Rects[index].Width = Convert.ToInt32(strParamInfo);
-                    }
-                    strParamInfo = xmlParameter.GetParamData(param + "-Height");
-                    if (strParamInfo != "")
-                    {
-                        Rects[index].Height = Convert.ToInt32(strParamInfo);
-                    }
-                }
             }
+
+            _device.LoadConfiguration();
 
             return;
         }
@@ -145,13 +79,10 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
         {
             if (null != ImageIn)
             {
-                var temp = CropImage();
-
                 MessageManager.Instance().Info("++++++Producer.Run(): begin.");
                 lock (TaskPool.PAD_LOCK)
                 {
-                    _device.OriginImages.Add(ImageIn);
-                    _device.TryPushImages(temp);
+                    _device.TryPushImages(ImageIn);
                 }
                 MessageManager.Instance().Info("++++++Producer.Run(): end.");
 
@@ -161,9 +92,9 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
                     List<double> y = new List<double>();
                     List<double> x = new List<double>();
                     List<int> num = new List<int>();
-                    for (int index = 0; index < Number; ++index)
+                    for (int index = 0; index < _device.TaskSize; ++index)
                     {
-                        ShapeOf2D.ConvertRectToShapeOf2D(Rects[index], out var shapeOf2D);
+                        ShapeOf2D.ConvertRectToShapeOf2D(Rectangle.Truncate(_device.Roi[index]), out var shapeOf2D);
                         y.AddRange(shapeOf2D.XldPointYs);
                         x.AddRange(shapeOf2D.XldPointXs);
                         num.AddRange(shapeOf2D.XldPointsNums);
@@ -196,18 +127,9 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
 
             #endregion
 
-            //
-            xmlParameter.Add("Number", Number);
-            for (int index = 0; index < Rects.Length; ++index)
-            {
-                string param = "Rect-" + index;
-                xmlParameter.Add(param+"-X", Rects[index].X);
-                xmlParameter.Add(param+"-Y", Rects[index].Y);
-                xmlParameter.Add(param+"-Width", Rects[index].Width);
-                xmlParameter.Add(param+"-Height", Rects[index].Height);
-            }
-
             xmlParameter.WriteParameter(configFile);
+
+            _device.SaveConfiguration();
 
             return;
         }
@@ -223,46 +145,33 @@ namespace AntennaAIDetector_SouthStar.Task.Producer
 
         #endregion
 
-        public List<Bitmap> CropImage()
-        {
-            List<Bitmap> res = new List<Bitmap>();
-            for (int index = 0; index < Number; ++index)
-            {
-                res.Add(CropImage(ImageIn, Rects[index]));
-            }
-
-            return res;
-        }
-
         public void AddRect()
         {
-            int y = 200 * (Number++);
+            int y = 200 * (_device.TaskSize + 1);
             int width = null == ImageIn ? 100 : ImageIn.Width;
+            var roi = new RectangleF((float)0, (float)y, (float)width, (float)100);
 
-            Rects[Number-1]=new Rectangle(0, y, width, 100);
-            SetTask();
+            _device.TryAddRoi(roi);
 
             return;
         }
 
         public void RemoveRect()
         {
-            Rects[--Number] = Rectangle.Empty;
-            SetTask();
+            _device.TryRemoveRoi();
 
             return;
         }
 
-        public int GetTaskSize()
+        public void Test()
         {
-            if (null == _device)
+            Run();
+            for (int index = 0; index < _device.TaskSize; ++index)
             {
-                MessageManager.Instance().Warn("Consumer: _device is null.");
-
-                return 0;
+                _device.PopBitmap(index).Save("E:/xia-" + (index) + ".bmp");
             }
 
-            return _device.GetTaskSize();
+            return;
         }
     }
 }

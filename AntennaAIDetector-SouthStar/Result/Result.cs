@@ -101,18 +101,5 @@ namespace AntennaAIDetector_SouthStar.Result
 
         #endregion
 
-        public void RetrieveTaskMode()
-        {
-            if (null == _device)
-            {
-                MessageManager.Instance().Warn("Result.RetrieveTaskMode: null _device!");
-
-                return;
-            }
-
-            _device.LoadConfiguration();
-
-            return;
-        }
     }
 }

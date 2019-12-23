@@ -17,6 +17,8 @@ namespace AntennaAIDetector_SouthStar.Result
 
         public DisplayChar()
         {
+            Size = new Size(200, 200);
+            Color = Color.Red;
         }
 
         public AqCharacter ConvertToAqCharacter()
@@ -36,6 +38,12 @@ namespace AntennaAIDetector_SouthStar.Result
             aqCharacter.isVisible = false;
 
             return aqCharacter;
+        }
+
+        public void SetDisplayChar(PointF position, string text)
+        {
+            Text = text;
+            Position = new Point(Convert.ToInt32(position.X), Convert.ToInt32(position.Y));
         }
     }
 }

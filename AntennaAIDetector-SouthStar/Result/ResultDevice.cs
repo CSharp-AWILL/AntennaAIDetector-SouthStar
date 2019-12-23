@@ -12,16 +12,44 @@ namespace AntennaAIDetector_SouthStar.Result
     // Singleton
     public class ResultDevice
     {
+        private Task.Task _taskDevice = null;
         private static ResultDevice _instance = null;
         private Queue<SingleResult> _singleResults = new Queue<SingleResult>();
 
         public static Object PAD_LOCK = new object();
-        public int TaskSize { get; private set; } = 0;
-        public int TotalSize { get; private set; } = 0;
+        public int TaskSize
+        {
+            get
+            {
+                if (null == _taskDevice)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return _taskDevice.TaskSize;
+                }
+            }
+        }
+
+        public int TotalSize
+        {
+            get
+            {
+                if (null == _taskDevice)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return _taskDevice.TotalSize;
+                }
+            }
+        }
 
         private ResultDevice()
         {
-            LoadConfiguration();
+            _taskDevice = Task.TaskPool.GetInstance();
         }
 
         public static ResultDevice GetInstance()
@@ -38,15 +66,6 @@ namespace AntennaAIDetector_SouthStar.Result
             }
 
             return _instance;
-        }
-
-        public void LoadConfiguration()
-        {
-            TaskModeForm.LoadConfiguration(out var taskSize, out var totalSize);
-            TaskSize = taskSize;
-            TotalSize = totalSize;
-
-            return;
         }
 
         public void Clear()

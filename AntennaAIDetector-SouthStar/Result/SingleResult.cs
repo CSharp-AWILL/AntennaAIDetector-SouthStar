@@ -23,12 +23,6 @@ namespace AntennaAIDetector_SouthStar.Result
             DefectInfo = defectInfo;
         }
 
-        public void SetDisplayChar(int heightOfImage)
-        {
-            DisplayChar.Text = DefectInfo;
-            DisplayChar.Position = new Point(10, heightOfImage * Index + 10);
-            DisplayChar.Size = new Size(200, 200);
-            DisplayChar.Color = Color.Red;
-        }
+        
     }
 }

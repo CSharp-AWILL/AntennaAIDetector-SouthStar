@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 using Aqrose.Framework.Utility.MessageManager;
 using Aqrose.Framework.Utility.Tools;
 
@@ -7,9 +9,14 @@ namespace AntennaAIDetector_SouthStar.Task
 {
     public class Task
     {
-        //public static readonly object PAD_LOCK = new object();
-
+        public int TaskSize { get; set; } = 0;
+        public int TotalSize { get; set; } = 0;
         public List<Bitmap> OriginImages { get; set; } = new List<Bitmap>();
+        public RectangleF[] Roi { get; set; } = new RectangleF[6]
+        {
+            RectangleF.Empty, RectangleF.Empty, RectangleF.Empty,
+            RectangleF.Empty, RectangleF.Empty, RectangleF.Empty
+        };
         public List<Queue<Bitmap>> ImageQueues { get; set; } = new List<Queue<Bitmap>>();
 
         public Task()
@@ -28,6 +35,97 @@ namespace AntennaAIDetector_SouthStar.Task
             return amount;
         }
 
+        private void SetTaskSize(int number)
+        {
+            ImageQueues = new List<Queue<Bitmap>>();
+            if (number > 0)
+            {
+                for (int index = 0; index < number; ++index)
+                {
+                    ImageQueues.Add(new Queue<Bitmap>());
+                }
+            }
+
+            return;
+        }
+
+        public void LoadConfiguration()
+        {
+            string param = "";
+            string info = "";
+            RectangleF roi = new RectangleF();
+
+            XmlParameter xmlParameter = new XmlParameter();
+
+            xmlParameter.ReadParameter(Application.StartupPath + @"\TaskParamFile.xml");
+
+            info = xmlParameter.GetParamData("TaskSize");
+            if (!string.IsNullOrWhiteSpace(info))
+            {
+                TaskSize = Convert.ToInt32(info);
+            }
+
+            info = xmlParameter.GetParamData("TotalSize");
+            if (!string.IsNullOrWhiteSpace(info))
+            {
+                TotalSize = Convert.ToInt32(info);
+            }
+
+            //
+            for (int index = 0; index < TaskSize; ++index)
+            {
+                roi = new RectangleF();
+                param = "Roi-" + index;
+                info = xmlParameter.GetParamData(param + "-X");
+                if (info != "")
+                {
+                    Roi[index].X = (float)Convert.ToDouble(info);
+                }
+                info = xmlParameter.GetParamData(param + "-Y");
+                if (info != "")
+                {
+                    Roi[index].Y = (float)Convert.ToDouble(info);
+                }
+                info = xmlParameter.GetParamData(param + "-Width");
+                if (info != "")
+                {
+                    Roi[index].Width = (float)Convert.ToDouble(info);
+                }
+                info = xmlParameter.GetParamData(param + "-Height");
+                if (info != "")
+                {
+                    Roi[index].Height = (float)Convert.ToDouble(info);
+                }
+
+                ImageQueues.Add(new Queue<Bitmap>());
+            }
+
+            return;
+        }
+
+        public void SaveConfiguration()
+        {
+            string param = "";
+            XmlParameter xmlParameter = new XmlParameter();
+
+            xmlParameter.Add("TaskSize", TaskSize);
+            xmlParameter.Add("TotalSize", TotalSize);
+
+            //
+            for (int index = 0; index < TaskSize; ++index)
+            {
+                param = "Roi-" + index;
+                xmlParameter.Add(param + "-X", Roi[index].X);
+                xmlParameter.Add(param + "-Y", Roi[index].Y);
+                xmlParameter.Add(param + "-Width", Roi[index].Width);
+                xmlParameter.Add(param + "-Height", Roi[index].Height);
+            }
+
+            xmlParameter.WriteParameter(Application.StartupPath + @"\TaskParamFile.xml");
+
+            return;
+        }
+
         public int GetTaskSize()
         {
             /*
@@ -42,15 +140,42 @@ namespace AntennaAIDetector_SouthStar.Task
             return ImageQueues.Count;
         }
 
+        public bool TryAddRoi(RectangleF rectangle)
+        {
+            ++TaskSize;
+            if (TaskSize > Roi.Length)
+            {
+                --TaskSize;
+                return false;
+            }
+
+            Roi[TaskSize - 1] = rectangle;
+            ImageQueues.Add(new Queue<Bitmap>());
+
+            return true;
+        }
+
+        public bool TryRemoveRoi()
+        {
+            --TaskSize;
+            if (0 > TaskSize)
+            {
+                ++TaskSize;
+                return false;
+            }
+
+            Roi[TaskSize] = RectangleF.Empty;
+            ImageQueues.RemoveAt(TaskSize);
+
+            return true;
+        }
+
         public Bitmap PopBitmap(int index)
         {
             Bitmap temp = null;
             if (null != ImageQueues && index < ImageQueues.Count && 0 < ImageQueues[index].Count)
             {
-                var image = ImageQueues[index].Dequeue();
-                //temp = image.Clone(new Rectangle(0, 0, image.Width, image.Height), System.Drawing.Imaging.PixelFormat.DontCare);
                 temp = ImageOperateTools.ImageCopy(ImageQueues[index].Dequeue());
-                //return Images[index].Dequeue().Clone() as Bitmap;
             }
             MessageManager.Instance().Info("Task.Pop: " + index);
 
@@ -98,18 +223,34 @@ namespace AntennaAIDetector_SouthStar.Task
             return true;
         }
 
-        public void SetTaskSize(int number)
+        public bool TryPushImages(Bitmap originImage)
         {
-            ImageQueues = new List<Queue<Bitmap>>();
-            if (number > 0)
+            if (null == originImage)
             {
-                for (int index = 0; index < number; ++index)
-                {
-                    ImageQueues.Add(new Queue<Bitmap>());
-                }
+                return false;
             }
 
-            return;
+            //
+            OriginImages.Add(originImage);
+            for (int index = 0; index < TaskSize; ++index)
+            {
+                var roi = Roi[index];
+                //
+                roi.X = Math.Max(roi.X, 0);
+                roi.Y = Math.Max(roi.Y, 0);
+                roi.Width = Math.Max(roi.Width, 0);
+                roi.Height = Math.Max(roi.Height, 0);
+                //
+                roi.X = Math.Min(roi.X, originImage.Width);
+                roi.Y = Math.Min(roi.Y, originImage.Height);
+                roi.Width = Math.Min(roi.Width, originImage.Width - roi.X);
+                roi.Height = Math.Min(roi.Height, originImage.Height - roi.Y);
+                ImageOperateTools.BitmapCropImage(originImage, Rectangle.Truncate(roi), out var res);
+                ImageQueues[index].Enqueue(res);
+                MessageManager.Instance().Info("Task.Push: " + index);
+            }
+            
+            return true;
         }
 
         public void GetStatusOfQueue(int index, out int status)

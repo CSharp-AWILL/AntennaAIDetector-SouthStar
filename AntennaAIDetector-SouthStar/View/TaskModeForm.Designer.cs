@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.button_Ensure = new System.Windows.Forms.Button();
-            this.button_Cancel = new System.Windows.Forms.Button();
             this.numericUpDown_TaskSize = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,18 +48,9 @@
             this.button_Ensure.UseVisualStyleBackColor = true;
             this.button_Ensure.Click += new System.EventHandler(this.button_Ensure_Click);
             // 
-            // button_Cancel
-            // 
-            this.button_Cancel.Location = new System.Drawing.Point(228, 143);
-            this.button_Cancel.Name = "button_Cancel";
-            this.button_Cancel.Size = new System.Drawing.Size(75, 23);
-            this.button_Cancel.TabIndex = 1;
-            this.button_Cancel.Text = "取消";
-            this.button_Cancel.UseVisualStyleBackColor = true;
-            this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click);
-            // 
             // numericUpDown_TaskSize
             // 
+            this.numericUpDown_TaskSize.Enabled = false;
             this.numericUpDown_TaskSize.Location = new System.Drawing.Point(168, 39);
             this.numericUpDown_TaskSize.Maximum = new decimal(new int[] {
             20,
@@ -111,7 +101,7 @@
             0,
             0});
             // 
-            // TaskSizeForm
+            // TaskModeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -121,13 +111,12 @@
             this.Controls.Add(this.numericUpDown_TotalSize);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericUpDown_TaskSize);
-            this.Controls.Add(this.button_Cancel);
             this.Controls.Add(this.button_Ensure);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(400, 240);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(400, 240);
-            this.Name = "TaskSizeForm";
+            this.Name = "TaskModeForm";
             this.Opacity = 0.8D;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -145,7 +134,6 @@
         #endregion
 
         private System.Windows.Forms.Button button_Ensure;
-        private System.Windows.Forms.Button button_Cancel;
         private System.Windows.Forms.NumericUpDown numericUpDown_TaskSize;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;

@@ -13,57 +13,22 @@ namespace AntennaAIDetector_SouthStar.View
 {
     public partial class TaskModeForm : Form
     {
-        private static object _padLock = new object();
+        private Task.Task _device = null;
 
         public TaskModeForm()
         {
+            _device = Task.TaskPool.GetInstance();
             InitializeComponent();
-            LoadConfiguration(out var taskSize, out var totalSize);
-            this.numericUpDown_TaskSize.Value = taskSize;
-            this.numericUpDown_TotalSize.Value = totalSize;
+            DoDataBindings();
         }
 
-        public static void LoadConfiguration(out int taskSize, out int totalSize)
+        private void DoDataBindings()
         {
-            string info = "";
-            taskSize = 0;
-            totalSize = 0;
+            var mode = DataSourceUpdateMode.OnPropertyChanged | DataSourceUpdateMode.OnValidation;
 
-            lock (_padLock)
-            {
-                XmlParameter xmlParameter = new XmlParameter();
-
-                xmlParameter.ReadParameter(Application.StartupPath + @"\ParamFile.xml");
-
-                info = xmlParameter.GetParamData("TaskSize");
-                if (!string.IsNullOrWhiteSpace(info))
-                {
-                    taskSize = Convert.ToInt32(info);
-                }
-
-                info = xmlParameter.GetParamData("TotalSize");
-                if (!string.IsNullOrWhiteSpace(info))
-                {
-                    totalSize = Convert.ToInt32(info);
-                }
-            }
-            return;
-        }
-
-        private void SaveConfiguration()
-        {
-            lock (_padLock)
-            {
-                XmlParameter xmlParameter = new XmlParameter();
-
-                var info = this.numericUpDown_TaskSize.Value;
-                xmlParameter.Add("TaskSize", Convert.ToInt32(info));
-
-                info = this.numericUpDown_TotalSize.Value;
-                xmlParameter.Add("TotalSize", Convert.ToInt32(info));
-
-                xmlParameter.WriteParameter(Application.StartupPath + @"\ParamFile.xml");
-            }
+            //
+            this.numericUpDown_TaskSize.DataBindings.Add(new Binding("Text", _device, "TaskSize", true, mode));
+            this.numericUpDown_TotalSize.DataBindings.Add(new Binding("Text", _device, "TotalSize", true, mode));
 
             return;
         }
@@ -72,8 +37,6 @@ namespace AntennaAIDetector_SouthStar.View
 
         private void button_Ensure_Click(object sender, EventArgs e)
         {
-            SaveConfiguration();
-
             this.Close();
 
             return;
