@@ -299,17 +299,17 @@ namespace AntennaAIDetector_SouthStar.DataSave
         {
             string content = "";
 
-            if (null == _device)
+            //
+            lock (ResultDevice.PAD_LOCK)
             {
-                MessageManager.Instance().Alarm("DataSave.Run: null _device!");
-
-                return;
+                content = GetResultData();
             }
 
-            //
-            content = GetResultData();
-            WriteCsv(content);
-            EnqueueResultDatas(content);
+            if (!string.IsNullOrWhiteSpace(content))
+            {
+                WriteCsv(content);
+                EnqueueResultDatas(content);
+            }
 
             return;
         }
