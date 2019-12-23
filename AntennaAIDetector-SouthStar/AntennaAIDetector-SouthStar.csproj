@@ -127,6 +127,13 @@
     </Compile>
     <Compile Include="Task\Task.cs" />
     <Compile Include="Task\TaskPool.cs" />
+    <Compile Include="TileImage\TileImage.cs" />
+    <Compile Include="TileImage\TileImageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TileImage\TileImageForm.Designer.cs">
+      <DependentUpon>TileImageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\DefaultView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -170,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Task\Spy\SpyForm.resx">
       <DependentUpon>SpyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TileImage\TileImageForm.resx">
+      <DependentUpon>TileImageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\DefaultView.resx">
       <DependentUpon>DefaultView.cs</DependentUpon>
