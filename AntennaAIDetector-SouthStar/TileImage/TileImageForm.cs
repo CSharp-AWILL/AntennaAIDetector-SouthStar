@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Aqrose.Framework.Utility.Tools;
+using AqVision.Graphic.AqVision.shape;
 
 namespace AntennaAIDetector_SouthStar.TileImage
 {
@@ -15,6 +17,7 @@ namespace AntennaAIDetector_SouthStar.TileImage
     {
         private TileImage _tileImage = null;
         private Bitmap _currImage = null;
+        private List<AqShap> _currDisplayShape = new List<AqShap>();
         public TileImageForm(TileImage tileImage)
         {
             _tileImage = tileImage;
@@ -36,6 +39,10 @@ namespace AntennaAIDetector_SouthStar.TileImage
             if (null != _currImage)
             {
                 this.aqDisplay1.Image = _currImage;
+                if (null != _currDisplayShape)
+                {
+                    DisplayContour.Display(this.aqDisplay1, _currDisplayShape);
+                }
             }
 
             this.aqDisplay1.FitToScreen();
@@ -45,11 +52,6 @@ namespace AntennaAIDetector_SouthStar.TileImage
         }
 
         #region Event
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            _tileImage.Run();
-        }
 
         private void button_LoadSingleImage_Click(object sender, EventArgs e)
         {
@@ -116,6 +118,8 @@ namespace AntennaAIDetector_SouthStar.TileImage
 
         private void button_DisplayResult_Click(object sender, EventArgs e)
         {
+            _currDisplayShape = new List<AqShap>();
+
             if (null == _tileImage.WholeImage)
             {
                 MessageBox.Show("请先拼接模型！");
@@ -123,9 +127,28 @@ namespace AntennaAIDetector_SouthStar.TileImage
                 return;
             }
 
+            if (null == _tileImage.SingleImage)
+            {
+                MessageBox.Show("没有拼接模型！");
+
+                return;
+            }
+            _tileImage.GenerateResultDisplay(_tileImage.SingleImage.Height, out _currDisplayShape);
+
+            FormRefresh();
+
+            return;
+        }
+
+        private void aqDisplay1_SizeChanged(object sender, EventArgs e)
+        {
+            FormRefresh();
+
             return;
         }
 
         #endregion
+
+
     }
 }

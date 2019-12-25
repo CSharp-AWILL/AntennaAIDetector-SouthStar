@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using AntennaAIDetector_SouthStar.Result;
 using Aqrose.Framework.Core.Attributes;
 using Aqrose.Framework.Core.DataType;
 using Aqrose.Framework.Core.Interface;
@@ -17,6 +18,7 @@ namespace AntennaAIDetector_SouthStar.TileImage
     public class TileImage : ModuleData, IModule, IDisplay
     {
         private Task.Task _device = null;
+        private ResultDevice _result = null;
         private ShapeOf2D _singleRois = new ShapeOf2D();
 
         public int CurrTotalSize { get; set; } = 0;
@@ -37,6 +39,7 @@ namespace AntennaAIDetector_SouthStar.TileImage
         public TileImage()
         {
             _device = Task.TaskPool.GetInstance();
+            _result = ResultDevice.GetInstance();
             CurrTotalSize = _device.TotalSize;
         }
 
@@ -242,6 +245,59 @@ namespace AntennaAIDetector_SouthStar.TileImage
             return;
         }
 
+        public void GenerateResultDisplay(int stride, out List<AqShap> aqShaps)
+        {
+            string resultString = _result.ResultString;
+            string prefix = "";
+            aqShaps = new List<AqShap>();
 
+            if (null == _device)
+            {
+                MessageManager.Instance().Warn("TileImage.GenerateResultDisplay: null _device");
+
+                return;
+            }
+            prefix = "-" + _device.TotalSize + ":  ";
+
+            if (string.IsNullOrWhiteSpace(resultString))
+            {
+                for (int index = 0; index < _device.TotalSize; ++index)
+                {
+                    var temp = index.ToString() + prefix + "NULL";
+                    var displayChar = new DisplayChar();
+
+                    displayChar.Text = temp;
+                    displayChar.Size = new Size(200, 200);
+                    displayChar.Position = new Point(100, index * stride);
+                    displayChar.Color = Color.Yellow;
+                    aqShaps.Add(displayChar.ConvertToAqCharacter());
+                }
+            }
+            else
+            {
+                var info = resultString.Split(',');
+                var lengthOfInfo = info.Length;
+                var size = Math.Min(lengthOfInfo, _device.TotalSize);
+
+                if (size <= 0)
+                {
+                    return;
+                }
+
+                for (int index = 0; index < size; ++index)
+                {
+                    var temp = index.ToString() + prefix + info[index];
+                    var displayChar = new DisplayChar();
+
+                    displayChar.Text = temp;
+                    displayChar.Size = new Size(200, 200);
+                    displayChar.Position = new Point(100, index * stride);
+                    displayChar.Color = ("OK" != temp) ? Color.Red : Color.Green;
+                    aqShaps.Add(displayChar.ConvertToAqCharacter());
+                }
+            }
+
+            return;
+        }
     }
 }
