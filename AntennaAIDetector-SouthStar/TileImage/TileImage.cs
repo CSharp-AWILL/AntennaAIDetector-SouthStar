@@ -154,8 +154,10 @@ namespace AntennaAIDetector_SouthStar.TileImage
             {
                 if (null != _device && null != _device.OriginImages && 0 < _device.OriginImages.Count)
                 {
-                    _originImages = _device.OriginImages;
-                    _device.OriginImages.Clear();
+                    foreach (var temp in _device.OriginImages)
+                    {
+                        _originImages.Add(_device.OriginImages.Dequeue());
+                    }
                 }
             }
             TileSingleImages();

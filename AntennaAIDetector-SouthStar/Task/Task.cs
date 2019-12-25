@@ -11,7 +11,7 @@ namespace AntennaAIDetector_SouthStar.Task
     {
         public int TaskSize { get; set; } = 0;
         public int TotalSize { get; set; } = 0;
-        public List<Bitmap> OriginImages { get; set; } = new List<Bitmap>();
+        public Queue<Bitmap> OriginImages { get; set; } = new Queue<Bitmap>();
         public RectangleF[] Roi { get; set; } = new RectangleF[6]
         {
             RectangleF.Empty, RectangleF.Empty, RectangleF.Empty,
@@ -231,7 +231,11 @@ namespace AntennaAIDetector_SouthStar.Task
             }
 
             //
-            OriginImages.Add(originImage);
+            if (TotalSize <= OriginImages.Count)
+            {
+                OriginImages.Dequeue();
+            }
+            OriginImages.Enqueue(originImage);
             for (int index = 0; index < TaskSize; ++index)
             {
                 var roi = Roi[index];
