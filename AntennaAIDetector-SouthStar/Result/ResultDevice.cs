@@ -17,6 +17,9 @@ namespace AntennaAIDetector_SouthStar.Result
         private Queue<SingleResult> _singleResults = new Queue<SingleResult>();
 
         public static Object PAD_LOCK = new object();
+
+        public string HeadString { get; private set; } = "";
+        public string ResultString { get; private set; } = "";
         public int TaskSize
         {
             get
@@ -108,6 +111,8 @@ namespace AntennaAIDetector_SouthStar.Result
                 }
             }
 
+            HeadString = res;
+
             return res;
         }
 
@@ -169,6 +174,8 @@ namespace AntennaAIDetector_SouthStar.Result
                     res += (resultArrayOfSingleChannel[j][i] + ",");
                 }
             }
+
+            ResultString = res;
 
             return res;
         }
