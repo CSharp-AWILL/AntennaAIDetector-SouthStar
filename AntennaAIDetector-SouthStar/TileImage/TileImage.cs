@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Runtime.InteropServices;
 using AntennaAIDetector_SouthStar.Result;
 using Aqrose.Framework.Core.Attributes;
@@ -89,7 +90,19 @@ namespace AntennaAIDetector_SouthStar.TileImage
 
         public void InitModule(string projectDirectory, string nodeName)
         {
-            //throw new NotImplementedException();
+            string imageFilePath;
+
+            imageFilePath = projectDirectory + @"\TileImage-" + nodeName + @".bmp";
+            if (File.Exists(imageFilePath))
+            {
+                SingleImage = new Bitmap(imageFilePath, true);
+            }
+            else
+            {
+                SingleImage = new Bitmap(500, 100);
+            }
+
+            return;
         }
 
         public void Run()
@@ -167,7 +180,15 @@ namespace AntennaAIDetector_SouthStar.TileImage
 
         public void SaveModule(string projectDirectory, string nodeName)
         {
-            //throw new NotImplementedException();
+            string imageFilePath;
+
+            imageFilePath = projectDirectory + @"\TileImage-" + nodeName + @".bmp";
+            if (SingleImage != null)
+            {
+                SingleImage.Save(imageFilePath, ImageFormat.Bmp);
+            }
+
+            return;
         }
 
         public bool StartSetForm()
