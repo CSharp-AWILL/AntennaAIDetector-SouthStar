@@ -158,7 +158,7 @@ namespace AntennaAIDetector_SouthStar.Result
             {
                 var singleResult = _singleResults.Dequeue();
                 int channel = singleResult.Index;
-                int index = indexOfResultQueue / TaskSize;
+                int index = indexOfResultQueue / Math.Min(1, TaskSize);
                 resultArrayOfSingleChannel[channel][index]= singleResult.DefectInfo;
             }
             // pick out

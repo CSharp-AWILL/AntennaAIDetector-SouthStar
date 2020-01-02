@@ -171,7 +171,7 @@ namespace AntennaAIDetector_SouthStar.Task.Consumer
                 return 0;
             }
 
-            return _device.GetTaskSize();
+            return _device.TaskSize;
         }
     }
 }

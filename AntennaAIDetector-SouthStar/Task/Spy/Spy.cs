@@ -122,7 +122,7 @@ namespace AntennaAIDetector_SouthStar.Task.Spy
                 return 0;
             }
 
-            return _device.GetTaskSize();
+            return _device.TaskSize;
         }
     }
 }

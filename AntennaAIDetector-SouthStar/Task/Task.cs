@@ -9,8 +9,8 @@ namespace AntennaAIDetector_SouthStar.Task
 {
     public class Task
     {
-        public int TaskSize { get; set; } = 0;
-        public int TotalSize { get; set; } = 0;
+        public int TaskSize { get; set; } = 1;
+        public int TotalSize { get; set; } = 1;
         public Queue<Bitmap> OriginImages { get; set; } = new Queue<Bitmap>();
         public RectangleF[] Roi { get; set; } = new RectangleF[6]
         {
@@ -33,20 +33,6 @@ namespace AntennaAIDetector_SouthStar.Task
             }
 
             return amount;
-        }
-
-        private void SetTaskSize(int number)
-        {
-            ImageQueues = new List<Queue<Bitmap>>();
-            if (number > 0)
-            {
-                for (int index = 0; index < number; ++index)
-                {
-                    ImageQueues.Add(new Queue<Bitmap>());
-                }
-            }
-
-            return;
         }
 
         public void LoadConfiguration()
@@ -126,20 +112,6 @@ namespace AntennaAIDetector_SouthStar.Task
             return;
         }
 
-        public int GetTaskSize()
-        {
-            /*
-             * return -1: error
-             * return n: the list of queue count
-             */
-            if (null == ImageQueues)
-            {
-                return -1;
-            }
-
-            return ImageQueues.Count;
-        }
-
         public bool TryAddRoi(RectangleF rectangle)
         {
             ++TaskSize;
@@ -203,7 +175,7 @@ namespace AntennaAIDetector_SouthStar.Task
             }
 
             //
-            if (source.Count != GetTaskSize())
+            if (source.Count != TaskSize)
             {
                 MessageManager.Instance().Alarm("Task: unexcepted case!");
             }
@@ -212,10 +184,7 @@ namespace AntennaAIDetector_SouthStar.Task
             for (int index = 0; index < source.Count; ++index)
             {
                 var temp = ImageOperateTools.ImageCopy(source[index]);
-                //var image = source[index];
-                //var temp = image.Clone(new Rectangle(0, 0, image.Width, image.Height), System.Drawing.Imaging.PixelFormat.DontCare);
                 ImageQueues[index].Enqueue(temp);
-                //Images[index].Enqueue(source[index].Clone() as Bitmap);
 
                 MessageManager.Instance().Info("Task.Push: " + index);
             }
@@ -269,7 +238,7 @@ namespace AntennaAIDetector_SouthStar.Task
 
             status = 0;
 
-            if (/*-1 == GetTaskSize() || */index >= GetTaskSize())
+            if (index >= TaskSize)
             {
                 status = -1;
 
