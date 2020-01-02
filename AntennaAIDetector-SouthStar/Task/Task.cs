@@ -204,7 +204,13 @@ namespace AntennaAIDetector_SouthStar.Task
             {
                 OriginImages.Dequeue();
             }
+
+            while (OriginImages.Count >= TotalSize)
+            {
+                OriginImages.Dequeue();
+            }
             OriginImages.Enqueue(originImage);
+
             for (int index = 0; index < TaskSize; ++index)
             {
                 var roi = Roi[index];
