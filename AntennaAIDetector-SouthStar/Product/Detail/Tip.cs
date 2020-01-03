@@ -6,13 +6,7 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
     public class Tip:IEvaluateAIDI
     {
         public bool IsAddToDetection { get; set; } = true;
-        public bool IsResultOK
-        {
-            get
-            {
-                return 0 == Region.XldPointsNums.Count;
-            }
-        }
+        public bool IsResultOK { get; set; } = true;
 
         public ResultOfAIDI ResultOfAIDI { get; set; } = new ResultOfAIDI(null);
         public ShapeOf2D Region { get; set; } = new ShapeOf2D();
@@ -34,8 +28,8 @@ namespace AntennaAIDetector_SouthStar.Product.Detail
         public void CalculateRegion()
         {
             // LABEL: do nothing
-            Region = new ShapeOf2D();
-            Region = ResultOfAIDI.RawRegion;
+            //Region = new ShapeOf2D();
+            //Region = ResultOfAIDI.RawRegion;
         }
 
         #endregion

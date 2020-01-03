@@ -34,6 +34,10 @@ namespace AntennaAIDetector_SouthStar.Detector
         public List<AIDIShape> OutputOfOffsetAIDI { get; set; } = new List<AIDIShape>();
         [InputData]
         public List<AIDIShape> OutputOfTipAIDI { get; set; } = new List<AIDIShape>();
+        [InputData]
+        public string IsResultOKOfTipAIDI { get; set; } = "";
+        [InputData]
+        public string IsResultOKOfBadConnectionAIDI { get; set; } = "";
 
         [OutputData]
         public string IsOkString
@@ -109,10 +113,13 @@ namespace AntennaAIDetector_SouthStar.Detector
         private void InjectInputDataToProductManager()
         {
             ProductManager.DefectParam.ResultOfAIDI = new ResultOfAIDI(OutputOfDefectAIDI);
-            ProductManager.BadConnectionParam.ResultOfAIDI = new ResultOfAIDI(OutputOfBadConnectionAIDI);
+            //ProductManager.BadConnectionParam.ResultOfAIDI = new ResultOfAIDI(OutputOfBadConnectionAIDI);
             ProductManager.OverageParam.ResultOfAIDI = new ResultOfAIDI(OutputOfOverageAIDI);
             ProductManager.OffsetParam.ResultOfAIDI = new ResultOfAIDI(OutputOfOffsetAIDI);
-            ProductManager.TipParam.ResultOfAIDI = new ResultOfAIDI(OutputOfTipAIDI);
+            //ProductManager.TipParam.ResultOfAIDI = new ResultOfAIDI(OutputOfTipAIDI);
+            //
+            ProductManager.TipParam.IsResultOK = "OK" == IsResultOKOfTipAIDI ? true : false;
+            ProductManager.BadConnectionParam.IsResultOK = "OK" == IsResultOKOfBadConnectionAIDI ? true : false;
             //
             ProductManager.OffsetParam.Matrix = null == PosMatrix ? new MatrixD() : new MatrixD(PosMatrix);
 
