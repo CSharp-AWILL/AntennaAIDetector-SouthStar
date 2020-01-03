@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Aqrose.Framework.Utility.Tools;
+using Aqrose.Framework.Utility.WindowConfig;
 using AqVision.Graphic.AqVision.shape;
 
 namespace AntennaAIDetector_SouthStar.TileImage
@@ -23,6 +24,11 @@ namespace AntennaAIDetector_SouthStar.TileImage
             _tileImage = tileImage;
             InitializeComponent();
             DoDataBindings();
+            if (null != _tileImage.DisplayShapes)
+            {
+                _currDisplayShape = _tileImage.DisplayShapes;
+            }
+            InitializeComboxWndName(this.comboBoxDisplayWindowName, _tileImage.DisplayWindowName);
             FormRefresh();
         }
 
@@ -60,6 +66,23 @@ namespace AntennaAIDetector_SouthStar.TileImage
 
             this.aqDisplay1.FitToScreen();
             this.aqDisplay1.Update();
+
+            return;
+        }
+
+        private void InitializeComboxWndName(ComboBox comboBox, string windowName)
+        {
+            comboBox.Items.Clear();
+            WindowNum.Instance().GetWindowNameList(out var windowNameList);
+            if (null == windowNameList)
+            {
+                return;
+            }
+            foreach (var obj in windowNameList)
+            {
+                comboBox.Items.Add(obj);
+            }
+            _tileImage.DisplayWindowName = windowNameList.Contains(windowName) ? windowName : windowNameList[0];
 
             return;
         }

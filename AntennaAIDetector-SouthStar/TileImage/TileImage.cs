@@ -185,6 +185,7 @@ namespace AntennaAIDetector_SouthStar.TileImage
 
                     return;
                 }
+                WholeImage = ImageOperateTools.ImageCopy(wholeImage);
             }
 
             //
@@ -219,7 +220,7 @@ namespace AntennaAIDetector_SouthStar.TileImage
                 image.Dispose();
             }
 
-            configFile = projectDirectory + @"\Detector-" + nodeName + ".xml";
+            configFile = projectDirectory + @"\TileImage-" + nodeName + ".xml";
             XmlParameter xmlParameter = new XmlParameter();
 
             #region IDisplay
@@ -350,13 +351,14 @@ namespace AntennaAIDetector_SouthStar.TileImage
 
                 for (int index = 0; index < size; ++index)
                 {
-                    var temp = index.ToString() + prefix + info[index];
+                    var rawResult = info[index];
+                    var temp = index.ToString() + prefix + rawResult;
                     var displayChar = new DisplayChar();
 
                     displayChar.Text = temp;
                     displayChar.Size = new Size(200, 200);
                     displayChar.Position = new Point(100, index * stride);
-                    displayChar.Color = ("OK" != temp) ? Color.Red : Color.Green;
+                    displayChar.Color = ("OK" != rawResult) ? Color.Red : Color.Blue;
                     aqShaps.Add(displayChar.ConvertToAqCharacter());
                 }
             }

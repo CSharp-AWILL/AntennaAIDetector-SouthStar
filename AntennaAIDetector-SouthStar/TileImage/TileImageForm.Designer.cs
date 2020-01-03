@@ -163,9 +163,9 @@
             // 
             this.panel5.Controls.Add(this.comboBoxDisplayWindowName);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(80, 0);
+            this.panel5.Location = new System.Drawing.Point(52, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(39, 63);
+            this.panel5.Size = new System.Drawing.Size(67, 63);
             this.panel5.TabIndex = 1;
             // 
             // comboBoxDisplayWindowName
@@ -175,7 +175,7 @@
             this.comboBoxDisplayWindowName.FormattingEnabled = true;
             this.comboBoxDisplayWindowName.Location = new System.Drawing.Point(3, 22);
             this.comboBoxDisplayWindowName.Name = "comboBoxDisplayWindowName";
-            this.comboBoxDisplayWindowName.Size = new System.Drawing.Size(0, 20);
+            this.comboBoxDisplayWindowName.Size = new System.Drawing.Size(61, 20);
             this.comboBoxDisplayWindowName.TabIndex = 6;
             // 
             // panel4
@@ -184,14 +184,14 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(80, 63);
+            this.panel4.Size = new System.Drawing.Size(52, 63);
             this.panel4.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 25);
+            this.label1.Location = new System.Drawing.Point(5, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 5;

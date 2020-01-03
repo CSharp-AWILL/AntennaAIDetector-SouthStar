@@ -154,9 +154,10 @@ namespace AntennaAIDetector_SouthStar.Result
             };
 
             // fill in
-            for (int indexOfResultQueue = 0; indexOfResultQueue < TotalSize; ++indexOfResultQueue)
+            var size = _singleResults.Count;
+            for (int indexOfResultQueue = 0; indexOfResultQueue < Math.Max(TotalSize, size); ++indexOfResultQueue)
             {
-                if (0 == _singleResults.Count)
+                if (0 >= _singleResults.Count)
                 {
                     break;
                 }
