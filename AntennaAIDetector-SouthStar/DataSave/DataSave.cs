@@ -19,6 +19,15 @@ namespace AntennaAIDetector_SouthStar.DataSave
         private string _codeOfProduct = "";
         private ResultDevice _device = null;
 
+        [OutputData]
+        public string IsOKString
+        {
+            get
+            {
+                return IsResultOK ? "OK" : "NG";
+            }
+        }
+
         public string DirectoryPath
         {
             get
@@ -302,7 +311,15 @@ namespace AntennaAIDetector_SouthStar.DataSave
             //
             lock (ResultDevice.PAD_LOCK)
             {
-                content = GetResultData();
+                if (_device.IsQueueFull())
+                {
+                    content = GetResultData();
+                    IsResultOK = true;
+                }
+                else
+                {
+                    IsResultOK = false;
+                }
             }
 
             if (!string.IsNullOrWhiteSpace(content))

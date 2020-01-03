@@ -88,7 +88,7 @@
             // 
             this.numericUpDown_TotalSize.Location = new System.Drawing.Point(168, 84);
             this.numericUpDown_TotalSize.Maximum = new decimal(new int[] {
-            20,
+            30,
             0,
             0,
             0});

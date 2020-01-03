@@ -116,6 +116,11 @@ namespace AntennaAIDetector_SouthStar.Result
             return res;
         }
 
+        public bool IsQueueFull()
+        {
+            return _taskDevice.TotalSize == _singleResults.Count;
+        }
+
         public string GenerateDstMessage()
         {
             string res = "";
