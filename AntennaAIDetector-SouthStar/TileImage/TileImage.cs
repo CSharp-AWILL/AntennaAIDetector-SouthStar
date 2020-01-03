@@ -91,15 +91,42 @@ namespace AntennaAIDetector_SouthStar.TileImage
         public void InitModule(string projectDirectory, string nodeName)
         {
             string imageFilePath;
+            string configFile;
+            string strParamInfo = "";
+            XmlParameter xmlParameter = null;
 
             imageFilePath = projectDirectory + @"\TileImage-" + nodeName + @".bmp";
             if (File.Exists(imageFilePath))
             {
-                SingleImage = new Bitmap(imageFilePath, true);
+                var image = new Bitmap(imageFilePath, true);
+                SingleImage = ImageOperateTools.ImageCopy(image);
+                image.Dispose();
             }
             else
             {
                 SingleImage = new Bitmap(500, 100);
+            }
+
+            configFile = projectDirectory + @"\TileImage-" + nodeName + ".xml";
+            if (File.Exists(configFile))
+            {
+                xmlParameter = new XmlParameter();
+                xmlParameter.ReadParameter(configFile);
+
+                #region IDisplay
+
+                strParamInfo = xmlParameter.GetParamData("DisplayWindowName");
+                if (strParamInfo != "")
+                {
+                    DisplayWindowName = strParamInfo;
+                }
+                strParamInfo = xmlParameter.GetParamData("IsDisplay");
+                if (strParamInfo != "")
+                {
+                    IsDisplay = Convert.ToBoolean(strParamInfo);
+                }
+
+                #endregion
             }
 
             return;
@@ -166,7 +193,8 @@ namespace AntennaAIDetector_SouthStar.TileImage
             if (IsDisplay)
             {
                 DisplayBitmap = WholeImage;
-                DisplayContour.GetContours(_singleRois.XldPointYs, _singleRois.XldPointXs, _singleRois.XldPointsNums, out var contours, AqVision.Graphic.AqColorEnum.Yellow, 1);
+                GenerateResultDisplay(SingleImage.Height, out var contours);
+                //DisplayContour.GetContours(_singleRois.XldPointYs, _singleRois.XldPointXs, _singleRois.XldPointsNums, out var contours, AqVision.Graphic.AqColorEnum.Yellow, 1);
                 DisplayShapes = contours;
                 IsUpdate = true;
             }
@@ -181,12 +209,27 @@ namespace AntennaAIDetector_SouthStar.TileImage
         public void SaveModule(string projectDirectory, string nodeName)
         {
             string imageFilePath;
+            string configFile;
 
             imageFilePath = projectDirectory + @"\TileImage-" + nodeName + @".bmp";
             if (SingleImage != null)
             {
-                SingleImage.Save(imageFilePath, ImageFormat.Bmp);
+                Bitmap image = ImageOperateTools.ImageCopy(SingleImage);
+                image.Save(imageFilePath, image.RawFormat);
+                image.Dispose();
             }
+
+            configFile = projectDirectory + @"\Detector-" + nodeName + ".xml";
+            XmlParameter xmlParameter = new XmlParameter();
+
+            #region IDisplay
+
+            xmlParameter.Add("DisplayWindowName", DisplayWindowName);
+            xmlParameter.Add("IsDisplay", IsDisplay);
+
+            #endregion
+
+            xmlParameter.WriteParameter(configFile);
 
             return;
         }

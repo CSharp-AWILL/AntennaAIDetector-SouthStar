@@ -22,6 +22,19 @@ namespace AntennaAIDetector_SouthStar.TileImage
         {
             _tileImage = tileImage;
             InitializeComponent();
+            DoDataBindings();
+            FormRefresh();
+        }
+
+        private void DoDataBindings()
+        {
+            var mode = DataSourceUpdateMode.OnPropertyChanged | DataSourceUpdateMode.OnValidation;
+
+            //
+            this.comboBoxDisplayWindowName.DataBindings.Add(new Binding("Text", _tileImage, "DisplayWindowName", true, mode));
+            this.checkBoxShow.DataBindings.Add(new Binding("Checked", _tileImage, "IsDisplay", true, mode));
+
+            return;
         }
 
         private void FormRefresh()
