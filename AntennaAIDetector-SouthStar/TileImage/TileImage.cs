@@ -22,6 +22,7 @@ namespace AntennaAIDetector_SouthStar.TileImage
         private ResultDevice _result = null;
         private ShapeOf2D _singleRois = new ShapeOf2D();
 
+        public int SizeOfText { get; set; } = 10;
         public int CurrTotalSize { get; set; } = 0;
         public Bitmap SingleImage { get; set; } = null;
         public Bitmap WholeImage { get; set; } = null;
@@ -127,6 +128,12 @@ namespace AntennaAIDetector_SouthStar.TileImage
                 }
 
                 #endregion
+
+                strParamInfo = xmlParameter.GetParamData("SizeOfText");
+                if (strParamInfo != "")
+                {
+                    SizeOfText = Convert.ToInt32(strParamInfo);
+                }
             }
 
             return;
@@ -230,6 +237,8 @@ namespace AntennaAIDetector_SouthStar.TileImage
 
             #endregion
 
+            xmlParameter.Add("SizeOfText", SizeOfText);
+
             xmlParameter.WriteParameter(configFile);
 
             return;
@@ -332,7 +341,7 @@ namespace AntennaAIDetector_SouthStar.TileImage
                     var displayChar = new DisplayChar();
 
                     displayChar.Text = temp;
-                    displayChar.Size = new Size(200, 200);
+                    displayChar.Size = new Size(SizeOfText, SizeOfText);
                     displayChar.Position = new Point(100, index * stride);
                     displayChar.Color = Color.Yellow;
                     aqShaps.Add(displayChar.ConvertToAqCharacter());
@@ -356,7 +365,7 @@ namespace AntennaAIDetector_SouthStar.TileImage
                     var displayChar = new DisplayChar();
 
                     displayChar.Text = temp;
-                    displayChar.Size = new Size(200, 200);
+                    displayChar.Size = new Size(SizeOfText, SizeOfText);
                     displayChar.Position = new Point(100, index * stride);
                     displayChar.Color = ("OK" != rawResult) ? Color.Red : Color.Blue;
                     aqShaps.Add(displayChar.ConvertToAqCharacter());

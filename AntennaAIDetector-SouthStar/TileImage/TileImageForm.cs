@@ -40,6 +40,8 @@ namespace AntennaAIDetector_SouthStar.TileImage
             this.comboBoxDisplayWindowName.DataBindings.Add(new Binding("Text", _tileImage, "DisplayWindowName", true, mode));
             this.checkBoxShow.DataBindings.Add(new Binding("Checked", _tileImage, "IsDisplay", true, mode));
 
+            this.numericUpDown_SizeOfText.DataBindings.Add(new Binding("Text", _tileImage, "SizeOfText", true, mode));
+
             return;
         }
 
