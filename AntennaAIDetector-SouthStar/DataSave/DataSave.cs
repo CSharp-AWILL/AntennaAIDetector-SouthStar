@@ -104,7 +104,7 @@ namespace AntennaAIDetector_SouthStar.DataSave
 
         private string GetTimeInfo()
         {
-            return DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss"); ;
+            return DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
         }
 
         private bool CanGenerateNewCsvFile()
