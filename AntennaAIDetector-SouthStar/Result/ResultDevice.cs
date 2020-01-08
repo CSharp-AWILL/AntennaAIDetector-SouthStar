@@ -118,6 +118,7 @@ namespace AntennaAIDetector_SouthStar.Result
 
         public bool IsQueueFull()
         {
+            MessageManager.Instance().Info("ResultDevice.IsQueueFull: _singleResults.Count is " + _singleResults.Count.ToString());
             return _taskDevice.TotalSize == _singleResults.Count;
         }
 
@@ -129,6 +130,16 @@ namespace AntennaAIDetector_SouthStar.Result
              * first dim: channel
              * second dim: index
              */
+
+            Queue<SingleResult>[] singleResultsOfSingleChannel = new Queue<SingleResult>[5]
+            {
+                    new Queue<SingleResult>(),
+                    new Queue<SingleResult>(),
+                    new Queue<SingleResult>(),
+                    new Queue<SingleResult>(),
+                    new Queue<SingleResult>()
+            };
+
             string[][] resultArrayOfSingleChannel = new string[5][]
             {
                 new string[10]
@@ -158,7 +169,7 @@ namespace AntennaAIDetector_SouthStar.Result
                 }
             };
 
-            // fill in
+            // translate queue
             var size = _singleResults.Count;
             for (int indexOfResultQueue = 0; indexOfResultQueue < Math.Max(TotalSize, size); ++indexOfResultQueue)
             {
@@ -167,11 +178,29 @@ namespace AntennaAIDetector_SouthStar.Result
                     break;
                 }
                 var singleResult = _singleResults.Dequeue();
-                int channel = singleResult.Index;
-                int index = indexOfResultQueue / Math.Max(1, TaskSize);
-                resultArrayOfSingleChannel[channel][index]= singleResult.DefectInfo;
+                //int channel = singleResult.Index;
+                //int index = indexOfResultQueue / Math.Max(1, TaskSize);
+                //resultArrayOfSingleChannel[channel][index]= singleResult.DefectInfo;
+                if (singleResult.Index >= singleResultsOfSingleChannel.Length)
+                {
+                    MessageManager.Instance().Alarm("ResultDevice.GenerateDstMessage: need to enlarge singleResultsOfSingleChannel.");
+                    continue;
+                }
+                singleResultsOfSingleChannel[singleResult.Index].Enqueue(singleResult);
             }
-            // pick out
+            // pick out and fill in bucket
+            foreach (var singleResults in singleResultsOfSingleChannel)
+            {
+                int channel = 0;
+                int index = 0;
+                for (; singleResults.Count > 0;)
+                {
+                    var singleResult = singleResults.Dequeue();
+                    resultArrayOfSingleChannel[channel][index++] = singleResult.DefectInfo;
+                }
+                channel++;
+            }
+            // generate
             for (int i = 0; i < groupCount; ++i)
             {
                 for (int j = 0; j < TaskSize; ++j)
